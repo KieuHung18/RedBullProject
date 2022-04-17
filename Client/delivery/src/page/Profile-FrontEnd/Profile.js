@@ -7,7 +7,8 @@ export class Profile extends React.Component{
         return(
             <div>
                 <div>
-                    <label>Hello </label>
+                    <label>Hello  asdasd</label>
+                    
                 </div>
             </div>
         );
