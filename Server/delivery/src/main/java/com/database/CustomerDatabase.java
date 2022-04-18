@@ -18,19 +18,20 @@ public class CustomerDatabase {
 			System.out.println(jsonObject);
 			JSONObject customer = (JSONObject) jsonObject.get(id_customer);
 
-			String id = (String) customer.get("id");
-			System.out.println(id);
-			String fullName = (String) customer.get("fullName");
-			System.out.println(fullName);
-			String address = (String) customer.get("address");
-			System.out.println(address);
-			String phoneNumber = (String) customer.get("phoneNumber");
-			System.out.println(phoneNumber);
-
-			obj0.put("id", id);
-			obj0.put("idCustomer", fullName);
-			obj0.put("idUser", address);
-			obj0.put("dayReceive", phoneNumber);
+//			String id = (String) customer.get("id");
+//			System.out.println(id);
+//			String fullName = (String) customer.get("fullName");
+//			System.out.println(fullName);
+//			String address = (String) customer.get("address");
+//			System.out.println(address);
+//			String phoneNumber = (String) customer.get("phoneNumber");
+//			System.out.println(phoneNumber);
+//
+//			obj0.put("id", id);
+//			obj0.put("idCustomer", fullName);
+//			obj0.put("idUser", address);
+//			obj0.put("dayReceive", phoneNumber);
+			obj0 = customer;
 
 		} catch (IOException e) {
 			e.printStackTrace();
