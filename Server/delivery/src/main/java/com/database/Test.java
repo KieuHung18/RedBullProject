@@ -13,7 +13,7 @@ public class Test {
 		UserDatabase userDatabase = new UserDatabase();
 //		System.out.println(userDatabase.getUser("u1"));
 		System.out.println(userDatabase.checkExistAccount());
-//		System.out.println(userDatabase.checkExistPassword());
+		System.out.println(userDatabase.checkExistPassword());
 
 //		CustomerDatabase customerDatabase = new CustomerDatabase();
 //		System.out.println(customerDatabase.getCustomer("c0"));

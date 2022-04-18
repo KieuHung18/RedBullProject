@@ -16,15 +16,15 @@ public class CustomerDatabase {
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 			System.out.println(jsonObject);
-			JSONObject packages = (JSONObject) jsonObject.get(id_customer);
+			JSONObject customer = (JSONObject) jsonObject.get(id_customer);
 
-			String id = (String) packages.get("id");
+			String id = (String) customer.get("id");
 			System.out.println(id);
-			String fullName = (String) packages.get("fullName");
+			String fullName = (String) customer.get("fullName");
 			System.out.println(fullName);
-			String address = (String) packages.get("address");
+			String address = (String) customer.get("address");
 			System.out.println(address);
-			String phoneNumber = (String) packages.get("phoneNumber");
+			String phoneNumber = (String) customer.get("phoneNumber");
 			System.out.println(phoneNumber);
 
 			obj0.put("id", id);

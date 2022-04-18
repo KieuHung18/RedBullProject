@@ -18,19 +18,19 @@ public class UserDatabase {
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 			System.out.println(jsonObject);
-			JSONObject packages = (JSONObject) jsonObject.get(id_user);
+			JSONObject user = (JSONObject) jsonObject.get(id_user);
 
-			String id = (String) packages.get("id");
+			String id = (String) user.get("id");
 			System.out.println(id);
-			String fullName = (String) packages.get("fullName");
+			String fullName = (String) user.get("fullName");
 			System.out.println(fullName);
-			String address = (String) packages.get("address");
+			String address = (String) user.get("address");
 			System.out.println(address);
-			String phoneNumber = (String) packages.get("phoneNumber");
+			String phoneNumber = (String) user.get("phoneNumber");
 			System.out.println(phoneNumber);
-			String password = (String) packages.get("password");
+			String password = (String) user.get("password");
 			System.out.println(password);
-			String account = (String) packages.get("account");
+			String account = (String) user.get("account");
 			System.out.println(account);
 
 			obj0.put("id", id);
@@ -57,17 +57,17 @@ public class UserDatabase {
 			System.out.println(jsonObject);
 			for (int i = 0; i < jsonObject.size(); i++) {
 
-				JSONObject packages = (JSONObject) jsonObject.get("u" + i);
+				JSONObject user = (JSONObject) jsonObject.get("u" + i);
 
-				String account = (String) packages.get("account");
+				String account = (String) user.get("account");
 				System.out.println(account);
 				if (!list.contains(account)) {
 					list.add(account);
 				}
 
-				if (list.size() != jsonObject.size()) {
-					return true;
-				}
+			}
+			if (list.size() != jsonObject.size()) {
+				return true;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -86,17 +86,17 @@ public class UserDatabase {
 			System.out.println(jsonObject);
 			for (int i = 0; i < jsonObject.size(); i++) {
 
-				JSONObject packages = (JSONObject) jsonObject.get("u" + i);
+				JSONObject user = (JSONObject) jsonObject.get("u" + i);
 
-				String password = (String) packages.get("password");
+				String password = (String) user.get("password");
 				System.out.println(password);
 				if (!list.contains(password)) {
 					list.add(password);
 				}
 
-				if (list.size() != jsonObject.size()) {
-					return true;
-				}
+			}
+			if (list.size() != jsonObject.size()) {
+				return true;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
