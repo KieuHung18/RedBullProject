@@ -3,15 +3,27 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { PackageList } from './page/PackageList/PackageList';
+import Footer from './page/Footer/Footer';
+import Navbar from './page/Navbar/Navbar';
+import 'bootstrap/dist/css/bootstrap.css'
+import '../node_modules/font-awesome/css/font-awesome.min.css'; 
+import AboutUS from './page/AboutUsPage/AboutUs.jsx';
 import { Profile } from './page/Profile-FrontEnd/Profile';
 // import PackageList from './page/PackageList/PackageList';
 import {PackageList} from './page/PackageList/PackageList';
 import  {PackageDetail}  from './page/PackageDetail/PackageDetail';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+
 root.render(
   <React.StrictMode>
-    <PackageList />
+    {/* <PackageList /> */}
+    {/* <Navbar />
+    <Footer /> */}
+    <AboutUS />
+
   </React.StrictMode>
 );
 
