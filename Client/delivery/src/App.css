@@ -1,4 +1,16 @@
-.input{
-    width: 50px;
-    height: 10px;
-}
+#main-container {
+    place-items: center center;
+  }
+  
+  #sign-in-form {
+    max-width: 330px;
+  }
+  
+  .bootstrap-logo {
+    width: 72px;
+    height: 72px;
+  }
+  
+  .form-control:focus {
+    z-index: 5;
+  }
