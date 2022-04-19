@@ -47,13 +47,10 @@ public class UserDatabase {
 
 				String account = (String) user.get("account");
 				System.out.println(account);
-				if (!list.contains(account)) {
-					list.add(account);
+				if (accountInput.equals(account)) {
+					return true;
 				}
 
-			}
-			if (list.contains(accountInput)) {
-				return true;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -66,7 +63,6 @@ public class UserDatabase {
 	/** Phương thức kiểm tra mật khẩu nhập vào có tồn tại hay không? **/
 	public boolean checkExistPassword(String passwordInput) {
 		JSONParser parser = new JSONParser();
-		ArrayList<String> list = new ArrayList<String>();
 		String link = "user.json";
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
@@ -77,13 +73,10 @@ public class UserDatabase {
 
 				String password = (String) user.get("password");
 				System.out.println(password);
-				if (!list.contains(password)) {
-					list.add(password);
+				if (passwordInput.equals(password)) {
+					return true;
 				}
 
-			}
-			if (list.contains(passwordInput)) {
-				return true;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

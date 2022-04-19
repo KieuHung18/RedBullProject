@@ -18,8 +18,8 @@ public class Test {
 		/** Phương thức User **/
 		UserDatabase userDatabase = new UserDatabase();
 //		System.out.println(userDatabase.getUser("u1"));
-		System.out.println(userDatabase.checkExistAccount("abcde"));
-		System.out.println(userDatabase.checkExistPassword("1234"));
+		System.out.println(userDatabase.checkExistAccount("ab"));
+		System.out.println(userDatabase.checkExistPassword("123456"));
 		/*******/
 
 		/** Phương thức Customer **/
