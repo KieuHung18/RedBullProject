@@ -3,7 +3,6 @@ package com.database;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import org.json.simple.JSONObject;
@@ -11,6 +10,10 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class UserDatabase {
+
+	/**
+	 * Phương thức lấy người giao hàng(JSONObject) bao gồm tất cả hông tin theo ID
+	 **/
 	public JSONObject getUser(String id_user) {
 		JSONParser parser = new JSONParser();
 		JSONObject obj0 = new JSONObject();
@@ -19,26 +22,6 @@ public class UserDatabase {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 			System.out.println(jsonObject);
 			JSONObject user = (JSONObject) jsonObject.get(id_user);
-
-//			String id = (String) user.get("id");
-//			System.out.println(id);
-//			String fullName = (String) user.get("fullName");
-//			System.out.println(fullName);
-//			String address = (String) user.get("address");
-//			System.out.println(address);
-//			String phoneNumber = (String) user.get("phoneNumber");
-//			System.out.println(phoneNumber);
-//			String password = (String) user.get("password");
-//			System.out.println(password);
-//			String account = (String) user.get("account");
-//			System.out.println(account);
-//
-//			obj0.put("id", id);
-//			obj0.put("idCustomer", fullName);
-//			obj0.put("idUser", address);
-//			obj0.put("dayReceive", phoneNumber);
-//			obj0.put("dayDelivery", password);
-//			obj0.put("addressDelivery", account);
 
 			obj0 = user;
 
@@ -50,7 +33,8 @@ public class UserDatabase {
 		return obj0;
 	}
 
-	public boolean checkExistAccount() {
+	/** Phương thức kiểm tra tài khoản nhập vào có tồn tại hay không? **/
+	public boolean checkExistAccount(String accountInput) {
 		JSONParser parser = new JSONParser();
 		ArrayList<String> list = new ArrayList<String>();
 		String link = "user.json";
@@ -68,7 +52,7 @@ public class UserDatabase {
 				}
 
 			}
-			if (list.size() != jsonObject.size()) {
+			if (list.contains(accountInput)) {
 				return true;
 			}
 		} catch (IOException e) {
@@ -79,7 +63,8 @@ public class UserDatabase {
 		return false;
 	}
 
-	public boolean checkExistPassword() {
+	/** Phương thức kiểm tra mật khẩu nhập vào có tồn tại hay không? **/
+	public boolean checkExistPassword(String passwordInput) {
 		JSONParser parser = new JSONParser();
 		ArrayList<String> list = new ArrayList<String>();
 		String link = "user.json";
@@ -97,7 +82,7 @@ public class UserDatabase {
 				}
 
 			}
-			if (list.size() != jsonObject.size()) {
+			if (list.contains(passwordInput)) {
 				return true;
 			}
 		} catch (IOException e) {
