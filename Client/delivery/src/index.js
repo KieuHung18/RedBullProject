@@ -8,6 +8,7 @@ import Footer from './page/Footer/Footer';
 import Navbar from './page/Navbar/Navbar';
 import 'bootstrap/dist/css/bootstrap.css'
 import '../node_modules/font-awesome/css/font-awesome.min.css'; 
+import AboutUS from './page/AboutUsPage/AboutUs.jsx';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -15,8 +16,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     {/* <PackageList /> */}
-    <Navbar />
-    <Footer />
+    {/* <Navbar />
+    <Footer /> */}
+    <AboutUS />
 
   </React.StrictMode>
 );
