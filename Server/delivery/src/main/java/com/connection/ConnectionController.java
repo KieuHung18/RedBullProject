@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class ConnectionController {
-	
 	@CrossOrigin(origins="http://localhost:3000")
 	@RequestMapping(path = "/user",method=RequestMethod.POST)
 	@ResponseBody
