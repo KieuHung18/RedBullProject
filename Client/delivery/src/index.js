@@ -9,6 +9,10 @@ import Navbar from './page/Navbar/Navbar';
 import 'bootstrap/dist/css/bootstrap.css'
 import '../node_modules/font-awesome/css/font-awesome.min.css'; 
 import AboutUS from './page/AboutUsPage/AboutUs.jsx';
+import { Profile } from './page/Profile-FrontEnd/Profile';
+// import PackageList from './page/PackageList/PackageList';
+import {PackageList} from './page/PackageList/PackageList';
+import  {PackageDetail}  from './page/PackageDetail/PackageDetail';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

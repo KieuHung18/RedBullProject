@@ -1,0 +1,14 @@
+.package-list-container{
+    margin: 50px;
+}
+.package-list-row:hover{
+    background-color: black;
+    color: white;
+}
+
+table.table.table-bordered {
+    table-layout: auto;
+}
+table.table.table-bordered {
+    border-color: black;
+}
