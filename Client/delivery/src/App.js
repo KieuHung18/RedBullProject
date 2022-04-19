@@ -1,7 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
 import jquery  from 'jquery';
-
 function doAjaxPost() {
   jquery.ajax({
       type: "POST",
@@ -16,6 +15,7 @@ function doAjaxPost() {
 function App() {
   return (
     <button onClick={doAjaxPost} className='button' id='button-id'>connect</button>
+    
   );
 }
 
