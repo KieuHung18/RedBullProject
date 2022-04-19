@@ -20,7 +20,9 @@ import jquery  from 'jquery';
 //       <button onClick={doAjaxPost} className='button' id='button-id'>connect</button>
 //     );
 //   }
-
+const user = {
+    FirstName:"Dinh",LastName:"Phat",PhoneNumber:"0123456789",Address:"TP Ho Chi Minh",UserName:"user-01",
+};
 export class Profile extends React.Component {
     render() {
         return (
@@ -43,28 +45,28 @@ export class Profile extends React.Component {
                                             {/* <!-- First Name --> */}
                                             <div className="col-md-6">
                                                 <label className="form-label">First Name *</label>
-                                                <input type="text" className="form-control" placeholder="" aria-label="First name" value="Scaralet"/>
+                                                <input type="text" className="form-control" placeholder="" aria-label="First name" value={user.FirstName}/>
                                                 
                                             </div>
                                             {/* <!-- Last name --> */}
                                             <div className="col-md-6">
                                                 <label className="form-label">Last Name *</label>
-                                                <input type="text" className="form-control" placeholder="" aria-label="Last name" value="Doe"/>
+                                                <input type="text" className="form-control" placeholder="" aria-label="Last name" value={user.LastName}/>
                                             </div>
                                             {/* <!-- Phone number --> */}
                                             <div className="col-md-6">
                                                 <label className="form-label">Phone number *</label>
-                                                <input type="text" className="form-control" placeholder="" aria-label="Phone number" value="(333) 000 555"/>
+                                                <input type="text" className="form-control" placeholder="" aria-label="Phone number" value={user.PhoneNumber}/>
                                             </div>
                                             {/* <!-- Mobile number --> */}
                                             <div className="col-md-6">
                                                 <label className="form-label">Address *</label>
-                                                <input type="text" className="form-control" placeholder="" aria-label="Address" value="Ho Chi Minh"/>
+                                                <input type="text" className="form-control" placeholder="" aria-label="Address" value={user.Address}/>
                                             </div>
-                                            {/* <!-- Email --> */}
+                                            {/* <!-- Email -->for="inputEmail4" value="example@homerealty.com" */}
                                             <div className="col-md-6">
-                                                <label for="inputEmail4" className="form-label">Email *</label>
-                                                <input type="email" className="form-control" id="inputEmail4" value="example@homerealty.com"/>
+                                                <label className="form-label">UserName *</label>
+                                                <input type="text" className="form-control" placeholder="" aria-label="UserName" value={user.UserName}/>
                                             </div>
                                             {/* <!-- Skype --> */}
                                             <div className="col-md-6">
