@@ -4,11 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Profile } from './page/Profile-FrontEnd/Profile';
+// import PackageList from './page/PackageList/PackageList';
+import {PackageList} from './page/PackageList/PackageList';
+import  {PackageDetail}  from './page/PackageDetail/PackageDetail';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Profile />
+    <PackageList />
   </React.StrictMode>
 );
 
