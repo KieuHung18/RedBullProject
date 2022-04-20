@@ -1,4 +1,6 @@
 package com.user;
+
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,26 +9,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.connection.JsonResponse;
+
+@Controller
 public class UserController {
-	@CrossOrigin(origins="http://localhost:3000")
-	@RequestMapping(value = "/connect",method=RequestMethod.POST)
-	@ResponseBody
-	public JsonResponse connect(@RequestParam(value ="clientData")String data) {
-		System.out.println(data);
-		JsonResponse res=new JsonResponse();
-		res.setRespone("SUCCESS");
-		res.setResult("conect");
-		return res;
-	}
 	
 	@CrossOrigin(origins="http://localhost:3000")
-	@RequestMapping(path = "/init",method=RequestMethod.POST)
+	@RequestMapping(path = "/user",method=RequestMethod.GET)
 	@ResponseBody
-	public JsonResponse connectpath(@RequestParam(value ="clientData")String data) {
-		System.out.println(data);
+	public JsonResponse connectpath(@RequestParam(value ="userID")String userID) {
+		System.out.println(userID);
 		JsonResponse res=new JsonResponse();
-		res.setRespone("SUCCESS");
-		res.setResult("conect");
+		res.setResponse(getUser(userID));
+		res.setResult("SUCCESS");
 		return res;
+	}
+	public User getUser(String userID) {
+		User result = new User("asd", "asdsad", "asd", "asd", "asd");
+		
+		return result;
+		
 	}
 }
