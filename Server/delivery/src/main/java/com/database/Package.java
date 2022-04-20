@@ -93,4 +93,11 @@ public class Package {
 		this.status = status;
 	}
 
+	@Override
+	public String toString() {
+		return "Package [id=" + id + ", idCustomer=" + idCustomer + ", idUser=" + idUser + ", dayReceive=" + dayReceive
+				+ ", dayDelivery=" + dayDelivery + ", addressDelivery=" + addressDelivery + ", cost=" + cost
+				+ ", status=" + status + "]";
+	}
+
 }

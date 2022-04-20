@@ -17,7 +17,7 @@ public class CustomerDatabase {
 		String link = "customer.json";
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
-			System.out.println(jsonObject);
+//			System.out.println(jsonObject);
 			JSONObject customer = (JSONObject) jsonObject.get(id_customer);
 
 			obj0 = customer;

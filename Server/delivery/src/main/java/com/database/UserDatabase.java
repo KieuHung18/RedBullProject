@@ -20,7 +20,7 @@ public class UserDatabase {
 		String link = "user.json";
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
-			System.out.println(jsonObject);
+//			System.out.println(jsonObject);
 			JSONObject user = (JSONObject) jsonObject.get(id_user);
 
 			obj0 = user;
@@ -40,13 +40,13 @@ public class UserDatabase {
 		String link = "user.json";
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
-			System.out.println(jsonObject);
+//			System.out.println(jsonObject);
 			for (int i = 0; i < jsonObject.size(); i++) {
 
 				JSONObject user = (JSONObject) jsonObject.get("u" + i);
 
 				String account = (String) user.get("account");
-				System.out.println(account);
+//				System.out.println(account);
 				if (accountInput.equals(account)) {
 					return true;
 				}
@@ -66,13 +66,13 @@ public class UserDatabase {
 		String link = "user.json";
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
-			System.out.println(jsonObject);
+//			System.out.println(jsonObject);
 			for (int i = 0; i < jsonObject.size(); i++) {
 
 				JSONObject user = (JSONObject) jsonObject.get("u" + i);
 
 				String password = (String) user.get("password");
-				System.out.println(password);
+//				System.out.println(password);
 				if (passwordInput.equals(password)) {
 					return true;
 				}

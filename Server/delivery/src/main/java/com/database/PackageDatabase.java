@@ -20,7 +20,7 @@ public class PackageDatabase {
 
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
-			System.out.println(jsonObject);
+//			System.out.println(jsonObject);
 			JSONObject packages = (JSONObject) jsonObject.get(id_package);
 
 			obj0 = packages;
@@ -40,7 +40,7 @@ public class PackageDatabase {
 		try (Reader reader = new FileReader(link)) {
 
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
-			System.out.println(jsonObject);
+//			System.out.println(jsonObject);
 
 			JSONObject user = (JSONObject) jsonObject.get(id_package);
 
@@ -71,7 +71,7 @@ public class PackageDatabase {
 		try (Reader reader = new FileReader(link)) {
 
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
-			System.out.println(jsonObject);
+//			System.out.println(jsonObject);
 
 			JSONObject user = (JSONObject) jsonObject.get(id_package);
 			user.put("status", true);
@@ -96,7 +96,7 @@ public class PackageDatabase {
 		try (Reader reader = new FileReader(link)) {
 
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
-			System.out.println(jsonObject);
+//			System.out.println(jsonObject);
 
 			JSONObject user = (JSONObject) jsonObject.get(id_package);
 			user.put("status", status);
@@ -121,38 +121,25 @@ public class PackageDatabase {
 //		String link = "packages.json";
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
-			System.out.println();
-			System.out.println(jsonObject);
+//			System.out.println(jsonObject);
 			for (int i = 0; i < jsonObject.size(); i++) {
 				JSONObject packages = (JSONObject) jsonObject.get("p" + i);
 				String id = (String) packages.get("id");
-				System.out.println(id);
 				String idCustomer = (String) packages.get("idCustomer");
-				System.out.println(idCustomer);
 				String idUser = (String) packages.get("idUser");
-				System.out.println(idUser);
 				JSONObject dayReceive = (JSONObject) packages.get("dayReceive");
 //			System.out.println(dayReceive);
 				long dr0 = (long) dayReceive.get("day");
-				System.out.println(dr0);
 				long mr0 = (long) dayReceive.get("month");
-				System.out.println(mr0);
 				long yr0 = (long) dayReceive.get("year");
-				System.out.println(yr0);
 				JSONObject dayDelivery = (JSONObject) packages.get("dayDelivery");
 //			System.out.println(dayDelivery);
 				long dd0 = (long) dayDelivery.get("day");
-				System.out.println(dd0);
 				long md0 = (long) dayDelivery.get("month");
-				System.out.println(md0);
 				long yd0 = (long) dayDelivery.get("year");
-				System.out.println(yd0);
 				String addressDelivery = (String) packages.get("addressDelivery");
-				System.out.println(addressDelivery);
 				long cost = (long) packages.get("cost");
-				System.out.println(cost);
 				boolean status = (boolean) packages.get("status");
-				System.out.println(status);
 
 				Package package0 = new Package();
 				Date dater0 = new Date();
@@ -164,8 +151,8 @@ public class PackageDatabase {
 				dated0.setMonth((int) md0);
 				dated0.setYear((int) yd0);
 				package0.setId(id);
-				package0.setIdCustomer(id);
-				package0.setIdUser(id);
+				package0.setIdCustomer(idCustomer);
+				package0.setIdUser(idUser);
 				package0.setDayReceive(dater0);
 				package0.setDayDelivery(dated0);
 				package0.setAddressDelivery(addressDelivery);
