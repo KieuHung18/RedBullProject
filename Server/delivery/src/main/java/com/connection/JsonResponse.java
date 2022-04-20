@@ -2,7 +2,7 @@ package com.connection;
 
 public class JsonResponse {
 	private String result;
-	private Object respone;
+	private Object response;
 	public JsonResponse() {
 		// TODO Auto-generated constructor stub
 	}
@@ -12,11 +12,13 @@ public class JsonResponse {
 	public void setResult(String result) {
 		this.result = result;
 	}
-	public Object getRespone() {
-		return respone;
+	public Object getResponse() {
+		return response;
 	}
-	public void setRespone(Object respone) {
-		this.respone = respone;
+	public void setResponse(Object response) {
+		this.response = response;
 	}
+	
+	
 	
 }
