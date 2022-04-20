@@ -22,40 +22,37 @@ function productsGenerator(quantity){
 }
 
 let packageTable=[];
-
+packageTable=productsGenerator(20);
 export class PackageList extends React.Component {
   constructor(props) {
     super(props);
     this.state = { loadData: true };
   }
 
-  componentDidMount() {
-    var display=this;
-    jquery.ajax({
-      type: "GET",
-      url: "http://localhost:8080/delivery/packagelist",
-      success: function(response){
-        if(response.result=="SUCCESS"){
-          if(display.state.loadData){
-          for (let i = 0; i < response.respone.length; i++) {
-            packageTable.push({id:response.respone[i].packageID, address: response.respone[i].address, customerName: response.respone[i].customerName, customerPhone: response.respone[i].customerPhone ,price:  response.respone[i].price,status: response.respone[i].status,distance: Math.floor(Math.random()*1000)/100+"km"});
-          }
-          display.setState({ color: display.state.loadData=false });
-        }
+  // componentDidMount() {
+  //   var display=this;
+  //   jquery.ajax({
+  //     type: "GET",
+  //     url: "http://localhost:8080/delivery/packagelist",
+  //     success: function(res){
+  //       if(res.result=="SUCCESS"){
+  //         if(display.state.loadData){
+  //         for (let i = 0; i < res.response.length; i++) {
+  //           packageTable.push({id:res.response[i].packageID, address: res.response[i].address, customerName: res.response[i].customerName, customerPhone: res.response[i].customerPhone ,price:  res.response[i].price,status: res.response[i].status,distance: Math.floor(Math.random()*1000)/100+"km"});
+  //         }
+  //         display.setState({ loadData: false });
+  //       }
           
-        }
-        else{console.log("fail");
-          //redirect
-        }
-       },
-       error: function(){
-         console.log("error");
-       }
-    });
-    // setTimeout(() => {
-    //   this.setState({ color: this.state.color=='green'?'lightgreen':'green' });console.log(packageTable);
-    // }, 250);
-  }
+  //       }
+  //       else{console.log("fail");
+  //         //redirect
+  //       }
+  //      },
+  //      error: function(){
+  //        console.log("error");
+  //      }
+  //   });
+  // }
   render() {
     const columns = [
       { dataField: 'address', text: 'Address'},

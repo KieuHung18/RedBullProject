@@ -16,7 +16,7 @@ public class ConnectionController {
 	public JsonResponse connectpath(@RequestParam(value ="id")String data) {
 		System.out.println("Search database id"+data);
 		JsonResponse res=new JsonResponse();
-		res.setRespone("user");
+		res.setResponse("user");
 		res.setResult("SUCCESS");
 		return res;
 	}
