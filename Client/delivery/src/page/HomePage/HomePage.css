@@ -1,0 +1,32 @@
+#container {
+  width: 2000px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  /* background-color: brown; */
+}
+
+.row {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px 20px;
+}
+
+#form {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#card {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#btn-submit {
+  width: 100%;
+}
+
+.text-bold {
+  font-weight: 500;
+}

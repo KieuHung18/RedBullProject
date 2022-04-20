@@ -8,17 +8,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.connection.JsonResponse;
+import com.database.Date;
 
 @Controller
 public class PackageController {
 	@CrossOrigin(origins = "http://localhost:3000")
-	@RequestMapping(path = "/init", method = RequestMethod.POST)
+	@RequestMapping(path = "/package", method = RequestMethod.GET)
 	@ResponseBody
-	public JsonResponse connectpath(@RequestParam(value = "clientData") String data) {
-		System.out.println(data);
+	public JsonResponse connectpath(@RequestParam(value = "packageID") String packageID) {
 		JsonResponse res = new JsonResponse();
-		res.setRespone("SUCCESS");
-		res.setResult("conect");
+		res.setResponse(getPackage(packageID));
+		res.setResult("SUCCESS");
 		return res;
+	}
+	public Package getPackage(String packageID) {
+		Package result=new Package("adress",new Date(0, 0, 0).toString(),new Date(0, 0, 0).toString(),23000,false,"cusname","cusnum");
+		return result;
 	}
 }

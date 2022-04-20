@@ -1,0 +1,8 @@
+.not-found-container{
+    height: 768px;
+    width: 100%;
+}
+.not-found-title{
+    width: fit-content;
+    margin: auto;
+}
