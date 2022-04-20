@@ -19,7 +19,7 @@ public class PackageListController {
 	public JsonResponse getPackageList() {
 		JsonResponse res=new JsonResponse();
 		res.setResult("SUCCESS");
-		res.setRespone(loadData());
+		res.setResponse(loadData());
 		return res;
 	}
 	public List<PackageList> loadData() {

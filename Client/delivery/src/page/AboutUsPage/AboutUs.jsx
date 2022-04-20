@@ -11,13 +11,11 @@ function  AboutUs(){
     return (
         <Div>
             <div>
-                <Navbar></Navbar>
                 <Introduction />
                 <Media />
                 <OurTeam />
                 <OurPartner />
                 <ContactUs />
-                <Footer />
             </div>
         </Div>
     )

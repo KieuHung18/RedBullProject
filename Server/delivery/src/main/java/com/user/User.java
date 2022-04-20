@@ -3,18 +3,19 @@ package com.user;
 public class User {
 	private String firstName;
 	private String lastName;
-	private int phoneNumber;
+	private String phoneNumber;
 	private String address;
 	private String userName;
-	private int skypeID;
-	public User(String firstName, String lastName, int phoneNumber, String address, String userName, int skypeID) {
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
+	public User(String firstName, String lastName, String phoneNumber, String address, String userName) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.userName = userName;
-		this.skypeID = skypeID;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -28,10 +29,10 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public int getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-	public void setPhoneNumber(int phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 	public String getAddress() {
@@ -46,11 +47,7 @@ public class User {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public int getSkypeID() {
-		return skypeID;
-	}
-	public void setSkypeID(int skypeID) {
-		this.skypeID = skypeID;
-	}
+	
+	
 	
 }	
