@@ -1,0 +1,28 @@
+#main-container {
+    place-items: center center;
+    height: auto;
+    width: auto;
+
+  }
+  .header {
+    font-size: 50px;
+    font-family: "Open Sans", sans-serif;
+    color: red;
+    text-align: center;
+  }
+  .header1 {
+    font-size: 80px;
+    font-family: "Open Sans", sans-serif;
+    color: red;
+    text-align: center;
+  }
+  
+  .bootstrap-logo {
+    width: 72px;
+    height: 72px;
+  }
+  
+  .form-control:focus {
+    z-index: 5;
+  }
+ 
