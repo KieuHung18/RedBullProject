@@ -4,26 +4,40 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Profile.css';
 import jquery  from 'jquery';
 
-// function doAjaxPost() {
-//     jquery.ajax({
-//         type: "POST",
-//         url: "http://localhost:8080/delivery/Profile",
-//         data: "clientData=Profile",
-//         success: function(response){
-//             console.log(response.result)
-//          },
-//     });
-    
-//   }
-//   function App() {
-//     return (
-//       <button onClick={doAjaxPost} className='button' id='button-id'>connect</button>
-//     );
-//   }
-const user = {
-    FirstName:"Dinh",LastName:"Phat",PhoneNumber:"0123456789",Address:"TP Ho Chi Minh",UserName:"user-01",
+var user;
+user={
+    FirstName:"Dinh",LastName:"Phat",PhoneNumber:"0123456789",Address:"TP Ho Chi Minh",
 };
 export class Profile extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { loadData: true };
+      }
+    // componentDidMount() {
+    //     var display=this;
+    //     jquery.ajax({
+    //         type: "GET",
+    //         url: "http://localhost:8080/delivery/user",
+    //         data:{userID: "u1"},
+    //         success: function(res){
+    //         if(res.result=="SUCCESS"){
+    //             if(display.state.loadData){
+    //                 user={
+    //                     FirstName:res.response.firstName,LastName:res.response.lastName,PhoneNumber:res.response.phoneNumber,Address:res.response.address
+    //                 };
+    //             display.setState({ loadData: false });
+    //         }
+                
+    //         }
+    //         else{console.log("fail");
+    //             //redirect
+    //         }
+    //         },
+    //         error: function(){
+    //             console.log("error");
+    //         }
+    //     });
+    // }
     render() {
         return (
             <div className="container">
@@ -63,16 +77,7 @@ export class Profile extends React.Component {
                                                 <label className="form-label">Address *</label>
                                                 <input type="text" className="form-control" placeholder="" aria-label="Address" value={user.Address}/>
                                             </div>
-                                            {/* <!-- Email -->for="inputEmail4" value="example@homerealty.com" */}
-                                            <div className="col-md-6">
-                                                <label className="form-label">UserName *</label>
-                                                <input type="text" className="form-control" placeholder="" aria-label="UserName" value={user.UserName}/>
-                                            </div>
-                                            {/* <!-- Skype --> */}
-                                            <div className="col-md-6">
-                                                <label className="form-label">Skype *</label>
-                                                <input type="text" className="form-control" placeholder="" aria-label="Phone number" value="Scaralet D"/>
-                                            </div>
+                                            
                                         </div> 
                                         {/* <!-- Row END --> */}
                                     </div>

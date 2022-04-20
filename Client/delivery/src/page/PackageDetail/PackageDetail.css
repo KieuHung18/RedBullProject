@@ -1,3 +1,6 @@
 .package-detail-container{
     margin: 20px;
 }
+.package-detail-body.card-body{
+    color: black;
+}
