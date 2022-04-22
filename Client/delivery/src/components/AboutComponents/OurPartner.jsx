@@ -77,7 +77,7 @@ function  OurPartner(){
 export default OurPartner;
 const Div = styled.div`
     background: linear-gradient(#e6e0ff, #ecfafc);
-    padding-top: 20px;
+    padding-top: 05px;
     height: 300px;
     margin-top: 30px;
     .main_sections{

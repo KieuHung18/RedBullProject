@@ -6,7 +6,7 @@ function Footer(){
     
     return(
         <Div>
-           <div className="container-fluid bg-dark mt-5 ">
+           <div className="container-fluid  mt-5 ">
                 <div className=" mx-5">
                     <div className="row mb-4">
                         <div className="col-md-4 col-sm-11 col-xs-11">
@@ -81,14 +81,16 @@ function Footer(){
 }
 export default Footer;
 const Div = styled.div`
-    color: #FFFF;
+    --tw-bg-opacity: 1;
+    background-color: rgba(249,249,249,var(--tw-bg-opacity));
+    color: #000000;
     .footer-text{
         color: #777777;
         .logo{
             text-align: center;
             display: table-cell;
-            text-align: center;
-            margin-left: 20px;
+            margin-left: 5px;
+            
             img{
                 width: 200px;
             }
@@ -100,11 +102,15 @@ const Div = styled.div`
 
             }
         }
+        p{
+            text-align: left;
+        }
         .social{
             i{
                 margin-right: 10px;
+                float: left;
                 :hover{
-                    color: #FFFF;
+                    color: #000000;
                 }
             }
         }
@@ -112,16 +118,22 @@ const Div = styled.div`
     }
     .information_content{
         margin-top: 20px;
+
+        h5{
+            text-align: left !important;
+
+        }
         ul{
             margin: 0;
             padding: 0;
             li{
                 list-style-type: none ;
                 padding: 4px;
-                color: #777777;
+                color: #000000;
+                text-align: left !important;
                 cursor: pointer;
                 :hover{
-                    color: #FFFF;
+                    color: #ff0000;
                 }
             }
         }
