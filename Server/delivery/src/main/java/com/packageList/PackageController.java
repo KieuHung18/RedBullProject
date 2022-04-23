@@ -21,9 +21,10 @@ public class PackageController {
 	@ResponseBody
 	public JsonResponse connectpath(@RequestParam(value = "packageID") String packageID) {
 		JsonResponse res = new JsonResponse();
-		res.setResponse(getPackage(packageID));
+	
 		if (getPackage(packageID) != null) {
 			res.setResult("SUCCESS");
+			res.setResponse(getPackage(packageID));
 		} else {
 			res.setResult("FAIL");
 		}
@@ -73,8 +74,4 @@ public class PackageController {
 		}
 	}
 
-	public static void main(String[] args) {
-		System.out.println(new PackageController().getPackage("ps0"));
-		System.out.println(new PackageController().getPackage("p0"));
-	}
 }

@@ -47,6 +47,11 @@ public class User {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	@Override
+	public String toString() {
+		return "User [firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", address="
+				+ address + ", userName=" + userName + "]";
+	}
 	
 	
 	

@@ -1,7 +1,6 @@
 package com.packagelistcontroller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -26,7 +25,9 @@ public class PackageListController {
 	public JsonResponse getPackageList() {
 		JsonResponse res = new JsonResponse();
 		res.setResult("SUCCESS");
-		res.setResponse(loadData());
+		List<PackageList> list = loadData();
+		System.out.println(list);
+		res.setResponse(list);
 		return res;
 	}
 
@@ -56,7 +57,4 @@ public class PackageListController {
 		return result;
 	}
 
-	public static void main(String[] args) {
-		System.out.println(new PackageListController().loadData());
-	}
 }
