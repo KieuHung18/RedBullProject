@@ -2,19 +2,12 @@ import React from "react";
 import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./HomePage.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+
 export class HomePage extends React.Component {
   render() {
     return (
       <Container id="container">
-        {/* <Row class="row">
-          <h3 class="text-bold">Header</h3>
-        </Row>
-        <hr></hr>
-        <Row class="row">
-          <h3 class="text-bold">Navbars</h3>
-        </Row>
-        <hr></hr> */}
-
         {/* HIGHLIGHT  */}
         <Row class="row">
           <h2 class="text-h2">Highlights</h2>
@@ -25,30 +18,18 @@ export class HomePage extends React.Component {
               <i class="fa-solid fa-award icon"></i>
             </div>
             <h5 class="text-h5">The best for delivery</h5>
-            {/* <p>
-              Lorem ipsum dolor sit amet, tincidunt vestibulum. Fusce egeabus
-              consectetuer turpis, suspendisse.
-            </p> */}
           </Col>
           <Col sm={12} md={4} lg={4}>
             <div>
               <i class="fa-solid fa-truck-fast icon"></i>
             </div>
             <h5 class="text-h5">Fast delivery, high success rate</h5>
-            {/* <p>
-              Lorem ipsum dolor sit amet, tincidunt vestibulum. Fusce egeabus
-              consectetuer turpis, suspendisse.
-            </p> */}
           </Col>
           <Col sm={12} md={4} lg={4}>
             <div>
               <i class="fa-solid fa-signal icon"></i>
             </div>
             <h5 class="text-h5">24/7 online management system</h5>
-            {/* <p>
-              Lorem ipsum dolor sit amet, tincidunt vestibulum. Fusce egeabus
-              consectetuer turpis, suspendisse.
-            </p> */}
           </Col>
         </Row>
         <hr></hr>
@@ -115,23 +96,7 @@ export class HomePage extends React.Component {
             </Row>
           </Card>
         </Row>
-        {/* <Row>
-          <Card id="card">
-            <Card.Body>
-              <blockquote className="blockquote mb-0 text-h5">
-                <p>
-                  {" "}
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Integer posuere erat a ante.{" "}
-                </p>
-                <footer className="blockquote-footer">
-                  Someone famous in{" "}
-                  <cite title="Source Title">Source Title</cite>
-                </footer>
-              </blockquote>
-            </Card.Body>
-          </Card>
-        </Row> */}
+
         <hr></hr>
         <Row class="row">
           <h3 class="text-h2">Contact Us</h3>
@@ -167,10 +132,6 @@ export class HomePage extends React.Component {
             </Button>
           </Form>
         </Row>
-        {/* <hr></hr>
-        <Row class="row">
-          <h3 class="text-bold">Footer</h3>
-        </Row> */}
       </Container>
     );
   }
