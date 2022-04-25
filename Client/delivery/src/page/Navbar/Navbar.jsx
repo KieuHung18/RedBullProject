@@ -44,7 +44,7 @@ function Navbar(){
                         <a  href="/Profile" class="nav-link">Profile</a>
                      </li>
                      <li class="nav-item">
-                        <a href="login"  class="nav-link">Login</a>
+                        <a href=""  class="nav-link">Login</a>
                      </li>
                   </ul>
 
