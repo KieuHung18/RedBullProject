@@ -11,7 +11,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class PackageDatabase {
-	public static final String link = "packages.json";
+	public static final String link = "D:/Study/RedBullProject/Server/delivery/packages.json";
 
 	/** Phương thức lấy gói hàng(JSONObject) bao gồm tất cả hông tin theo ID **/
 	public JSONObject getPackage(String id_package) {
@@ -20,7 +20,7 @@ public class PackageDatabase {
 
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
-			System.out.println(jsonObject);
+//			System.out.println(jsonObject);
 			JSONObject packages = (JSONObject) jsonObject.get(id_package);
 
 			obj0 = packages;
@@ -40,7 +40,7 @@ public class PackageDatabase {
 		try (Reader reader = new FileReader(link)) {
 
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
-			System.out.println(jsonObject);
+//			System.out.println(jsonObject);
 
 			JSONObject user = (JSONObject) jsonObject.get(id_package);
 

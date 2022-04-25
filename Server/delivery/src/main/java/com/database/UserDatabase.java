@@ -17,10 +17,10 @@ public class UserDatabase {
 	public JSONObject getUser(String id_user) {
 		JSONParser parser = new JSONParser();
 		JSONObject obj0 = new JSONObject();
-		String link = "user.json";
+		String link = "D:\\Study\\RedBullProject\\Server\\delivery\\user.json";
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
-			System.out.println(jsonObject);
+//			System.out.println(jsonObject);
 			JSONObject user = (JSONObject) jsonObject.get(id_user);
 
 			obj0 = user;
