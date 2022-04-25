@@ -1,24 +1,20 @@
 package com.database;
 
-import com.database.Date;
-
 public class Package {
 	private String id;
 	private String idCustomer;
 	private String idUser;
-	private Date dayReceive;
-	private Date dayDelivery;
 	private String addressDelivery;
+	private Date dayDelivery;
+	private Date dayReceive;
 	private int cost;
 	private boolean status;
 
 	public Package() {
-
 	}
 
 	public Package(String id, String idCustomer, String idUser, Date dayReceive, Date dayDelivery,
 			String addressDelivery, int cost, boolean status) {
-		super();
 		this.id = id;
 		this.idCustomer = idCustomer;
 		this.idUser = idUser;

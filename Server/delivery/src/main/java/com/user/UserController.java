@@ -1,8 +1,7 @@
 package com.user;
 
-import java.util.Iterator;
 import java.util.StringTokenizer;
-
+import java.util.Iterator;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.connection.JsonResponse;
+import com.database.UserDatabase;
 
 @Controller
 public class UserController {
@@ -29,7 +29,6 @@ public class UserController {
 		} else {
 			res.setResult("FAIL");
 		}
-
 		return res;
 	}
 
@@ -55,7 +54,6 @@ public class UserController {
 
 		}
 		return result;
-
 	}
 
 }
