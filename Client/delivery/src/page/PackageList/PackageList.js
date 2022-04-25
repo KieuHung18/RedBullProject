@@ -1,28 +1,39 @@
-import React, { Component } from 'react';
-import './PackageList.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
-import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
-import BootstrapTable from 'react-bootstrap-table-next';
-import paginationFactory from 'react-bootstrap-table2-paginator';
-import jquery from 'jquery';
+import React, { Component } from "react";
+import "./PackageList.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import "react-bootstrap-table-next/dist/react-bootstrap-table2.css";
+import "react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css";
+import BootstrapTable from "react-bootstrap-table-next";
+import paginationFactory from "react-bootstrap-table2-paginator";
+import jquery from "jquery";
+// import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 
 const tableRowEvents = {
   onClick: (row) => {
     console.log(row.id);
   },
-}
+};
 
-function productsGenerator(quantity){
+function productsGenerator(quantity) {
   const items = [];
   for (let i = 0; i < quantity; i++) {
-    items.push({id:'item'+i, address: "someadress/someadress/someadress", customerName: `someName ${i}`, customerPhone: "0937446809" ,price:  2100 + i, status:Math.random()>0.5?true:false,distance: Math.floor(Math.random()*1000)/100+"km"});
+    items.push({
+      id: "item" + i,
+      city: "Ho Chi Minh city",
+      ward: "Ward 1",
+      customerName: `someName ${i}`,
+      customerPhone: "0937446809",
+      price: 2100 + i,
+      status: Math.random() > 0.5 ? true : false,
+      distance: Math.floor(Math.random() * 1000) / 100 + "km",
+    });
   }
   return items;
 }
 
-let packageTable=[];
-packageTable=productsGenerator(20);
+let packageTable = [];
+packageTable = productsGenerator(20);
 export class PackageList extends React.Component {
   constructor(props) {
     super(props);
@@ -42,7 +53,7 @@ export class PackageList extends React.Component {
   //         }
   //         display.setState({ loadData: false });
   //       }
-          
+
   //       }
   //       else{console.log("fail");
   //         //redirect
@@ -55,31 +66,41 @@ export class PackageList extends React.Component {
   // }
   render() {
     const columns = [
-      { dataField: 'address', text: 'Address'},
-      { dataField: 'customerName', text: 'Customer Name'},
-      { dataField: 'customerPhone', text: 'Customer Pame'},
-      { dataField: 'price', text: 'Price'},
-      { dataField: 'distance', text: 'Distance', sort: true },
-      { dataField: 'status', text: 'Status'}
+      {
+        dataField: "city",
+        text: "City",
+      },
+      { dataField: "ward", text: "Ward" },
+      { dataField: "customerName", text: "Customer Name" },
+      { dataField: "customerPhone", text: "Customer Pame" },
+      { dataField: "price", text: "Price" },
+      { dataField: "distance", text: "Distance", sort: true },
+      { dataField: "status", text: "Status" },
     ];
-  
+
     const pagination = paginationFactory({
       page: 1,
       sizePerPage: 5,
-      lastPageText: '>>',
-      firstPageText: '<<',
-      nextPageText: '>',
-      prePageText: '<',
+      lastPageText: ">>",
+      firstPageText: "<<",
+      nextPageText: ">",
+      prePageText: "<",
       showTotal: true,
       alwaysShowAllBtns: true,
     });
     return (
       <div className="package-list-container">
-      <h1>Package List</h1>
-      <BootstrapTable rowEvents={ tableRowEvents } rowClasses="package-list-row"  bootstrap4 keyField='id' data={packageTable} columns={columns}   pagination={pagination} />
-    </div>
+        <h1>Package List</h1>
+        <BootstrapTable
+          rowEvents={tableRowEvents}
+          rowClasses="package-list-row"
+          bootstrap4
+          keyField="id"
+          data={packageTable}
+          columns={columns}
+          pagination={pagination}
+        />
+      </div>
     );
   }
 }
-
-
