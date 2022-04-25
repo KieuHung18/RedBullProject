@@ -1,29 +1,6 @@
-/* .package-detail-container{
+.package-detail-container{
     margin: 20px;
 }
 .package-detail-body.card-body{
     color: black;
-} */
-
-#container-detail {
-  width: 2000px;
-  font-family: "Poppins", sans-serif;
-}
-
-#card-detail {
-  color: #000;
-  background-color: #fff;
-  border: 1px solid #eee;
-  width: 50%;
-  border: 1px solid #fc7341;
-}
-
-#card-detail:hover {
-  border: 2px solid #fc7341;
-}
-
-.item {
-  color: #fc7341;
-  font-weight: 400;
-  font-size: 24px;
 }

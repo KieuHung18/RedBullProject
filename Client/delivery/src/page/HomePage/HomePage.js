@@ -6,49 +6,26 @@ export class HomePage extends React.Component {
   render() {
     return (
       <Container id="container">
-        {/* <Row class="row">
+        <Row class="row">
           <h3 class="text-bold">Header</h3>
         </Row>
         <hr></hr>
         <Row class="row">
           <h3 class="text-bold">Navbars</h3>
         </Row>
-        <hr></hr> */}
-
-        {/* HIGHLIGHT  */}
+        <hr></hr>
         <Row class="row">
-          <h2 class="text-h2">Highlights</h2>
+          <h3 class="text-bold">Hightlights</h3>
         </Row>
         <Row>
-          <Col sm={12} md={4} lg={4}>
-            <div>
-              <i class="fa-solid fa-award icon"></i>
-            </div>
-            <h5 class="text-h5">The best for delivery</h5>
-            {/* <p>
-              Lorem ipsum dolor sit amet, tincidunt vestibulum. Fusce egeabus
-              consectetuer turpis, suspendisse.
-            </p> */}
+          <Col>
+            <h5>The best for delivery</h5>
           </Col>
-          <Col sm={12} md={4} lg={4}>
-            <div>
-              <i class="fa-solid fa-truck-fast icon"></i>
-            </div>
-            <h5 class="text-h5">Fast delivery, high success rate</h5>
-            {/* <p>
-              Lorem ipsum dolor sit amet, tincidunt vestibulum. Fusce egeabus
-              consectetuer turpis, suspendisse.
-            </p> */}
+          <Col>
+            <h5>Fast delivery, high success rate</h5>
           </Col>
-          <Col sm={12} md={4} lg={4}>
-            <div>
-              <i class="fa-solid fa-signal icon"></i>
-            </div>
-            <h5 class="text-h5">24/7 online management system</h5>
-            {/* <p>
-              Lorem ipsum dolor sit amet, tincidunt vestibulum. Fusce egeabus
-              consectetuer turpis, suspendisse.
-            </p> */}
+          <Col>
+            <h5>24/7 online management system</h5>
           </Col>
         </Row>
         <hr></hr>
@@ -59,66 +36,12 @@ export class HomePage extends React.Component {
         </Row>
         <hr></hr>
         <Row class="row">
-          <h3 class="text-h2">Customer testimonials</h3>
+          <h3 class="text-bold">Customer testimonials</h3>
         </Row>
         <Row>
-          <Card id="card" class="card">
-            <Row>
-              <Col sm={12} md={2}>
-                <Card.Title>
-                  <i class="fa-solid fa-message icon2"></i>
-                </Card.Title>
-              </Col>
-              <Col sm={12} md={10}>
-                {" "}
-                <Card.Body>
-                  <blockquote className="blockquote mb-0 text-p">
-                    <p>
-                      {" "}
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Integer posuere erat a ante.{" "}
-                    </p>
-                    <footer className="blockquote-footer">
-                      Someone famous in{" "}
-                      <cite title="Source Title">Source Title</cite>
-                    </footer>
-                  </blockquote>
-                </Card.Body>
-              </Col>
-            </Row>
-          </Card>
-        </Row>
-        <Row>
-          <Card id="card">
-            <Row>
-              <Col sm={12} md={2}>
-                <Card.Title>
-                  <i class="fa-solid fa-message icon2"></i>
-                </Card.Title>
-              </Col>
-              <Col sm={12} md={10}>
-                {" "}
-                <Card.Body>
-                  <blockquote className="blockquote mb-0 text-p">
-                    <p>
-                      {" "}
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Integer posuere erat a ante.{" "}
-                    </p>
-                    <footer className="blockquote-footer">
-                      Someone famous in{" "}
-                      <cite title="Source Title">Source Title</cite>
-                    </footer>
-                  </blockquote>
-                </Card.Body>
-              </Col>
-            </Row>
-          </Card>
-        </Row>
-        {/* <Row>
           <Card id="card">
             <Card.Body>
-              <blockquote className="blockquote mb-0 text-h5">
+              <blockquote className="blockquote mb-0">
                 <p>
                   {" "}
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -131,10 +54,27 @@ export class HomePage extends React.Component {
               </blockquote>
             </Card.Body>
           </Card>
-        </Row> */}
+        </Row>
+        <Row>
+          <Card id="card">
+            <Card.Body>
+              <blockquote className="blockquote mb-0">
+                <p>
+                  {" "}
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Integer posuere erat a ante.{" "}
+                </p>
+                <footer className="blockquote-footer">
+                  Someone famous in{" "}
+                  <cite title="Source Title">Source Title</cite>
+                </footer>
+              </blockquote>
+            </Card.Body>
+          </Card>
+        </Row>
         <hr></hr>
         <Row class="row">
-          <h3 class="text-h2">Contact Us</h3>
+          <h3 class="text-bold">Get in touch</h3>
         </Row>
         <Row class="row">
           <Form id="form">
@@ -162,15 +102,15 @@ export class HomePage extends React.Component {
               ></Form.Control>
             </Form.Group>
 
-            <Button class="btn-submit" id="btn-submit" type="submit">
-              Send Message
+            <Button id="btn-submit" variant="primary" type="submit">
+              Submit
             </Button>
           </Form>
         </Row>
-        {/* <hr></hr>
+        <hr></hr>
         <Row class="row">
           <h3 class="text-bold">Footer</h3>
-        </Row> */}
+        </Row>
       </Container>
     );
   }
