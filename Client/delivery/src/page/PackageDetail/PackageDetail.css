@@ -1,29 +1,41 @@
-/* .package-detail-container{
-    margin: 20px;
-}
-.package-detail-body.card-body{
-    color: black;
-} */
-
 #container-detail {
   width: 2000px;
   font-family: "Poppins", sans-serif;
-}
-
-#card-detail {
   color: #000;
-  background-color: #fff;
-  border: 1px solid #eee;
-  width: 50%;
-  border: 1px solid #fc7341;
-}
-
-#card-detail:hover {
-  border: 2px solid #fc7341;
-}
-
-.item {
-  color: #fc7341;
-  font-weight: 400;
   font-size: 24px;
+}
+
+#map {
+  /* height: 100px; */
+}
+
+table,
+thead,
+tr,
+td {
+  padding: 10px;
+  border: 2px inset #000;
+}
+
+table {
+  width: 100%;
+  text-align: left;
+}
+
+tr {
+  height: 30px;
+}
+
+tr:nth-child(even) {
+  background-color: #d6eeee;
+}
+tr:hover {
+  background-color: #fff;
+  color: green;
+  font-weight: 600;
+}
+
+#group-btn {
+  padding-top: 40px;
+  text-align: right;
 }
