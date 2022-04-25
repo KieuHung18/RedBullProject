@@ -1,1 +1,27 @@
-{"u0":{"password":"123456","address":"Hai Phong","phoneNumber":"0903235674","fullName":"Tran Thanh Tam","id":"u0","account":"abc"},"u1":{"password":"123456","address":"Hai Phong","phoneNumber":"0903235674","fullName":"Tong Van Long","id":"u1","account":"abcd"},"u2":{"password":"123457","address":"Hai Phong","phoneNumber":"0903235674","fullName":"Bui Minh An","id":"u2","account":"abcde"}}
+{
+	"u0": {
+		"password": "123456",
+		"address": "Hai Phong",
+		"phoneNumber": "0903235674",
+		"fullName": "Tran Thanh Tam",
+		"id": "u0",
+		"account": "abc"
+	},
+	"u1": {
+		"password": "123456",
+		"address": "Hai Phong",
+		"phoneNumber": "0903235674",
+		"fullName": "Tong Van Long",
+		"id": "u1",
+		"account": "abcd"
+	},
+	"u2": {
+		"password": "123457",
+		"address": "Hai Phong",
+		"phoneNumber": "0903235674",
+		"fullName": "Bui Minh An",
+		"id": "u2",
+		"account": "abcde"
+	}
+}
+

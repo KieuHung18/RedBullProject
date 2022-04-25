@@ -1,7 +1,5 @@
 package com.packageList;
 
-import com.database.Date;
-
 public class Package {
 	private String address;
 	private String deliveryDate;
@@ -89,5 +87,4 @@ public class Package {
 				+ ", price=" + price + ", status=" + status + ", customerName=" + customerName + ", customerPhone="
 				+ customerPhone + "]";
 	}
-
 }

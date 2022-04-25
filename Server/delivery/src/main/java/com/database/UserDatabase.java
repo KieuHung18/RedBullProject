@@ -19,7 +19,7 @@ public class UserDatabase {
 		JSONParser parser = new JSONParser();
 		JSONObject obj0 = new JSONObject();
 //		String link = "user.json";
-
+		String link = "D:\\Study\\RedBullProject\\Server\\delivery\\user.json";
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 //			System.out.println(jsonObject);
