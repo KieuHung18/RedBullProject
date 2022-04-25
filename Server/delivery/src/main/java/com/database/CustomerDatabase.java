@@ -16,7 +16,7 @@ public class CustomerDatabase {
 		JSONObject obj0 = new JSONObject();
 //		String link = "customer.json";
 		String link = "C:\\Users\\QuocKhanh\\Documents\\RedBullProject\\Server\\delivery\\customer.json";
-		String link = "D:/Study/RedBullProject/Server/delivery/customer.json";
+//		String link = "D:/Study/RedBullProject/Server/delivery/customer.json";
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 //			System.out.println(jsonObject);
