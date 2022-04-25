@@ -35,6 +35,34 @@ public class UserDatabase {
 		return obj0;
 	}
 
+	/**
+	 * Phương thức lấy ID người giao hàng theo tên tài khoản
+	 **/
+	public String getUserID(String userName) {
+		JSONParser parser = new JSONParser();
+		String result  = null;
+		try (Reader reader = new FileReader(link)) {
+			JSONObject jsonObject = (JSONObject) parser.parse(reader);
+			for (int i = 0; i < jsonObject.size(); i++) {
+
+				JSONObject user = (JSONObject) jsonObject.get("u" + i);
+
+				String account = (String) user.get("account");
+				if (userName.equals(account)) {
+					result= "u"+i;
+					break;
+				}
+
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	
 	/** Phương thức kiểm tra tài khoản nhập vào có tồn tại hay không? **/
 	public boolean checkExistAccount(String accountInput) {
 		JSONParser parser = new JSONParser();
