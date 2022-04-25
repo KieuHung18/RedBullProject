@@ -1,7 +1,7 @@
 package com.user;
 
 import java.util.StringTokenizer;
-
+import java.util.Iterator;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,11 +20,12 @@ public class UserController {
 	@RequestMapping(path = "/user", method = RequestMethod.GET)
 	@ResponseBody
 	public JsonResponse connectpath(@RequestParam(value = "userID") String userID) {
+		System.out.println(userID);
 		JsonResponse res = new JsonResponse();
-		User user = getUser(userID);
-		if (user != null) {
-			res.setResponse(user);
+
+		if (getUser(userID) != null) {
 			res.setResult("SUCCESS");
+			res.setResponse(getUser(userID));
 		} else {
 			res.setResult("FAIL");
 		}
@@ -32,34 +33,27 @@ public class UserController {
 	}
 
 	public User getUser(String userID) {
-		User user = new User();
-		JSONObject userJSObj = new UserDatabase().getUser(userID);
+		User result = new User();
+		JSONObject jsonPackage = new com.database.UserDatabase().getUser(userID);
+		if (jsonPackage == null) {
+			return null;
+		} else {
+			String fullName = (String) jsonPackage.get("fullName");
+			String[] tmp = fullName.split(" ");
+			int count = tmp.length;
+			String firstName = "";
+			String lastName = tmp[count - 1];
+			for (int i = 0; i < tmp.length - 1; i++) {
+				firstName += tmp[i] + " ";
+			}
+			result.setFirstName(firstName);
+			result.setLastName(lastName);
+			result.setPhoneNumber((String) jsonPackage.get("phoneNumber"));
+			result.setAddress((String) jsonPackage.get("address"));
+			result.setUserName((String) jsonPackage.get("account"));
 
-		String fullName = (String) userJSObj.get("fullName");
-		String phoneNumber = (String) userJSObj.get("phoneNumber");
-		String address = (String) userJSObj.get("address");
-		String account = (String) userJSObj.get("account");
-
-		StringTokenizer st;
-		String firstName = "";
-		String lastName = "";
-
-		st = new StringTokenizer(fullName);
-		while (st.hasMoreTokens()) {
-			firstName = st.nextToken();
 		}
-
-		st = new StringTokenizer(fullName);
-		for (int i = 0; i < st.countTokens(); i++) {
-			lastName += st.nextToken() + " ";
-		}
-
-		user.setFirstName(firstName);
-		user.setLastName(lastName);
-		user.setPhoneNumber(phoneNumber);
-		user.setAddress(address);
-		user.setUserName(account);
-
-		return user;
+		return result;
 	}
+
 }

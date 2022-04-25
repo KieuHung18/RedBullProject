@@ -87,6 +87,4 @@ public class Package {
 				+ ", price=" + price + ", status=" + status + ", customerName=" + customerName + ", customerPhone="
 				+ customerPhone + "]";
 	}
-	
-
 }
