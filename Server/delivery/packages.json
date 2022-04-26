@@ -15,7 +15,7 @@
 			"month": -1,
 			"year": -1
 		},
-		"status": false
+		"status": "pending"
 	},
 	"p1": {
 		"id": "p1",
@@ -33,7 +33,7 @@
 			"month": -1,
 			"year": -1
 		},
-		"status": false
+		"status": "pending"
 	},
 	"p2": {
 		"id": "p2",
@@ -51,11 +51,11 @@
 			"month": -1,
 			"year": -1
 		},
-		"status": false
+		"status": "pending"
 	},
 	"p3": {
 		"id": "p3",
-		"idUser": "u",
+		"idUser": "u0",
 		"idCustomer": "c2",
 		"cost": 200000,
 		"addressDelivery": "Ho Chi Minh,Thu Duc,Linh Trung,64 Le Van Chi",
@@ -69,7 +69,7 @@
 			"month": -1,
 			"year": -1
 		},
-		"status": false
+		"status": "pending"
 	},
 	"p4": {
 		"id": "p4",
@@ -87,7 +87,7 @@
 			"month": -1,
 			"year": -1
 		},
-		"status": false
+		"status": "pending"
 	},
 	"p5": {
 		"id": "p5",
@@ -105,7 +105,7 @@
 			"month": -1,
 			"year": -1
 		},
-		"status": false
+		"status": "pending"
 	},
 	"p6": {
 		"id": "p6",
@@ -123,7 +123,7 @@
 			"month": -1,
 			"year": -1
 		},
-		"status": false
+		"status": "pending"
 	},
 	"p7": {
 		"id": "p7",
@@ -141,7 +141,7 @@
 			"month": -1,
 			"year": -1
 		},
-		"status": false
+		"status": "pending"
 	},
 	"p8": {
 		"id": "p8",
@@ -159,7 +159,7 @@
 			"month": -1,
 			"year": -1
 		},
-		"status": false
+		"status": "pending"
 	},
 	"p9": {
 		"id": "p9",
@@ -177,7 +177,7 @@
 			"month": -1,
 			"year": -1
 		},
-		"status": false
+		"status": "pending"
 	},
 	"p10": {
 		"id": "p10",
@@ -193,7 +193,7 @@
 			"month": -1,
 			"year": -1
 		},
-		"status": false
+		"status": "pending"
 	},
 	"p11": {
 		"id": "p11",
@@ -211,7 +211,7 @@
 			"month": -1,
 			"year": -1
 		},
-		"status": false
+		"status": "pending"
 	},
 	"p12": {
 		"id": "p12",
@@ -229,7 +229,7 @@
 			"month": -1,
 			"year": -1
 		},
-		"status": false
+		"status": "pending"
 	},
 	"p13": {
 		"id": "p13",
@@ -247,7 +247,7 @@
 			"month": -1,
 			"year": -1
 		},
-		"status": false
+		"status": "pending"
 	},
 	"p14": {
 		"id": "p14",
@@ -265,7 +265,7 @@
 			"month": -1,
 			"year": -1
 		},
-		"status": false
+		"status": "pending"
 	},
 	"p15": {
 		"idUser": "u2",
@@ -283,7 +283,7 @@
 		"id": "p15",
 		"addressDelivery": "Ho Chi Minh,Quan 1,Ben Nghe,Thao Cam Vien Sai Gon",
 		"idCustomer": "c2",
-		"status": false
+		"status": "pending"
 	},
 	"p16": {
 		"idUser": "u2",
@@ -301,7 +301,7 @@
 		"id": "p16",
 		"addressDelivery": "Ho Chi Minh,Thu Duc,Linh Trung,Dai hoc Kinh te-Luat",
 		"idCustomer": "c8",
-		"status": false
+		"status": "pending"
 	},
 	"p17": {
 		"idUser": "u2",
@@ -319,7 +319,7 @@
 		"id": "p17",
 		"addressDelivery": "Ho Chi Minh,Binh Thanh,26,Ben Xe Mien Dong",
 		"idCustomer": "c0",
-		"status": false
+		"status": "pending"
 	},
 	"p18": {
 		"idUser": "u1",
@@ -337,7 +337,7 @@
 		"id": "p18",
 		"addressDelivery": "Ho Chi Minh,Binh Thanh,22,Landmark 81",
 		"idCustomer": "c5",
-		"status": false
+		"status": "pending"
 	},
 	"p19": {
 		"idUser": "u2",
@@ -355,7 +355,7 @@
 		"id": "p19",
 		"addressDelivery": "Ho Chi Minh,Binh Tan,An Lac,Ben Xe Mien Tay",
 		"idCustomer": "c0",
-		"status": false
+		"status": "pending"
 	},
 	"p20": {
 		"idUser": "u1",
@@ -373,7 +373,7 @@
 		"id": "p20",
 		"addressDelivery": "Ho Chi Minh,Thu Duc,Linh Trung,Benh Vien Da khoa khu vuc Thu Duc",
 		"idCustomer": "c0",
-		"status": false
+		"status": "pending"
 	},
 	"p21": {
 		"idUser": "u2",
@@ -391,7 +391,7 @@
 		"id": "p21",
 		"addressDelivery": "Ho Chi Minh,Thu Duc,Linh Chieu,56 Hoang Dieu 2",
 		"idCustomer": "c0",
-		"status": false
+		"status": "pending"
 	},
 	"p22": {
 		"idUser": "u1",
@@ -410,7 +410,7 @@
 		"id": "p22",
 		"addressDelivery": "Ho Chi Minh,Thu Duc,Linh Chieu,Dai hoc Su Pham Ky Thuat TPHCM",
 		"idCustomer": "c8",
-		"status": false
+		"status": "pending"
 	},
 	"p23": {
 		"idUser": "u2",
@@ -428,7 +428,7 @@
 		"id": "p23",
 		"addressDelivery": "Ho Chi Minh,Thu Duc,Binh Tho, Cong ty co phan Cap nuoc Thu Duc",
 		"idCustomer": "c9",
-		"status": false
+		"status": "pending"
 	},
 	"p24": {
 		"idUser": "u1",
@@ -446,7 +446,7 @@
 		"id": "p24",
 		"addressDelivery": "Ho Chi Minh,Binh Thanh,26,Ben Xe Mien Dong",
 		"idCustomer": "c3",
-		"status": false
+		"status": "pending"
 	},
 	"p25": {
 		"idUser": "u0",
@@ -464,7 +464,7 @@
 		"id": "p25",
 		"addressDelivery": "Ho Chi Minh,Binh Thanh,22,Landmark 81",
 		"idCustomer": "c4",
-		"status": false
+		"status": "pending"
 	},
 	"p26": {
 		"idUser": "u1",
@@ -482,7 +482,7 @@
 		"id": "p26",
 		"addressDelivery": "Ho Chi Minh,Thu Duc,Phuoc Binh,106 Dai lo 3",
 		"idCustomer": "c5",
-		"status": false
+		"status": "pending"
 	},
 	"p27": {
 		"idUser": "u2",
@@ -500,7 +500,7 @@
 		"id": "p27",
 		"addressDelivery": "Ho Chi Minh,Tan Phu,Tay Thanh,140 Le Trong Tan",
 		"idCustomer": "c8",
-		"status": false
+		"status": "pending"
 	},
 	"p28": {
 		"idUser": "u2",
@@ -518,7 +518,7 @@
 		"id": "p28",
 		"addressDelivery": "Ho Chi Minh,Thu Duc,Truong Tho,26 Vo Van Ngan",
 		"idCustomer": "c8",
-		"status": false
+		"status": "pending"
 	},
 	"p29": {
 		"idUser": "u0",
@@ -536,6 +536,6 @@
 		"id": "p29",
 		"addressDelivery": "Ho Chi Minh,Thu Duc,Linh Trung,127 Le Van Chi",
 		"idCustomer": "c4",
-		"status": false
+		"status": "pending"
 	}
 }

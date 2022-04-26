@@ -1,12 +1,10 @@
 package com.packagelistcontroller;
 
 public class PackageList {
-	private String userID;
 	private String packageID;
 	private String address;
 	private int price;
-	private boolean status;
-	private String customerID;
+	private String status;
 	private String customerName;
 	private String customerPhone;
 
@@ -14,24 +12,15 @@ public class PackageList {
 		// TODO Auto-generated constructor stub
 	}
 
-	public PackageList(String userID, String packageID, String address, int price, boolean status, String customerID,
-			String customerName, String customerPhone) {
-		this.userID = userID;
+	public PackageList(String packageID, String address, int price, String status, String customerName,
+			String customerPhone) {
+		super();
 		this.packageID = packageID;
 		this.address = address;
 		this.price = price;
 		this.status = status;
-		this.customerID = customerID;
 		this.customerName = customerName;
 		this.customerPhone = customerPhone;
-	}
-
-	public String getUserID() {
-		return userID;
-	}
-
-	public void setUserID(String userID) {
-		this.userID = userID;
 	}
 
 	public String getPackageID() {
@@ -58,20 +47,12 @@ public class PackageList {
 		this.price = price;
 	}
 
-	public boolean isStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	public String getCustomerID() {
-		return customerID;
-	}
-
-	public void setCustomerID(String customerID) {
-		this.customerID = customerID;
 	}
 
 	public String getCustomerName() {
@@ -90,11 +71,16 @@ public class PackageList {
 		this.customerPhone = customerPhone;
 	}
 
-	@Override
-	public String toString() {
-		return "PackageList [userID=" + userID + ", packageID=" + packageID + ", address=" + address + ", price="
-				+ price + ", status=" + status + ", customerID=" + customerID + ", customerName=" + customerName
-				+ ", customerPhone=" + customerPhone + "]";
-	}
+	
+	
+
+	
+
+//	@Override
+//	public String toString() {
+//		return "PackageList [userID=" + userID + ", packageID=" + packageID + ", address=" + address + ", price="
+//				+ price + ", status=" + status + ", customerID=" + customerID + ", customerName=" + customerName
+//				+ ", customerPhone=" + customerPhone + "]";
+//	}
 
 }

@@ -30,14 +30,14 @@
     width:400px;
     padding-right: 220px;
   }
-  .header{
+  /* .header{
     color: #5ed6b3;
     font-size: 30px;
     padding-bottom: 13px;
-  }
+  } */
   
   
- input{
+ .login-input{
    width: 300px;
    height: 50px;
    border-radius: 5px;
@@ -80,7 +80,7 @@
   padding-top: 10px;
 }
 
-button{
+.login-button{
   border: 0;
   background: none;
   display: block;
@@ -88,7 +88,7 @@ button{
   text-align: center;
   border: 4px solid none;
   outline: none;
-  color: #5ed6b3;
+  color: gray;
   transition: 0.25s;
   width: 400px;
   height: 50px;
@@ -98,16 +98,13 @@ button{
   background-color: #b7eddd;
  
 }
-.box button:hover{
+.login-button:hover{
  
   border: #5ed6b3 4px solid;
   background-color: #fff;
   color: #0b9b70;
 }
 
-.signup-button{
-  padding-top: 18px;
-}
 .txt-field1{
   padding-bottom: 15px;
 }

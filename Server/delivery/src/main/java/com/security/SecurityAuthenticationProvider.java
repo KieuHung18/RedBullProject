@@ -23,6 +23,8 @@ public class SecurityAuthenticationProvider implements AuthenticationProvider
 		{
 				String account = authentication.getName();
 				String password = authentication.getCredentials().toString();
+				System.out.println(account);
+				System.out.println(password);
 				if (authorizedUser(account, password))
 				{
 					List<GrantedAuthority> grantedAuths = new ArrayList<>();

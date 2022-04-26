@@ -22,10 +22,10 @@ public class ValidateController {
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(path = "/validate", method = RequestMethod.GET)
 	@ResponseBody
-	public JsonResponse connectpath(@RequestParam(value = "packageID") String packageID) {
+	public JsonResponse validate(@RequestParam(value = "packageID") String packageID,@RequestParam(value = "status") String status) {
 		JsonResponse res = new JsonResponse();
 		com.database.PackageDatabase database = new PackageDatabase();
-		database.updateDelivered(packageID);
+		database.updateDelivered(packageID,status);
 		com.database.Date dateCurrent = new com.database.Date();
 		long millis = System.currentTimeMillis();
 
@@ -41,5 +41,6 @@ public class ValidateController {
 
 		return res;
 	}
+	
 
 }
