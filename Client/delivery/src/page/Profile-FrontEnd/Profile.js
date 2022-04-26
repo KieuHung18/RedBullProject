@@ -43,8 +43,22 @@ export class Profile extends React.Component {
         });
     }
      logout() {
-        console.log("logout");
-        localStorage.clear();
+        
+        jquery.ajax({
+            type: "GET",
+            url: "http://localhost:8080/delivery/logout",
+            xhrFields: {
+                withCredentials: true
+                },
+                crossDomain: true,
+            success: function(res){
+                console.log("logout");
+                localStorage.clear();
+            },
+            error: function(){
+                console.log("error");
+            }
+        });
       }
     render() {
         return (
