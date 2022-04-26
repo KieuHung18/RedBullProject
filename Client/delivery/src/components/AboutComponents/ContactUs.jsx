@@ -4,7 +4,7 @@ import styled from "styled-components";
 function  ContactUs(){
     return (
         <Div>
-            <div className="container text-center" >
+            <div className="container-fluid text-center" >
                 <div className="form_section">
                     <h1>Contact us</h1>
                     <form action="">
@@ -60,6 +60,7 @@ const Div = styled.div`
            } 
            .message_section{
                margin-top: 20px;
+               align-items: baseline;
                     p{
                        margin-left: -600px;
                        margin-bottom: 0px;
@@ -82,5 +83,21 @@ const Div = styled.div`
                 margin-top: 20px;
             }
             }
+    }
+    @media all and (max-width: 390px){
+        .information_Section{
+            display: block !important;
+
+           .items_form{ 
+               width: 100%;
+           }
+
+        }
+        .message_section{
+            input{
+                width: 348px !important;
+                margin: auto !important;
+            }
+        }
     }
 `;

@@ -15,7 +15,7 @@ function  OurTeam(){
     return (
       <Div>
         <Slider {...settings}>
-            <div className="Container text-center">
+            <div className="Container OurTeam text-center">
               <img src={Chidokato} alt="" />
               <p>
               All issues are resolved promptly. In communication, the employees are pleasant,
@@ -24,7 +24,7 @@ function  OurTeam(){
               <h1>Cao Dương Tuấn</h1>
               <h2>Developer</h2>
             </div>
-            <div className="Container text-center">
+            <div className="Container OurTeam text-center">
               <img src={Chidokato} alt="" />
               <p>
               All issues are resolved promptly. In communication, the employees are pleasant,
@@ -33,7 +33,7 @@ function  OurTeam(){
               <h1>Cao Dương Tuấn</h1>
               <h2>Developer</h2>
             </div>
-            <div className="Container text-center">
+            <div className="Container OurTeam text-center">
               <img src={Chidokato} alt="" />
               <p>
               All issues are resolved promptly. In communication, the employees are pleasant,
@@ -42,7 +42,7 @@ function  OurTeam(){
               <h1>Cao Dương Tuấn</h1>
               <h2>Developer</h2>
             </div>
-            <div className="Container text-center">
+            <div className="Container OurTeam text-center">
               <img src={Chidokato} alt="" />
               <p>
               All issues are resolved promptly. In communication, the employees are pleasant,
@@ -51,7 +51,7 @@ function  OurTeam(){
               <h1>Cao Dương Tuấn</h1>
               <h2>Developer</h2>
             </div>
-            <div className="Container text-center">
+            <div className="Container OurTeam text-center">
               <img src={Chidokato} alt="" />
               <p>
               All issues are resolved promptly. In communication, the employees are pleasant,
@@ -60,7 +60,7 @@ function  OurTeam(){
               <h1>Cao Dương Tuấn</h1>
               <h2>Developer</h2>
             </div>
-            <div className="Container text-center">
+            <div className="Container OurTeam text-center">
               <img src={Chidokato} alt="" />
               <p>
               All issues are resolved promptly. In communication, the employees are pleasant,
@@ -69,7 +69,7 @@ function  OurTeam(){
               <h1>Cao Dương Tuấn</h1>
               <h2>Developer</h2>
             </div>
-            <div className="Container text-center">
+            <div className="Container OurTeam text-center">
               <img src={Chidokato} alt="" />
               <p>
               All issues are resolved promptly. In communication, the employees are pleasant,
@@ -104,4 +104,10 @@ const Div = styled.div`
         text-transform: uppercase;
       }
     }
+    @media all and (max-width: 390px){
+      .OurTeam{
+        width: 95% !important;
+      }
+    }
+
 `;

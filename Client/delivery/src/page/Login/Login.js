@@ -2,7 +2,9 @@ import Container from 'react-bootstrap/Container';
 import {Form,Button} from 'react-bootstrap';
 import './Login.css';
 import React,{useState} from 'react';
-import  logo from '../../assets/images/img.svg'
+import  logo from '../../assets/LogoCompany.png'
+import accountimg from '../../assets/images/account.svg'
+import passimg from '../../assets/images/password.svg'
 import jquery from 'jquery';
 // asdasdasd
 function doLogin(event) {
@@ -35,31 +37,49 @@ function logout() {
   localStorage.clear();
 }
 function Login() {
+
   const [email,setEmail]=useState("")
+
   const [password,setPassword]=useState("")
   return (
-    <>
-    <Container id="main-container" className="d-grid h-10">
-      <button onClick={logout}>logout</button>
-    <div className="header1">Login</div>
-    <div className="col-sm-3.5 offset-s-4">
-    <div>
-      <img src={logo}/>
+
+  
+  <Container id="main-container" className="main-container">
+      <div>
+        <div className="imgs">
+          <div className="container-image">
+            <img src={logo} alt="logo" className="logo"/>
+      </div>
     </div>
-    <Form onSubmit={doLogin}>
-      <Form.Group className="mb-2" id="sign-in-email-address"></Form.Group>
-        <input  id="account"  onChange={(e) =>setEmail(e.target.value)} className="form-control" placeholder="Enter your email"></input>
-        <br />
-      <Form.Group className="mb-2" id="sign-in-password"></Form.Group>
-        <input id="password" type="password" value={password} onChange={(e) =>setPassword(e.target.value)} className="form-control" placeholder="Password"></input>
-        <br />
-        <div className="d-grid">
-        <button variant="primary" type="submit" className="btn btn-primary">Sign Up</button>
+    <form class="box" action="login.js" method="post">
+    <h1 className="header">Login Page</h1>
+    <Form onSubqmit={doLogin()}>
+      <Form.Group  id="sign-in-account"></Form.Group>
+      <div class="txt-field1">
+        <img src={accountimg} alt="accountimg" className="accountandpass"/>
+        <input  type="text" id="account"  onChange={(e) =>setAccount(e.target.value)} className="account" placeholder="Enter your account"></input>
+        <span></span>
+
         </div>
+      <Form.Group  id="sign-in-password"></Form.Group>
+      <div class="txt-field2">
+      <div className="distance">
+        <img src={passimg} alt="passimg" className="accountandpass"/>  
+          <input id="password" type="password"  onChange={(e) =>setPassword(e.target.value)} className="pass" placeholder="Enter your password"></input>
+          <span></span>
+        </div>
+        </div>
+        
+      <div>
+      <div className='signup-button'>
+        <button variant="primary" type="submit">Sign up</button>
+       </div>
+      </div>
       </Form>
+      </form>
     </div>
     </Container>
-    </>
+  
   );
 }
 

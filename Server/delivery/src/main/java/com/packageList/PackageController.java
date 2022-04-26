@@ -1,6 +1,5 @@
 package com.packageList;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -109,5 +108,7 @@ public class PackageController {
 // 		return pck;
 
 	}
-
+public static void main(String[] args) {
+	System.out.println(new PackageController().getPackage("p2"));
+}
 }

@@ -50,4 +50,12 @@ const Div = styled.div`
             }
         }
     }
+    @media all and (max-width: 390px){
+        .content_introduction{
+            width: 100% !important;
+            p{
+                font-size: 16px  !important;
+            }
+        }
+    }
 `;

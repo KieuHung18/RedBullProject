@@ -11,8 +11,9 @@ function  AboutUs(){
     return (
         <Div>
             <div>
-                <Introduction />
+                
                 <Media />
+                <Introduction />
                 <OurTeam />
                 <OurPartner />
                 <ContactUs />

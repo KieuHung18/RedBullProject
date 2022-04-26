@@ -61,11 +61,10 @@ const Application = () => {
       <Route path="home" element={<HomePage />} />
       <Route path="login" element={<Login />} />
       <Route path="aboutus" element={<AboutUS />} />
-
-      <Route path="packagelist" element={<PackageList />} />
+      
       <Route element={<ProtectedRoute/>}>
         {/* PROTECTED ROUTES IN HERE */}
-        
+        <Route path="packagelist" element={<PackageList />} />
         <Route path="package/:id" element={<PackageDetail />} />
         <Route path="profile" element={<Profile />} />
         

@@ -11,8 +11,10 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class PackageDatabase {
+
 	public static final String LINK = "E:\\RedBull\\RedBullProject\\Server\\delivery";
 	private static String link = LINK+"\\packages.json";
+
 	/** Phương thức lấy gói hàng(JSONObject) bao gồm tất cả hông tin theo ID **/
 	public JSONObject getPackage(String id_package) {
 		JSONParser parser = new JSONParser();
