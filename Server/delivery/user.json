@@ -1,27 +1,28 @@
 {
-	"u0": {
-		"password": "123456",
-		"address": "Hai Phong",
-		"phoneNumber": "0903235674",
-		"fullName": "Tran Thanh Tam",
-		"id": "u0",
-		"account": "Tran Thanh Tam"
-	},
-	"u1": {
-		"password": "123456",
-		"address": "Hai Phong",
-		"phoneNumber": "0903235674",
-		"fullName": "Tong Van Long",
-		"id": "u1",
-		"account": "abcd"
-	},
-	"u2": {
-		"password": "123456",
-		"address": "Hai Phong",
-		"phoneNumber": "0903235674",
-		"fullName": "Bui Minh An",
-		"id": "u2",
-		"account": "Tran Thanh Tam"
-	}
+  "u0": {
+    "id": "u0",
+    "account": "abc",
+    "password": "123456",
+    "fullName": "Tran Thanh Tam",
+    "phoneNumber": "0903235674",
+    "address": "Ho Chi Minh,Thu Duc,Binh Chieu,46 Go Dua"
+  },
+  "u1": {
+    "id": "u1",
+    "account": "abcd",
+    "password": "123456",
+    "fullName": "Tong Van Long",
+    "phoneNumber": "0903235674",
+    "address": "Ho Chi Minh,Thu Duc,Linh Trung,60 Le Van Chi"
+  },
+  "u2": {
+    "id": "u2",
+    "account": "abcde",
+    "password": "123456",
+    "fullName": "Bui Minh An",
+    "phoneNumber": "0903235674",
+    "address": "Hai Phong,Trai Cau,Le Chan,129 P.To Hieu"
+  }
+
 }
 
