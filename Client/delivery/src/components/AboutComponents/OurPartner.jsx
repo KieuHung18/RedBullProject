@@ -77,7 +77,7 @@ function  OurPartner(){
 export default OurPartner;
 const Div = styled.div`
     background: linear-gradient(#e6e0ff, #ecfafc);
-    padding-top: 20px;
+    padding-top: 05px;
     height: 300px;
     margin-top: 30px;
     .main_sections{
@@ -90,5 +90,16 @@ const Div = styled.div`
     .slider_img{
         width: 30% !important;
 
+    }
+    @media all and (max-width: 390px){
+        .main_sections{
+            width: 90%;
+            .slider_img{
+            img{
+                width: 68px;
+            }
+        }
+        
+        }
     }
 `;

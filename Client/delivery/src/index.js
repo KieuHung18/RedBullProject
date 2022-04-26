@@ -25,7 +25,7 @@ const routing=(
         <Route path="login" element={<Login />} />
         <Route path="packagelist" element={<PackageList />} />
         <Route path="package/:id" element={<PackageDetail />} />
-        <Route path="aboutus" element={<AboutUS />} />
+        <Route path="aboutUs" element={<AboutUS />} />
         <Route path="profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>

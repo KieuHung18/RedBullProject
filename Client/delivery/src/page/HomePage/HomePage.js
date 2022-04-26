@@ -6,14 +6,7 @@ export class HomePage extends React.Component {
   render() {
     return (
       <Container id="container">
-        <Row class="row">
-          <h3 class="text-bold">Header</h3>
-        </Row>
-        <hr></hr>
-        <Row class="row">
-          <h3 class="text-bold">Navbars</h3>
-        </Row>
-        <hr></hr>
+         
         <Row class="row">
           <h3 class="text-bold">Hightlights</h3>
         </Row>
