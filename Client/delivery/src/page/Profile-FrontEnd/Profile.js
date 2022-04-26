@@ -40,149 +40,144 @@ export class Profile extends React.Component {
     // }
     render() {
         return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-12">
+            <div className="container">  
+            <div>
+                <div>
+                <button className="btn-logout" type="button">Logout</button>
                         {/* <!-- Page title --> */}
-                        <div className="my-5">
-                            <h3>Profile</h3>
+                        <div className="header-profile">
+                            <h1 className="profile">Profile</h1>
                             <hr/>
                         </div>
                         {/* <!-- Form START --> */}
-                        <form className="file-upload">
-                            <div className="row mb-5 gx-5">
+                        </div>
+                        <form >
+
+
+                            {/* <!-- Contact detai and Upload profile--!> */}
+                            <div className="contact-and-profile form__wrapper">
                                 {/* <!-- Contact detail --> */}
-                                <div className="col-xxl-8 mb-5 mb-xxl-0">
-                                    <div className="bg-secondary-soft px-4 py-5 rounded">
-                                        <div className="row g-3">
-                                            <h4 className="mb-4 mt-0">Contact detail</h4>
+                                        <div className="main-contact-detail">
+                                            <h4 className="contact-detail">Contact detail</h4>
                                             {/* <!-- First Name --> */}
-                                            <div className="col-md-6">
-                                                <label className="form-label">First Name *</label>
+                                            <div className="first-name">
+                                                <label className="name">First Name *</label>
                                                 <input type="text" className="form-control" placeholder="" aria-label="First name" value={user.FirstName}/>
-                                                
                                             </div>
                                             {/* <!-- Last name --> */}
-                                            <div className="col-md-6">
-                                                <label className="form-label">Last Name *</label>
+                                            <div className="last-name">
+                                                <label className="name">Last Name *</label>
                                                 <input type="text" className="form-control" placeholder="" aria-label="Last name" value={user.LastName}/>
                                             </div>
                                             {/* <!-- Phone number --> */}
-                                            <div className="col-md-6">
-                                                <label className="form-label">Phone number *</label>
+                                            <div className="phone">
+                                                <label className="phone-number">Phone number *</label>
                                                 <input type="text" className="form-control" placeholder="" aria-label="Phone number" value={user.PhoneNumber}/>
                                             </div>
                                             {/* <!-- Mobile number --> */}
-                                            <div className="col-md-6">
-                                                <label className="form-label">Address *</label>
+                                            <div className="">
+                                                <label className="form-address">Address *</label>
                                                 <input type="text" className="form-control" placeholder="" aria-label="Address" value={user.Address}/>
-                                            </div>
-                                            
-                                        </div> 
                                         {/* <!-- Row END --> */}
-                                    </div>
-                                </div>
-                                {/* <!-- Upload profile --> */}
-                                <div className="col-xxl-4">
-                                    <div className="bg-secondary-soft px-4 py-5 rounded">
-                                        <div className="row g-3">
-                                            <h4 className="mb-4 mt-0">Upload your profile photo</h4>
-                                            <div className="text-center">
-                                                {/* <!-- Image upload --> */}
-                                                <div className="square position-relative display-2 mb-3">
-                                                    <i className="fas fa-fw fa-user position-absolute top-50 start-50 translate-middle text-secondary"></i>
-                                                </div>
-                                                {/* <!-- Button --> */}
-                                                <input type="file" id="customFile" name="file" hidden=""/>
-                                                    <label className="btn btn-success-soft btn-block" for="customFile">Upload</label>
-                                                    <button type="button" className="btn btn-danger-soft">Remove</button>
-                                                    {/* <!-- Content --> */}
-                                                    <p className="text-muted mt-3 mb-0"><span class="me-1">Note:</span>Minimum size 300px x 300px</p>
                                             </div>
                                         </div>
-                                    </div>
+                                {/* <!-- Upload profile --> */}
+                                <div className="main-upload-profile">
+                                    <h4 className="label-upload">Upload your profile photo</h4>
+                                        <div className="text-center">
+                                                {/* <!-- Image upload --> */}
+                                            <div className="position-relative">
+                                            </div>
+                                                {/* <!-- Button --> */}
+                                                <input type="file"  className="open-file"/>
+                                                <div className="upload-and-remove form__wrapper">
+                                               
+                                                <button className="btn-upload" for="customFile">Upload</button>
+                                                <button type="button" className="btn-remove">Remove</button>
+                                               
+                                                </div>
+                                                    {/* <!-- Content --> */}
+                                                    <p className="text-muted mt-3 mb-0"><span>Note: </span> Minimum size 300px x 300px</p>
+                                         </div>
                                 </div>
                             </div> 
                             {/* <!-- Row END --> */}
 
-                            {/* <!-- Social media detail --> */}
-                            <div className="row mb-5 gx-5">
-                                <div className="col-xxl-6 mb-5 mb-xxl-0">
-                                    <div className="bg-secondary-soft px-4 py-5 rounded">
-                                        <div className="row g-3">
+
+                            {/* <!-- Social media detail and change password --> */}
+                            <div className="social-and-changepass form__wrapper">
+                                {/* <!-- Social media detail --> */}
+                                <div className="social-media-detail-main">
+                                        <div className="row">
                                             <h4 className="mb-4 mt-0">Social media detail</h4>
                                             {/* <!-- Facebook --> */}
                                             <div className="col-md-6">
-                                                <label className="form-label"><i className="fab fa-fw fa-facebook me-2 text-facebook"></i>Facebook *</label>
+                                                <label className="form-label"><i class="fa fa-facebook-official"></i> Facebook</label>
                                                 <input type="text" className="form-control" placeholder="" aria-label="Facebook" value="http://www.facebook.com"/>
                                             </div>
                                             {/* <!-- Twitter --> */}
                                             <div className="col-md-6">
-                                                <label className="form-label"><i className="fab fa-fw fa-twitter text-twitter me-2"></i>Twitter *</label>
+                                                <label className="form-label"><i class="fa fa-twitter"></i> Twitter</label>
                                                 <input type="text" className="form-control" placeholder="" aria-label="Twitter" value="http://www.twitter.com"/>
                                             </div>
                                             {/* <!-- Linkedin --> */}
                                             <div className="col-md-6">
-                                                <label className="form-label"><i className="fab fa-fw fa-linkedin-in text-linkedin me-2"></i>Linkedin *</label>
+                                                <label className="form-label"><i class="fa fa-linkedin"></i> Linkedin</label>
                                                 <input type="text" className="form-control" placeholder="" aria-label="Linkedin" value="http://www.linkedin.com"/>
                                             </div>
                                             {/* <!-- Instragram --> */}
                                             <div className="col-md-6">
-                                                <label className="form-label"><i className="fab fa-fw fa-instagram text-instagram me-2"></i>Instagram *</label>
+                                                <label className="form-label"><i class="fa fa-instagram"></i> Instagram</label>
                                                 <input type="text" className="form-control" placeholder="" aria-label="Instragram" value="http://www.instragram.com"/>
                                             </div>
                                             {/* <!-- Dribble --> */}
                                             <div className="col-md-6">
-                                                <label className="form-label"><i class="fas fa-fw fa-basketball-ball text-dribbble me-2"></i>Dribble *</label>
+                                                <label className="form-label"><i class="fa fa-dribbble"></i> Dribble</label>
                                                 <input type="text" className="form-control" placeholder="" aria-label="Dribble" value="http://www.dribble.com"/>
                                             </div>
                                             {/* <!-- Pinterest --> */}
                                             <div className="col-md-6">
-                                                <label claclassNamess="form-label"><i class="fab fa-fw fa-pinterest text-pinterest"></i>Pinterest *</label>
+                                                <label className="form-label"><i class="fa fa-pinterest-p"></i> Pinterest</label>
                                                 <input type="text" className="form-control" placeholder="" aria-label="Pinterest" value="http://www.pinterest.com"/>
-                                            </div>
-                                        </div>
+                                         
                                          {/* <!-- Row END --> */}
                                     </div>
                                 </div>
-
+                            </div>
                                 {/* <!-- change password --> */}
-                                <div className="col-xxl-6">
-                                    <div className="bg-secondary-soft px-4 py-5 rounded">
-                                        <div className="row g-3">
-                                            <h4 className="my-4">Change Password</h4>
+                               
+                                   
+                                    <div className="label-change-password">
+                                        <h4 className="my-4">Change Password</h4>
                                             {/* <!-- Old password --> */}
-                                            <div className="col-md-6">
+                                        <div className="old-pass">
                                                 <label for="exampleInputPassword1" className="form-label">Old password *</label>
                                                 <input type="password" className="form-control" id="exampleInputPassword1"/>
-                                            </div>
+                                        </div>
                                             {/* <!-- New password --> */}
-                                            <div className="col-md-6">
+                                        <div className="new-pass">
                                                 <label for="exampleInputPassword2" className="form-label">New password *</label>
                                                 <input type="password" className="form-control" id="exampleInputPassword2"/>
-                                            </div>
+                                        </div>
                                             {/* <!-- Confirm password --> */}
-                                            <div className="col-md-12">
+                                        <div className="confirm-pass">
                                                 <label for="exampleInputPassword3" className="form-label">Confirm Password *</label>
                                                 <input type="password" className="form-control" id="exampleInputPassword3"/>
-                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div> 
+                            </div>
                             {/* <!-- Row END -->
+
+
                             <!-- button --> */}
                             <div className="gap-3 d-md-flex justify-content-md-end text-center">
-                                <button type="button" className="btn btn-danger btn-lg">Delete profile</button>
-                                <button type="button" className="btn btn-primary btn-lg">Update profile</button>
+                                <button type="button" className="btn-delete-profile">Delete profile</button>
+                                <button type="button" className="btn-update-profile">Update profile</button>
                             </div>
                         </form> 
                         {/* <!-- Form END --> */}
                     </div>
-                </div>
-            </div>
-
-
+                    </div>  
         );
     }
 }
