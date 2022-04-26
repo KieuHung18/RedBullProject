@@ -17,9 +17,7 @@ function Footer(){
                                             <a href="">RedPull</a>
                                         </div>
                                     </div>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                </p>
+                                <div className="logo-padding" style={{height:"10px"}}></div>
                                 <div className="social mt-2 mb-3">
                                     <div class="social mt-2 mb-3">
                                         <i class="fa fa-facebook-official fa-lg"></i> 

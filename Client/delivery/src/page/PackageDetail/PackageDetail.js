@@ -52,66 +52,10 @@ export class PackageDetail extends React.Component{
         });
     }
     }
-    abort(){
-        jquery.ajax({
-            type: "GET",
-            url: "http://localhost:8080/delivery/exception",
-            data: {status:"exception"},
-            xhrFields: {
-                withCredentials: true
-                },
-                crossDomain: true,
-            success: function(res){
-                let address= res.response.address.split(",");
-                    packageinfo={
-                        city:address[0],
-                        district:address[1],
-                        ward:address[2],
-                        detail:address[3],
-                        deliveryDate: res.response.deliveryDate,
-                        receiveDate: res.response.receiveDate,
-                        price:  res.response.price,
-                        status:  res.response.status}
-                    customer={phone: res.response.customerName,name: res.response.customerPhone};
-                display.setState({ loadData: false });
-            }
-        });
-    }
-    confirm(){
-        jquery.ajax({
-            type: "GET",
-            url: "http://localhost:8080/delivery/validate",
-            data: {status:"delivered"},
-            xhrFields: {
-                withCredentials: true
-                },
-                crossDomain: true,
-            success: function(res){
-                if(res.result=="SUCCESS"){
-                    let address= res.response.address.split(",");
-                        packageinfo={
-                            city:address[0],
-                            district:address[1],
-                            ward:address[2],
-                            detail:address[3],
-                            deliveryDate: res.response.deliveryDate,
-                            receiveDate: res.response.receiveDate,
-                            price:  res.response.price,
-                            status:  res.response.status}
-                        customer={phone: res.response.customerName,name: res.response.customerPhone};
-                    display.setState({ loadData: false });
-                }
-                else{
-                    console.log("fail");
-                    //redirect
-                }
-            }
-        });
-    }
+    
     render(){
          return(
             <div className="package-detail-container">
-                <button onClick={this.abort}>abort</button><button onClick={this.confirm}>confirm</button>
             <Card  border="dark">
                 <Tabs defaultActiveKey="infomation">
                     <Tab eventKey="infomation" title="Infomation">

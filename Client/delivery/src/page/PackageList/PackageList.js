@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './PackageList.css';
 import { Row,Col} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,11 +11,8 @@ import jquery from 'jquery';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle,faExclamationCircle, faCircleArrowRight} from '@fortawesome/free-solid-svg-icons'
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
-const tableRowEvents = {
-  onClick: (row) => {
-    console.log(row.id);
-  },
-}
+import {useNavigate } from 'react-router-dom'; 
+
 
 function productsGenerator(quantity){
   const items = [];
@@ -56,7 +53,13 @@ function count(){
     if(packageTable[i].status=="exception"){numException++;}
   }
 }
-export class PackageList extends React.Component {
+export default function PackageList(){
+  
+  return (
+    <Component navigate={useNavigate()}/>
+  );
+}
+export class Component extends React.Component {
   constructor(props) {
     super(props);
     this.state = { loadData: true };
@@ -105,6 +108,12 @@ export class PackageList extends React.Component {
   }
   
   render() {
+    const tableRowEvents = {
+      onClick: (row) => {
+        console.log(row.id);
+        this.props.navigate("/package/"+row.id);
+      },
+    }
     const columns = [
       { dataField: 'city', text: 'Province/City',filter: textFilter()},
       { dataField: 'district', text: 'District',filter: textFilter()},
