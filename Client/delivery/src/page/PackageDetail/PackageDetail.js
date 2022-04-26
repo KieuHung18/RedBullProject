@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./PackageDetail.css";
 import $ from "jquery";
@@ -10,12 +10,12 @@ packageinfo = {
   ward: "Dakao",
   street: "Cong vien Le Van Tam",
   deliveryDate: "Not Delivery",
-  receiveDate: "16/4/2022",
+  receiveDate: "26/4/2022",
   price: 200000,
   status: false,
 };
 var customer;
-customer = { phone: "0993826268", name: "cusName" };
+customer = { phone: "0367751252", name: "cusName" };
 
 $(function () {});
 
@@ -51,7 +51,7 @@ export class PackageDetail extends React.Component {
   render() {
     return (
       <Container id="container-detail">
-        <Row class="">
+        <Row id="ta">
           <Col md={6}>
             <table>
               <thead>
@@ -104,18 +104,37 @@ export class PackageDetail extends React.Component {
                 <td>{customer.name}</td>
               </tr>
             </table>
-            <div id="group-btn">
-              <Button variant="success">
-                successful delivery confirmation
-              </Button>{" "}
-              <Button variant="warning">delivery failure</Button>{" "}
-            </div>
           </Col>
 
           {/* This is map  */}
           <Col md={6} id="map">
-            This is map
-            <img src="http://laptrinhphp.info/uploads//images/2019/google-maps-banner.jpg"></img>
+            <Row>
+              <Col id="note" md={8}>
+                <Form.Group className="mb-3">
+                  <Form.Control
+                    as="textarea"
+                    rows={3}
+                    type="text"
+                    placeholder="Note của Khách hàng"
+                    disabled="true"
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col md={4}>
+                <div id="group-btn">
+                  <Button class="btn" variant="success">
+                    Delivery Success
+                  </Button>
+
+                  <Button class="btn" variant="warning">
+                    Delivery Failure
+                  </Button>
+                </div>
+              </Col>
+            </Row>
+            <Row class="map">
+              <img src="http://laptrinhphp.info/uploads//images/2019/google-maps-banner.jpg"></img>
+            </Row>
           </Col>
         </Row>
       </Container>
