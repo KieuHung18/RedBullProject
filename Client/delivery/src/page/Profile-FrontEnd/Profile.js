@@ -104,8 +104,7 @@ export class Profile extends React.Component {
                                                 <button type="button" className="btn-remove">Remove</button>
                                                
                                                 </div>
-                                                    {/* <!-- Content --> */}
-                                                    <p className="text-muted mt-3 mb-0"><span>Note: </span> Minimum size 300px x 300px</p>
+                                    
                                          </div>
                                 </div>
                             </div> 
