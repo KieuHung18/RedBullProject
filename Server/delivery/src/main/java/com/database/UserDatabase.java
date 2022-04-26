@@ -10,8 +10,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class UserDatabase {
-	public static final String link = "C:\\Users\\QuocKhanh\\Documents\\RedBullProject\\Server\\delivery\\user.json";
-
+	public static final String LINK = "E:\\RedBull\\RedBullProject\\Server\\delivery";
+	private static String link = LINK+"\\user.json";
 	/**
 	 * Phương thức lấy người giao hàng(JSONObject) bao gồm tất cả hông tin theo ID
 	 **/

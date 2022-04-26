@@ -5,33 +5,48 @@ import React,{useState} from 'react';
 import  logo from '../../assets/images/img.svg'
 import jquery from 'jquery';
 // asdasdasd
-function doLogin() {
+function doLogin(event) {
+  event.preventDefault();
   jquery.ajax({
       type: "POST",
-      url: "http://localhost:8080/delivery/login",
+      url: "http://localhost:8080/delivery/authenticateUser",
       data: {account: jquery("#account").val(), password: jquery("#password").val()},
+      xhrFields: {
+        withCredentials: true
+        },
+        crossDomain: true,
       success: function(response){
-       },
+        if(response.result=="SUCCESS"){
+          localStorage.setItem("user",response.response);
+        }
+        else{
+          alert("Wrongg user name or password")
+        }
+        
+      },
+      error: function(){
+        console.log("error");
+      }
   });
+  // 
+}
+function logout() {
+  console.log("logout");
+  localStorage.clear();
 }
 function Login() {
-
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
-  console.log('email: ' + useState.email);
-        console.log('password: ' + useState.password);
-        let item={email,password}
-        console.warn(item)
-  
   return (
     <>
     <Container id="main-container" className="d-grid h-10">
+      <button onClick={logout}>logout</button>
     <div className="header1">Login</div>
     <div className="col-sm-3.5 offset-s-4">
     <div>
       <img src={logo}/>
     </div>
-    <Form onSubmit={doLogin()}>
+    <Form onSubmit={doLogin}>
       <Form.Group className="mb-2" id="sign-in-email-address"></Form.Group>
         <input  id="account"  onChange={(e) =>setEmail(e.target.value)} className="form-control" placeholder="Enter your email"></input>
         <br />
