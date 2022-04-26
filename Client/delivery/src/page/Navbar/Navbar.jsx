@@ -8,8 +8,8 @@ function Navbar(){
     
    
 
-   var toggler = document.getElementById("toggler")
-   toggler.style.display="none"
+   // var toggler = document.getElementById("toggler")
+   // toggler.style.display="none"
 
    var navbar_nav= document.getElementById("navbar_menu")
    navbar_nav.classList.toggle("navbar_mobile")
@@ -18,8 +18,8 @@ function Navbar(){
    }
     return(
         <Div>
-            <nav className="navbar container_nav navbar-expand-sm">
-              <div id="navbar_menu" className="container navbar_menu">
+            <nav id="navbar_menu"  className="navbar container_nav navbar-expand-sm">
+              <div className="container navbar_menu">
                   <a className="navbar-brand title" href="/">
                      <img  src={Logo} alt="" />
                      <a href="">
@@ -44,7 +44,7 @@ function Navbar(){
                         <a  href="/Profile" class="nav-link">Profile</a>
                      </li>
                      <li class="nav-item">
-                        <a href=""  class="nav-link">Login</a>
+                        <a href="   "  class="nav-link">Login</a>
                      </li>
                   </ul>
 
@@ -59,7 +59,7 @@ function Navbar(){
                   when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                   <div className="search_order">
                      <input type="text" placeholder="Order search" name="" id="" />
-                     <button className="btn  ">Search</button>
+                     <button className="btn ">Search</button>
                   </div>
                </div>
             </div>
@@ -131,6 +131,10 @@ const Div = styled.div`
                border: 1px solid #f32424;
                margin-left: 10px;
                padding: 10px ;
+               :focus{
+                  border: 1px solid #f32424;
+                  outline: none;
+               }
             }
             button{
                margin-bottom: 5px;
@@ -190,18 +194,50 @@ const Div = styled.div`
      
    }
    .navbar_mobile{
-      height: 280px;
-      //margin-top: -183px !important;
+      position: absolute;
+      height: 400px;
+      width: 200px;
+      background-color: #FFFFFF;
+      margin-left: 190px;
       .title{
          display: none;
+      }
+      ul{
+         text-align: center;
+         margin-left: 27px;
       }
       .navbar-nav{
          display: block ;
          top: -183px !important;
 
       }
+      .navbar-toggler{
+         display: block;
+         position: absolute;
+         margin-left: 107px;
+         margin-top: -327px;
+         border-radius: 10px;
+         ::after{
+            transform: rotate(45deg);
+            margin-top: 15px;
+         }
+         ::before{
+            transform: rotate(135deg);
+            margin-top: 15px;
+         }
+      }
    }
-  
+  .search_order{
+     input{
+        width: 298px !important;
+       
+     }
+     button{
+        margin-right: 100px;
+        margin-top: -62px;
+        margin-left: 217px !important;
+     }
+  }
 }
 
 `;

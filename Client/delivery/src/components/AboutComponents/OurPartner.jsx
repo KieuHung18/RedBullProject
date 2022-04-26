@@ -91,4 +91,15 @@ const Div = styled.div`
         width: 30% !important;
 
     }
+    @media all and (max-width: 390px){
+        .main_sections{
+            width: 90%;
+            .slider_img{
+            img{
+                width: 68px;
+            }
+        }
+        
+        }
+    }
 `;

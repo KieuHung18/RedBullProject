@@ -138,4 +138,30 @@ const Div = styled.div`
             }
         }
     }
+    @media all and (max-width: 390px){
+        .social{
+            margin-left:18px;
+        }
+        .information_content {
+            h5{
+                text-align: center !important;
+
+            }
+            ul{
+            margin: 0;
+            padding: 0;
+                li{
+                    list-style-type: none ;
+                    padding: 4px;
+                    color: #000000;
+                    text-align: center !important;
+                    cursor: pointer;
+                    :hover{
+                        color: #ff0000;
+                    }
+                 }
+             }
+        }
+    }
+
 `;
