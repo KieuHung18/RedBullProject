@@ -8,13 +8,13 @@ public class Package {
 	private Date dayDelivery;
 	private Date dayReceive;
 	private int cost;
-	private boolean status;
+	private String status;
 
 	public Package() {
 	}
 
 	public Package(String id, String idCustomer, String idUser, Date dayReceive, Date dayDelivery,
-			String addressDelivery, int cost, boolean status) {
+			String addressDelivery, int cost, String status) {
 		this.id = id;
 		this.idCustomer = idCustomer;
 		this.idUser = idUser;
@@ -81,12 +81,19 @@ public class Package {
 		this.cost = cost;
 	}
 
-	public boolean getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	@Override
+	public String toString() {
+		return "Package [id=" + id + ", idCustomer=" + idCustomer + ", idUser=" + idUser + ", dayReceive=" + dayReceive
+				+ ", dayDelivery=" + dayDelivery + ", addressDelivery=" + addressDelivery + ", cost=" + cost
+				+ ", status=" + status + "]";
 	}
 
 }

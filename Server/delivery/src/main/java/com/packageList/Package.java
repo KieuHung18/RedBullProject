@@ -5,7 +5,7 @@ public class Package {
 	private String deliveryDate;
 	private String receiveDate;
 	int price;
-	private boolean status;
+	private String status;
 	private String customerName;
 	private String customerPhone;
 
@@ -13,7 +13,7 @@ public class Package {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Package(String address, String deliveryDate, String receiveDate, int price, boolean status,
+	public Package(String address, String deliveryDate, String receiveDate, int price, String status,
 			String customerName, String customerPhone) {
 		super();
 		this.address = address;
@@ -57,11 +57,11 @@ public class Package {
 		this.price = price;
 	}
 
-	public boolean isStatus() {
+	public String isStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
@@ -87,6 +87,4 @@ public class Package {
 				+ ", price=" + price + ", status=" + status + ", customerName=" + customerName + ", customerPhone="
 				+ customerPhone + "]";
 	}
-	
-
 }
