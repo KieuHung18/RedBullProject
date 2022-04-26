@@ -20,6 +20,7 @@ public class Test {
 //		System.out.println(userDatabase.getUser("u1"));
 		System.out.println(userDatabase.checkExistAccount("ab"));
 		System.out.println(userDatabase.checkExistPassword("123456"));
+		System.out.println(userDatabase.getUserID("abcdef"));
 		/*******/
 
 		/** Phương thức Customer **/
