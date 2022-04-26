@@ -6,44 +6,52 @@ import jquery  from 'jquery';
 
 var user;
 user={
-    FirstName:"Dinh",LastName:"Phat",PhoneNumber:"0123456789",Address:"TP Ho Chi Minh",
+    FirstName:"",LastName:"",PhoneNumber:"",Address:"",
 };
 export class Profile extends React.Component {
     constructor(props) {
         super(props);
         this.state = { loadData: true };
       }
-    // componentDidMount() {
-    //     var display=this;
-    //     jquery.ajax({
-    //         type: "GET",
-    //         url: "http://localhost:8080/delivery/user",
-    //         data:{userID: "u1"},
-    //         success: function(res){
-    //         if(res.result=="SUCCESS"){
-    //             if(display.state.loadData){
-    //                 user={
-    //                     FirstName:res.response.firstName,LastName:res.response.lastName,PhoneNumber:res.response.phoneNumber,Address:res.response.address
-    //                 };
-    //             display.setState({ loadData: false });
-    //         }
+    componentDidMount() {
+        var display=this;
+        jquery.ajax({
+            type: "GET",
+            url: "http://localhost:8080/delivery/user",
+            data:{userID: localStorage.getItem("user")},
+            xhrFields: {
+                withCredentials: true
+                },
+                crossDomain: true,
+            success: function(res){
+            if(res.result=="SUCCESS"){
+                if(display.state.loadData){
+                    user={
+                        FirstName:res.response.firstName,LastName:res.response.lastName,PhoneNumber:res.response.phoneNumber,Address:res.response.address
+                    };
+                display.setState({ loadData: false });
+            }
                 
-    //         }
-    //         else{console.log("fail");
-    //             //redirect
-    //         }
-    //         },
-    //         error: function(){
-    //             console.log("error");
-    //         }
-    //     });
-    // }
+            }
+            else{console.log("fail");
+                //redirect
+            }
+            },
+            error: function(){
+                console.log("error");
+            }
+        });
+    }
+     logout() {
+        console.log("logout");
+        localStorage.clear();
+      }
     render() {
         return (
             <div className="container">  
             <div>
                 <div>
-                <button className="btn-logout" type="button">Logout</button>
+                <button onClick={this.logout} className="btn-logout" type="button">Logout</button>
                         {/* <!-- Page title --> */}
                         <div className="header-profile">
                             <h1 className="profile">Profile</h1>

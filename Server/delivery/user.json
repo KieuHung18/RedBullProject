@@ -5,7 +5,7 @@
 		"phoneNumber": "0903235674",
 		"fullName": "Tran Thanh Tam",
 		"id": "u0",
-		"account": "abc"
+		"account": "Tran Thanh Tam"
 	},
 	"u1": {
 		"password": "123456",
@@ -16,12 +16,12 @@
 		"account": "abcd"
 	},
 	"u2": {
-		"password": "123457",
+		"password": "123456",
 		"address": "Hai Phong",
 		"phoneNumber": "0903235674",
 		"fullName": "Bui Minh An",
 		"id": "u2",
-		"account": "abcde"
+		"account": "Tran Thanh Tam"
 	}
 }
 

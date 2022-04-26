@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.connection.JsonResponse;
+import com.database.UserDatabase;
 
 
 @Controller
@@ -42,6 +43,8 @@ public class LoginController {
 		return res;
 	}
 	public String provideAuthorize(String account) {
-		return "u0";
+		UserDatabase database =new  UserDatabase();
+		
+		return database.getUserID(account);
 	}
 }

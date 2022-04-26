@@ -18,11 +18,8 @@ public class UserDatabase {
 	public JSONObject getUser(String id_user) {
 		JSONParser parser = new JSONParser();
 		JSONObject obj0 = new JSONObject();
-//		String link = "user.json";
-		String link = "D:\\Study\\RedBullProject\\Server\\delivery\\user.json";
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
-//			System.out.println(jsonObject);
 			JSONObject user = (JSONObject) jsonObject.get(id_user);
 
 			obj0 = user;
@@ -69,13 +66,11 @@ public class UserDatabase {
 		ArrayList<String> list = new ArrayList<String>();
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
-//			System.out.println(jsonObject);
 			for (int i = 0; i < jsonObject.size(); i++) {
 
 				JSONObject user = (JSONObject) jsonObject.get("u" + i);
 
 				String account = (String) user.get("account");
-//				System.out.println(account);
 				if (accountInput.equals(account)) {
 					return true;
 				}
@@ -94,7 +89,6 @@ public class UserDatabase {
 		JSONParser parser = new JSONParser();
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
-//			System.out.println(jsonObject);
 			for (int i = 0; i < jsonObject.size(); i++) {
 
 				JSONObject user = (JSONObject) jsonObject.get("u" + i);

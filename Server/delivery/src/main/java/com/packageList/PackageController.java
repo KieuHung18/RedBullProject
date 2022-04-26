@@ -61,7 +61,7 @@ public class PackageController {
 			Long cost = (long) jsonPackage.get("cost");
 			result.setPrice(cost.intValue());
 
-			boolean status = (boolean) jsonPackage.get("status");
+			String status = (String) jsonPackage.get("status");
 			result.setStatus(status);
 
 			String customerID = (String) jsonPackage.get("idCustomer");
