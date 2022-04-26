@@ -6,17 +6,23 @@ import  logo from '../../assets/LogoCompany.png'
 import accountimg from '../../assets/images/account.svg'
 import passimg from '../../assets/images/password.svg'
 import jquery from 'jquery';
+import {useNavigate } from 'react-router-dom'; 
 // asdasdasd
 function Login() {
   // const [account,setAccount]=useState("")
   // const [password,setPassword]=useState("")
   return (
-    <Component/>
+    <Component navigate={useNavigate()}/>
   );
 }
 class Component extends React.Component{
+  constructor(props){
+    super(props);
+    this.doLogin=this.doLogin.bind(this);
+  }
   doLogin(event) {
     event.preventDefault();
+    var display=this;
     jquery.ajax({
         type: "POST",
         url: "http://localhost:8080/delivery/authenticateUser",
@@ -26,8 +32,10 @@ class Component extends React.Component{
           },
           crossDomain: true,
         success: function(response){
-          if(response.result=="SUCCESS"){
+          if(response.result!="FAIL"){
             localStorage.setItem("user",response.response);
+            display.props.navigate("/profile");
+            window.location.reload(false);
           }
           else{
             alert("Wrongg user name or password")

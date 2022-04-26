@@ -21,9 +21,7 @@ import com.database.PackageDatabase;
 public class ValidateController {
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(path = "/validate", method = RequestMethod.GET)
-	@ResponseBody
-	public JsonResponse validate(@RequestParam(value = "packageID") String packageID,@RequestParam(value = "status") String status) {
-		JsonResponse res = new JsonResponse();
+	public void validate(@RequestParam(value = "packageID") String packageID,@RequestParam(value = "status") String status) {
 		com.database.PackageDatabase database = new PackageDatabase();
 		database.updateDelivered(packageID,status);
 		com.database.Date dateCurrent = new com.database.Date();
@@ -37,9 +35,6 @@ public class ValidateController {
 		dateCurrent.setMonth(month);
 		dateCurrent.setYear(year);
 		database.updateDayDelivery(dateCurrent, packageID);
-		res.setResult("SUCCESS");
-
-		return res;
 	}
 	
 

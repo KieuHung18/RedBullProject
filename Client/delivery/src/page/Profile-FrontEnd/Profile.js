@@ -3,15 +3,21 @@ import { } from 'react-bootstrap';//{Card,ListGroupItem,ListGroup}
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Profile.css';
 import jquery  from 'jquery';
-
+import {useNavigate } from 'react-router-dom'; 
 var user;
 user={
     FirstName:"",LastName:"",PhoneNumber:"",Address:"",
 };
-export class Profile extends React.Component {
+export default function Profile(){
+    return(
+        <Component navigate={useNavigate()}/>
+    );
+}
+class Component extends React.Component {
     constructor(props) {
         super(props);
         this.state = { loadData: true };
+        this.logout=this.logout.bind(this);
       }
     componentDidMount() {
         var display=this;
@@ -43,8 +49,24 @@ export class Profile extends React.Component {
         });
     }
      logout() {
+        var display=this;
+        jquery.ajax({
+            type: "GET",
+            url: "http://localhost:8080/delivery/logout",
+            xhrFields: {
+                withCredentials: true
+                },
+                crossDomain: true,
+            success: function(res){
+                
+            },
+            error: function(){
+                console.log("error");
+            }
+        });
         console.log("logout");
         localStorage.clear();
+        display.props.navigate("/home")
       }
     render() {
         return (

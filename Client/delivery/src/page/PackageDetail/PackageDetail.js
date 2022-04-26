@@ -6,7 +6,16 @@ import './PackageDetail.css'
 import jquery from "jquery";
 
 var packageinfo;
-packageinfo={address:"Viet Nam/Binh Duong/Di an",deliveryDate: "Not Delivery",receiveDate:"16/4/2022",price: 200000,status: false}
+packageinfo={
+city:"",
+district:"",
+ward:"",
+detail:"",
+street:"",
+deliveryDate: "",
+receiveDate:""
+,price: 0,
+status: ""}
 var customer;
 customer={phone:"0993826268",name:"cusName"};
 
@@ -14,31 +23,36 @@ export class PackageDetail extends React.Component{
     constructor(props) {
         super(props);
         this.state = { loadData: true };
-      }
-    // componentDidMount() {
-    // var display=this;
-    // jquery.ajax({
-    //     type: "GET",
-    //     url: "http://localhost:8080/delivery/package",
-    //     data: {packageID:"p1"},
-    //     success: function(res){
-    //     if(res.result=="SUCCESS"){
-    //         if(display.state.loadData){
-    //             packageinfo={address: res.response.address,deliveryDate: res.response.deliveryDate,receiveDate: res.response.receiveDate,price:  res.response.price,status:  res.response.status}
-    //             customer={phone: res.response.customerName,name: res.response.customerPhone};
-    //         display.setState({ loadData: false });
-    //     }
-            
-    //     }
-    //     else{console.log("fail");
-    //         //redirect
-    //     }
-    //     },
-    //     error: function(){
-    //         console.log("error");
-    //     }
-    // });
-    // }
+    }
+    componentDidMount() {
+    var display=this;
+    if(display.state.loadData){
+        jquery.ajax({
+            type: "GET",
+            url: "http://localhost:8080/delivery/package",
+            data: {packageID:"p1"},
+            xhrFields: {
+                withCredentials: true
+                },
+                crossDomain: true,
+            success: function(res){
+                let address= res.response.address.split(",");
+                    packageinfo={
+                        city:address[0],
+                        district:address[1],
+                        ward:address[2],
+                        detail:address[3],
+                        deliveryDate: res.response.deliveryDate,
+                        receiveDate: res.response.receiveDate,
+                        price:  res.response.price,
+                        status:  res.response.status}
+                    customer={phone: res.response.customerName,name: res.response.customerPhone};
+                display.setState({ loadData: false });
+            }
+        });
+    }
+    }
+    
     render(){
          return(
             <div className="package-detail-container">
@@ -48,11 +62,17 @@ export class PackageDetail extends React.Component{
                         <Card.Body className="package-detail-body">
                         <h1>Package Infomation</h1>
                             <ListGroup className="list-group-flush">
-                                <Card.Title>Address</Card.Title>
-                                <ListGroupItem>{packageinfo.address}</ListGroupItem>
+                                <Card.Title>City</Card.Title>
+                                <ListGroupItem>{packageinfo.city}</ListGroupItem>
+                                <Card.Title>District</Card.Title>
+                                <ListGroupItem>{packageinfo.district}</ListGroupItem>
+                                <Card.Title>Ward</Card.Title>
+                                <ListGroupItem>{packageinfo.ward}</ListGroupItem>
+                                <Card.Title>Detail</Card.Title>
+                                <ListGroupItem>{packageinfo.detail}</ListGroupItem>
 
                                 <Card.Title>Delivery Date</Card.Title>
-                                <ListGroupItem>{packageinfo.deliveryDate}</ListGroupItem>
+                                <ListGroupItem>{packageinfo.deliveryDatee=="-1/-1/-1"?"Not Delivery":packageinfo.deliveryDate}</ListGroupItem>
 
                                 <Card.Title>Receive Date</Card.Title>
                                 <ListGroupItem>{packageinfo.receiveDate}</ListGroupItem>
@@ -60,10 +80,9 @@ export class PackageDetail extends React.Component{
                                 <ListGroupItem>{packageinfo.price}</ListGroupItem>
 
                                 <Card.Title>Status</Card.Title>
-                                {packageinfo.status?
-                                <ListGroupItem className="recive-date">Delivered</ListGroupItem>:
-                                <ListGroupItem className="recive-date">Pedding...</ListGroupItem>
-                                }
+                                
+                                <ListGroupItem className="recive-date">{packageinfo.status}</ListGroupItem>
+                            
                                 <Card.Title>Contact</Card.Title>
                                 <ListGroupItem >
                                     <div>Customer: {customer.name}</div>

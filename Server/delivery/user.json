@@ -1,7 +1,7 @@
 {
   "u0": {
     "id": "u0",
-    "account": "abc",
+    "account": "Tran Thanh Tam",
     "password": "123456",
     "fullName": "Tran Thanh Tam",
     "phoneNumber": "0903235674",
@@ -9,7 +9,7 @@
   },
   "u1": {
     "id": "u1",
-    "account": "abcd",
+    "account": "Tong Van Long",
     "password": "123456",
     "fullName": "Tong Van Long",
     "phoneNumber": "0903235674",
@@ -17,7 +17,7 @@
   },
   "u2": {
     "id": "u2",
-    "account": "abcde",
+    "account": "Bui Minh An",
     "password": "123456",
     "fullName": "Bui Minh An",
     "phoneNumber": "0903235674",

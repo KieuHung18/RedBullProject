@@ -6,11 +6,11 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css'
 import '../node_modules/font-awesome/css/font-awesome.min.css'; 
 
-import { PackageList } from './page/PackageList/PackageList';
+import  PackageList  from './page/PackageList/PackageList';
 import Footer from './page/Footer/Footer';
 import Navbar from './page/Navbar/Navbar';
 import AboutUS from './page/AboutUsPage/AboutUs.jsx';
-import { Profile } from './page/Profile-FrontEnd/Profile';
+import Profile from './page/Profile-FrontEnd/Profile';
 import  {PackageDetail}  from './page/PackageDetail/PackageDetail';
 import NotFound from './page/NotFound/NotFound';
 import {BrowserRouter,Routes,Route,Navigate,Outlet } from 'react-router-dom';
