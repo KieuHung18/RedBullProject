@@ -13,34 +13,72 @@ import AboutUS from './page/AboutUsPage/AboutUs.jsx';
 import { Profile } from './page/Profile-FrontEnd/Profile';
 import  {PackageDetail}  from './page/PackageDetail/PackageDetail';
 import NotFound from './page/NotFound/NotFound';
-import {BrowserRouter,Routes,Route} from 'react-router-dom';
+import {BrowserRouter,Routes,Route,Navigate,Outlet } from 'react-router-dom';
 import {HomePage} from './page/HomePage/HomePage';
 import Login from './page/Login/Login';
-const routing=(
+// const routing=(
+//     <BrowserRouter>
+//       <Routes>
+//         <Route path="*" element={<NotFound />} />
+//         <Route path="/" element={<HomePage />} />
+//         <Route path="home" element={<HomePage />} />
+//         <Route path="login" element={<Login />} />
+//         <Route path="packagelist" element={<PackageList />} />
+//         <Route path="package/:id" element={<PackageDetail />} />
+//         <Route path="aboutus" element={<AboutUS />} />
+//         <Route path="profile" element={<Profile />} />
+//       </Routes>
+//     </BrowserRouter>
+//   );
+// const page=(
+//     <div className='ract-root'>
+//     <Navbar/>
+//     {routing}
+//     <Footer/>
+//     </div>
+//   );
+
+const ProtectedRoute = ({
+  redirectPath = '/login',
+  children,
+}) => {
+  if (!localStorage.getItem("user")) {
+    return <Navigate to={redirectPath} replace />;
+  }
+  return children ? children : <Outlet />;
+};
+
+const Application = () => {
+  
+  return (
+    <>
     <BrowserRouter>
-      <Routes>
-        <Route path="*" element={<NotFound />} />
-        <Route path="/" element={<HomePage />} />
-        <Route path="home" element={<HomePage />} />
-        <Route path="login" element={<Login />} />
+    <Navbar/>
+    <Routes>
+      {/* PUBLIC ROUTES IN HERE */}
+      <Route path="*" element={<NotFound />} />
+      <Route path="/" element={<HomePage />} />
+      <Route path="home" element={<HomePage />} />
+      <Route path="login" element={<Login />} />
+      <Route path="aboutus" element={<AboutUS />} />
+      
+      <Route element={<ProtectedRoute/>}>
+        {/* PROTECTED ROUTES IN HERE */}
         <Route path="packagelist" element={<PackageList />} />
         <Route path="package/:id" element={<PackageDetail />} />
-        <Route path="aboutUs" element={<AboutUS />} />
         <Route path="profile" element={<Profile />} />
-      </Routes>
-    </BrowserRouter>
-  );
-const page=(
-    <div className='ract-root'>
-    <Navbar/>
-    {routing}
+        
+      </Route>
+    </Routes>
     <Footer/>
-    </div>
+    </BrowserRouter>
+    </>
   );
+};
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    {page}
+    <Application/>
   </React.StrictMode>
 );
 

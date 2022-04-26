@@ -46,6 +46,43 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.8.7</version>
 		</dependency>
+		
+		<dependency>
+		<groupId>taglibs</groupId>
+		<artifactId>standard</artifactId>
+		<version>1.1.2</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.springframework.security</groupId>
+		<artifactId>spring-security-core</artifactId>
+		<version>4.0.3.RELEASE</version>
+	</dependency>
+
+	<dependency>
+		<groupId>org.springframework.security</groupId>
+		<artifactId>spring-security-web</artifactId>
+		<version>4.0.3.RELEASE</version>
+	</dependency>
+
+	<dependency>
+		<groupId>org.springframework.security</groupId>
+		<artifactId>spring-security-config</artifactId>
+		<version>4.0.3.RELEASE</version>
+	</dependency>
+	<dependency>
+		<groupId>javax.servlet.jsp.jstl</groupId>
+		<artifactId>javax.servlet.jsp.jstl-api</artifactId>
+		<version>1.2.1</version>
+		<scope>compile</scope>
+	</dependency>
+
+	<dependency>
+		<groupId>javax.servlet.jsp.jstl</groupId>
+		<artifactId>jstl-api</artifactId>
+		<version>1.2</version>
+	</dependency>
+	
 
 	</dependencies>
 

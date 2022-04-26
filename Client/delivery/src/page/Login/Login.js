@@ -7,25 +7,42 @@ import accountimg from '../../assets/images/account.svg'
 import passimg from '../../assets/images/password.svg'
 import jquery from 'jquery';
 // asdasdasd
-function doLogin() {
+function doLogin(event) {
+  event.preventDefault();
   jquery.ajax({
       type: "POST",
-      url: "http://localhost:8080/delivery/login",
+      url: "http://localhost:8080/delivery/authenticateUser",
       data: {account: jquery("#account").val(), password: jquery("#password").val()},
+      xhrFields: {
+        withCredentials: true
+        },
+        crossDomain: true,
       success: function(response){
-       },
+        if(response.result=="SUCCESS"){
+          localStorage.setItem("user",response.response);
+        }
+        else{
+          alert("Wrongg user name or password")
+        }
+        
+      },
+      error: function(){
+        console.log("error");
+      }
   });
+  // 
+}
+function logout() {
+  console.log("logout");
+  localStorage.clear();
 }
 function Login() {
 
-  const [email,setAccount]=useState("")
+  const [email,setEmail]=useState("")
+
   const [password,setPassword]=useState("")
-  console.log('email: ' + useState.email);
-        console.log('password: ' + useState.password);
-        let item={email,password}
-        console.warn(item)
-  
   return (
+
   
   <Container id="main-container" className="main-container">
       <div>
@@ -42,6 +59,7 @@ function Login() {
         <img src={accountimg} alt="accountimg" className="accountandpass"/>
         <input  type="text" id="account"  onChange={(e) =>setAccount(e.target.value)} className="account" placeholder="Enter your account"></input>
         <span></span>
+
         </div>
       <Form.Group  id="sign-in-password"></Form.Group>
       <div class="txt-field2">
