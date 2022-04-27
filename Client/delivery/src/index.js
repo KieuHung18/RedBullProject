@@ -16,27 +16,6 @@ import NotFound from './page/NotFound/NotFound';
 import {BrowserRouter,Routes,Route,Navigate,Outlet } from 'react-router-dom';
 import {HomePage} from './page/HomePage/HomePage';
 import Login from './page/Login/Login';
-// const routing=(
-//     <BrowserRouter>
-//       <Routes>
-//         <Route path="*" element={<NotFound />} />
-//         <Route path="/" element={<HomePage />} />
-//         <Route path="home" element={<HomePage />} />
-//         <Route path="login" element={<Login />} />
-//         <Route path="packagelist" element={<PackageList />} />
-//         <Route path="package/:id" element={<PackageDetail />} />
-//         <Route path="aboutus" element={<AboutUS />} />
-//         <Route path="profile" element={<Profile />} />
-//       </Routes>
-//     </BrowserRouter>
-//   );
-// const page=(
-//     <div className='ract-root'>
-//     <Navbar/>
-//     {routing}
-//     <Footer/>
-//     </div>
-//   );
 
 const ProtectedRoute = ({
   redirectPath = '/login',
@@ -46,6 +25,15 @@ const ProtectedRoute = ({
     return <Navigate to={redirectPath} replace />;
   }
   return children ? children : <Outlet />;
+};
+const ProtectedLogin= ({
+  redirectPath = '/home',
+  children,
+}) => {
+  if (localStorage.getItem("user")) {
+    return <Navigate to={redirectPath} replace />;
+  }
+  return <Login/>;
 };
 
 const Application = () => {
@@ -59,15 +47,14 @@ const Application = () => {
       <Route path="*" element={<NotFound />} />
       <Route path="/" element={<HomePage />} />
       <Route path="home" element={<HomePage />} />
-      <Route path="login" element={<Login />} />
+      <Route path="login" element={<ProtectedLogin />} />
       <Route path="aboutus" element={<AboutUS />} />
       
       <Route element={<ProtectedRoute/>}>
         {/* PROTECTED ROUTES IN HERE */}
         <Route path="packagelist" element={<PackageList />} />
-        <Route path="package/:id" element={<PackageDetail />} />
         <Route path="profile" element={<Profile />} />
-        
+        <Route path="package/:id" element={<PackageDetail />} />
       </Route>
     </Routes>
     <Footer/>

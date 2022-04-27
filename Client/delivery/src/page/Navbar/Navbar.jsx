@@ -2,8 +2,29 @@
 import styled from "styled-components";
 import React from "react"
 import Logo from "../../assets/LogoCompany.png"
+import jquery from "jquery";
+function logout() {
+   var display=this;
+   jquery.ajax({
+       type: "GET",
+       url: "http://localhost:8080/delivery/logout",
+       xhrFields: {
+           withCredentials: true
+           },
+           crossDomain: true,
+       success: function(res){
+           
+       },
+       error: function(){
+           console.log("error");
+       }
+   });
+   console.log("logout");
+   localStorage.clear();
+   display.props.navigate("/home")
+ }
 function Navbar(){
-    
+
  function  toggler(){
     
    
@@ -44,7 +65,10 @@ function Navbar(){
                         <a  href="/Profile" class="nav-link">Profile</a>
                      </li>
                      <li class="nav-item">
-                        <a href="/Login"  class="nav-link">Login</a>
+                        {localStorage.getItem("user")?
+                        <a href="/Home" onClick={logout} class="nav-link">Logout</a>:
+                        <a href="/Login" class="nav-link">Login</a>
+                        }
                      </li>
                   </ul>
 
