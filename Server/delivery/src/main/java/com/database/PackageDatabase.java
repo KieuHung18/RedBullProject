@@ -12,8 +12,8 @@ import org.json.simple.parser.ParseException;
 
 public class PackageDatabase {
 
-	public static final String LINK = "E:\\RedBull\\RedBullProject\\Server\\delivery";
-	private static String link = LINK+"\\packages.json";
+	public static final String LINK = "D:\\Study\\RedBullProject\\Server\\delivery";
+	private static String link = LINK + "\\packages.json";
 
 	/** Phương thức lấy gói hàng(JSONObject) bao gồm tất cả hông tin theo ID **/
 	public JSONObject getPackage(String id_package) {
@@ -22,7 +22,6 @@ public class PackageDatabase {
 
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
-//			System.out.println(jsonObject);
 			JSONObject packages = (JSONObject) jsonObject.get(id_package);
 
 			obj0 = packages;
@@ -34,9 +33,6 @@ public class PackageDatabase {
 		}
 		return obj0;
 	}
-	
-	
-	
 
 	/** Phương thức update ngày giao của gói hàng **/
 	public static void updateDayDelivery(Date dayDelivery, String id_package) {
@@ -70,7 +66,7 @@ public class PackageDatabase {
 	}
 
 	/** Phương thức update gói hàng đã được giao thành công **/
-	public static void updateDelivered(String id_package,String status) {
+	public static void updateDelivered(String id_package, String status) {
 		JSONParser parser = new JSONParser();
 
 		try (Reader reader = new FileReader(link)) {
@@ -174,7 +170,7 @@ public class PackageDatabase {
 		}
 		return arrobj0;
 	}
-	
+
 	public JSONArray getListPackages(String userID) {
 		JSONParser parser = new JSONParser();
 		JSONArray arrobj0 = new JSONArray();
@@ -184,8 +180,8 @@ public class PackageDatabase {
 //			System.out.println(jsonObject);
 			for (int i = 0; i < jsonObject.size(); i++) {
 				JSONObject packages = (JSONObject) jsonObject.get("p" + i);
-				String user=(String) packages.get("idUser");
-				if(user.equals(userID)) {
+				String user = (String) packages.get("idUser");
+				if (user.equals(userID)) {
 					String id = (String) packages.get("id");
 					String idCustomer = (String) packages.get("idCustomer");
 					String idUser = (String) packages.get("idUser");
@@ -220,10 +216,10 @@ public class PackageDatabase {
 					package0.setAddressDelivery(addressDelivery);
 					package0.setCost((int) cost);
 					package0.setStatus(status);
-					
+
 					arrobj0.add(package0);
 				}
-				
+
 			}
 
 		} catch (IOException e) {
