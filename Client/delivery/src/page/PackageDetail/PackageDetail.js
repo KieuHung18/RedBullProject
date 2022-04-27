@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./PackageDetail.css";
-import $ from "jquery";
+import jquery from "jquery";
 var packageinfo;
 packageinfo = {
   pro: "Ho Chi Minh city",
@@ -17,37 +17,76 @@ packageinfo = {
 var customer;
 customer = { phone: "0367751252", name: "cusName" };
 
-$(function () {});
-
 export class PackageDetail extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { loadData: true };
+    this.state = { loadData: true , deliver:"pending"};
+    this.delivered=this.delivered.bind(this);
+    this.exception=this.exception.bind(this);
+    this.pending=this.pending.bind(this);
   }
-  // componentDidMount() {
-  // var display=this;
-  // jquery.ajax({
+  componentDidMount() {
+    var display=this;
+    if(display.state.loadData){
+        jquery.ajax({
+            type: "GET",
+            url: "http://localhost:8080/delivery/package",
+            data: {packageID:"p1"},
+            xhrFields: {
+                withCredentials: true
+                },
+                crossDomain: true,
+            success: function(res){
+                let address= res.response.address.split(",");
+                    packageinfo={
+                        city:address[0],
+                        district:address[1],
+                        ward:address[2],
+                        detail:address[3],
+                        deliveryDate: res.response.deliveryDate,
+                        receiveDate: res.response.receiveDate,
+                        price:  res.response.price,
+                        status:  res.response.status}
+                    customer={phone: res.response.customerName,name: res.response.customerPhone};
+                display.setState({ loadData: false });display.setState({ deliver: res.response.status });
+            }
+        });
+    }
+  }
+  delivered(){
+    // this.setState({deliver:"delivered"});
+  //   var display=this;
+  //   jquery.ajax({
   //     type: "GET",
   //     url: "http://localhost:8080/delivery/package",
   //     data: {packageID:"p1"},
+  //     xhrFields: {
+  //         withCredentials: true
+  //         },
+  //         crossDomain: true,
   //     success: function(res){
-  //     if(res.result=="SUCCESS"){
-  //         if(display.state.loadData){
-  //             packageinfo={address: res.response.address,deliveryDate: res.response.deliveryDate,receiveDate: res.response.receiveDate,price:  res.response.price,status:  res.response.status}
+  //         let address= res.response.address.split(",");
+  //             packageinfo={
+  //                 city:address[0],
+  //                 district:address[1],
+  //                 ward:address[2],
+  //                 detail:address[3],
+  //                 deliveryDate: res.response.deliveryDate,
+  //                 receiveDate: res.response.receiveDate,
+  //                 price:  res.response.price,
+  //                 status:  res.response.status}
   //             customer={phone: res.response.customerName,name: res.response.customerPhone};
-  //         display.setState({ loadData: false });
-  //     }
-
-  //     }
-  //     else{console.log("fail");
-  //         //redirect
-  //     }
-  //     },
-  //     error: function(){
-  //         console.log("error");
+  //         display.setState({ loadData: false });display.setState({ deliver: res.response.status });
   //     }
   // });
-  // }
+    
+  }
+  exception(){
+    this.setState({deliver:"exception"});
+  }
+  pending(){
+    this.setState({deliver:"pending"});
+  }
   render() {
     return (
       <Container id="container-detail">
@@ -122,11 +161,15 @@ export class PackageDetail extends React.Component {
               </Col>
               <Col md={4}>
                 <div id="group-btn">
-                  <Button class="btn" variant="success">
-                    Delivery Success
+                  <Button class="btn" onClick={this.delivered} 
+                  variant="success" 
+                  disabled={this.state.deliver=="pending"?false:true}>
+                  Delivery Success
                   </Button>
 
-                  <Button class="btn" variant="warning">
+                  <Button class="btn" onClick={this.exception} 
+                  variant="warning" 
+                  disabled={this.state.deliver=="pending"?false:true}>
                     Delivery Failure
                   </Button>
                 </div>
