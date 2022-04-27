@@ -1,105 +1,143 @@
 import React from "react";
-import {Card,ListGroup,ListGroupItem,Tab} from 'react-bootstrap';
-import Tabs from 'react-bootstrap/Tabs'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './PackageDetail.css'
-import jquery from "jquery";
-
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./PackageDetail.css";
+import $ from "jquery";
 var packageinfo;
-packageinfo={
-city:"",
-district:"",
-ward:"",
-detail:"",
-street:"",
-deliveryDate: "",
-receiveDate:""
-,price: 0,
-status: ""}
+packageinfo = {
+  pro: "Ho Chi Minh city",
+  district: "Quan 1",
+  ward: "Dakao",
+  street: "Cong vien Le Van Tam",
+  deliveryDate: "Not Delivery",
+  receiveDate: "26/4/2022",
+  price: 200000,
+  status: false,
+};
 var customer;
-customer={phone:"0993826268",name:"cusName"};
+customer = { phone: "0367751252", name: "cusName" };
 
-export class PackageDetail extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = { loadData: true };
-    }
-    componentDidMount() {
-    var display=this;
-    if(display.state.loadData){
-        jquery.ajax({
-            type: "GET",
-            url: "http://localhost:8080/delivery/package",
-            data: {packageID:"p1"},
-            xhrFields: {
-                withCredentials: true
-                },
-                crossDomain: true,
-            success: function(res){
-                let address= res.response.address.split(",");
-                    packageinfo={
-                        city:address[0],
-                        district:address[1],
-                        ward:address[2],
-                        detail:address[3],
-                        deliveryDate: res.response.deliveryDate,
-                        receiveDate: res.response.receiveDate,
-                        price:  res.response.price,
-                        status:  res.response.status}
-                    customer={phone: res.response.customerName,name: res.response.customerPhone};
-                display.setState({ loadData: false });
-            }
-        });
-    }
-    }
-    
-    render(){
-         return(
-            <div className="package-detail-container">
-            <Card  border="dark">
-                <Tabs defaultActiveKey="infomation">
-                    <Tab eventKey="infomation" title="Infomation">
-                        <Card.Body className="package-detail-body">
-                        <h1>Package Infomation</h1>
-                            <ListGroup className="list-group-flush">
-                                <Card.Title>City</Card.Title>
-                                <ListGroupItem>{packageinfo.city}</ListGroupItem>
-                                <Card.Title>District</Card.Title>
-                                <ListGroupItem>{packageinfo.district}</ListGroupItem>
-                                <Card.Title>Ward</Card.Title>
-                                <ListGroupItem>{packageinfo.ward}</ListGroupItem>
-                                <Card.Title>Detail</Card.Title>
-                                <ListGroupItem>{packageinfo.detail}</ListGroupItem>
+$(function () {});
 
-                                <Card.Title>Delivery Date</Card.Title>
-                                <ListGroupItem>{packageinfo.deliveryDatee=="-1/-1/-1"?"Not Delivery":packageinfo.deliveryDate}</ListGroupItem>
+export class PackageDetail extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { loadData: true };
+  }
+  // componentDidMount() {
+  // var display=this;
+  // jquery.ajax({
+  //     type: "GET",
+  //     url: "http://localhost:8080/delivery/package",
+  //     data: {packageID:"p1"},
+  //     success: function(res){
+  //     if(res.result=="SUCCESS"){
+  //         if(display.state.loadData){
+  //             packageinfo={address: res.response.address,deliveryDate: res.response.deliveryDate,receiveDate: res.response.receiveDate,price:  res.response.price,status:  res.response.status}
+  //             customer={phone: res.response.customerName,name: res.response.customerPhone};
+  //         display.setState({ loadData: false });
+  //     }
 
-                                <Card.Title>Receive Date</Card.Title>
-                                <ListGroupItem>{packageinfo.receiveDate}</ListGroupItem>
-                                <Card.Title>Price</Card.Title>
-                                <ListGroupItem>{packageinfo.price}</ListGroupItem>
+  //     }
+  //     else{console.log("fail");
+  //         //redirect
+  //     }
+  //     },
+  //     error: function(){
+  //         console.log("error");
+  //     }
+  // });
+  // }
+  render() {
+    return (
+      <Container id="container-detail">
+        <Row id="ta">
+          <Col md={6}>
+            <table>
+              <thead>
+                <tr>
+                  <th>
+                    <h1>Package Info</h1>
+                  </th>
+                  <th></th>
+                </tr>
+              </thead>
 
-                                <Card.Title>Status</Card.Title>
-                                
-                                <ListGroupItem className="recive-date">{packageinfo.status}</ListGroupItem>
-                            
-                                <Card.Title>Contact</Card.Title>
-                                <ListGroupItem >
-                                    <div>Customer: {customer.name}</div>
-                                    <div>Phone number: {customer.phone}</div>
-                                </ListGroupItem>
-                                <ListGroupItem></ListGroupItem>
-                            </ListGroup>
-                        </Card.Body>
-                    </Tab>
-                    <Tab eventKey="map" title="Map">
-                        <h1>MAP</h1>
-                    </Tab>
-                </Tabs>
+              <tr>
+                <td>Province/City</td>
+                <td>{packageinfo.pro}</td>
+              </tr>
+              <tr>
+                <td>District</td>
+                <td>{packageinfo.district}</td>
+              </tr>
+              <tr>
+                <td>Wards</td>
+                <td>{packageinfo.ward}</td>
+              </tr>
+              <tr>
+                <td>Street/House</td>
+                <td>{packageinfo.street}</td>
+              </tr>
+              <tr>
+                <td>Delivery</td>
+                <td>{packageinfo.deliveryDate}</td>
+              </tr>
+              <tr>
+                <td>Receive Date</td>
+                <td>{packageinfo.receiveDate}</td>
+              </tr>
+              <tr>
+                <td>Price</td>
+                <td>{packageinfo.price}</td>
+              </tr>
+              <tr>
+                <td>Status</td>
+                <td>{packageinfo.status}</td>
+              </tr>
+              <tr>
+                <td>Phone</td>
+                <td>{customer.phone}</td>
+              </tr>
+              <tr>
+                <td>Name</td>
+                <td>{customer.name}</td>
+              </tr>
+            </table>
+          </Col>
 
-            
-            </Card>
-          </div>
-         );
-     }
- }
+          {/* This is map  */}
+          <Col md={6} id="map">
+            <Row>
+              <Col id="note" md={8}>
+                <Form.Group className="mb-3">
+                  <Form.Control
+                    as="textarea"
+                    rows={3}
+                    type="text"
+                    placeholder="Note của Khách hàng"
+                    disabled="true"
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col md={4}>
+                <div id="group-btn">
+                  <Button class="btn" variant="success">
+                    Delivery Success
+                  </Button>
+
+                  <Button class="btn" variant="warning">
+                    Delivery Failure
+                  </Button>
+                </div>
+              </Col>
+            </Row>
+            <Row class="map">
+              <img src="http://laptrinhphp.info/uploads//images/2019/google-maps-banner.jpg"></img>
+            </Row>
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
+}

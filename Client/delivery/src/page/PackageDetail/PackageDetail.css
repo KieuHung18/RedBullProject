@@ -1,6 +1,67 @@
-.package-detail-container{
-    margin: 20px;
+#container-detail {
+  width: 2000px;
+  font-family: "Poppins", sans-serif;
+  color: #000;
+  font-size: 20px;
+  background-color: #eee;
+  border-radius: 20px;
+  /* border: 2px solid green; */
 }
-.package-detail-body.card-body{
-    color: black;
+
+#map {
+}
+
+table,
+thead,
+tr,
+td {
+  padding: 10px;
+  border: 2px inset #000;
+}
+
+table {
+  width: 100%;
+  text-align: left;
+  background-color: #eee;
+  /* border: 2px solid salmon; */
+}
+
+tr {
+  height: 30px;
+}
+
+tr:nth-child(even) {
+  background-color: #d6eeee;
+}
+tr:hover {
+  background-color: #fff;
+  color: green;
+  font-weight: 600;
+}
+
+#group-btn {
+  padding-top: 0px;
+  text-align: right;
+}
+
+#group-btn .btn {
+  margin-bottom: 10px;
+  width: 200px;
+}
+
+#ta,
+#map {
+  /* border: 2px solid salmon; */
+  border-radius: 10px;
+}
+
+img {
+  width: 80%;
+}
+
+#note {
+  padding: 0px;
+}
+
+.map {
 }
