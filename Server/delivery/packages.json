@@ -4,7 +4,7 @@
 		"idUser": "u2",
 		"idCustomer": "c8",
 		"cost": 100000,
-		"addressDelivery": "Ho Chi Minh,Quan 4,Phuong 13,300A Nguyen Tat Thanh",
+		"addressDelivery": "Ho Chi Minh,4,Phuong 13,300A Nguyen Tat Thanh",
 		"dayReceive": {
 			"day": 10,
 			"month": 1,
@@ -22,7 +22,7 @@
 		"idUser": "u2",
 		"idCustomer": "c3",
 		"cost": 200000,
-		"addressDelivery": "Ho Chi Minh,Thu Duc,Thanh My Loi,168 Truong Van Ban",
+		"addressDelivery": "Ho Chi Minh,2,Thanh My Loi,168 Truong Van Ban",
 		"dayReceive": {
 			"day": 11,
 			"month": 1,
@@ -40,7 +40,7 @@
 		"idUser": "u1",
 		"idCustomer": "c8",
 		"cost": 155000,
-		"addressDelivery": "Ho Chi Minh,Thu Duc,Tan Phu,10/80C Xa lo Ha Noi",
+		"addressDelivery": "Ho Chi Minh,Thu Duc,Linh Trung,10/80C Xa lo Ha Noi",
 		"dayReceive": {
 			"day": 30,
 			"month": 1,
@@ -220,7 +220,7 @@
 		"idUser": "u0",
 		"idCustomer": "c6",
 		"cost": 10000,
-		"addressDelivery": "Ho Chi Minh,Quan 12,Hiep Thanh,6/4D Le Van Khuong",
+		"addressDelivery": "Ho Chi Minh,12,Tan Thoi Hiep,6/4D Le Van Khuong",
 		"dayReceive": {
 			"day": 20,
 			"month": 3,
@@ -238,7 +238,7 @@
 		"idUser": "u2",
 		"idCustomer": "c9",
 		"cost": 450000,
-		"addressDelivery": "Ho Chi Minh,Tan Phu,Son Ky,30 Tan Thang",
+		"addressDelivery": "Ho Chi Minh,Tan Phu,Son Ky,30 D. Tan Thang",
 		"dayReceive": {
 			"day": 12,
 			"month": 1,
@@ -256,7 +256,7 @@
 		"idUser": "u1",
 		"idCustomer": "c2",
 		"cost": 500000,
-		"addressDelivery": "Ho Chi Minh,Tan Phu,Tay Thanh,140 Le Trong Tan",
+		"addressDelivery": "Ho Chi Minh,Tan Phu,Son Ky,140 Le Trong Tan",
 		"dayReceive": {
 			"day": 14,
 			"month": 1,
@@ -274,7 +274,7 @@
 		"idUser": "u2",
 		"idCustomer": "c2",
 		"cost": 100000,
-		"addressDelivery": "Ho Chi Minh,Quan 1,Ben Nghe,Thao Cam Vien Sai Gon",
+		"addressDelivery": "Ho Chi Minh,1,Ben Nghe,2 Nguyen Binh Khiem",
 		"dayReceive": {
 			"day": 13,
 			"month": 4,
@@ -292,7 +292,7 @@
 		"idUser": "u0",
 		"idCustomer": "c8",
 		"cost": 70000,
-		"addressDelivery": "Ho Chi Minh,Thu Duc,Linh Trung,Dai hoc Kinh te-Luat",
+		"addressDelivery": "Ho Chi Minh,Binh Thanh,Phuong 13,307 No Trang Long",
 		"dayReceive": {
 			"day": 14,
 			"month": 4,
@@ -310,7 +310,7 @@
 		"idUser": "u2",
 		"idCustomer": "c0",
 		"cost": 130000,
-		"addressDelivery": "Ho Chi Minh,Binh Thanh,26,Ben Xe Mien Dong",
+		"addressDelivery": "Ho Chi Minh,Binh Thanh,Phuong 13,410 Nguyen Xi",
 		"dayReceive": {
 			"day": 11,
 			"month": 4,
@@ -328,7 +328,7 @@
 		"idUser": "u1",
 		"idCustomer": "c5",
 		"cost": 130000,
-		"addressDelivery": "Ho Chi Minh,Binh Thanh,22,Landmark 81",
+		"addressDelivery": "Ho Chi Minh,Binh Thanh,Phuong 11,302 Nguyen Van Dau",
 		"dayReceive": {
 			"day": 11,
 			"month": 4,
@@ -346,7 +346,7 @@
 		"idUser": "u2",
 		"idCustomer": "c0",
 		"cost": 130000,
-		"addressDelivery": "Ho Chi Minh,Binh Tan,An Lac,Ben Xe Mien Tay",
+		"addressDelivery": "Ho Chi Minh,Binh Thanh,Phuong 5,355A Le Quan Dinh",
 		"dayReceive": {
 			"day": 11,
 			"month": 4,
@@ -364,7 +364,7 @@
 		"idUser": "u1",
 		"idCustomer": "c6",
 		"cost": 130000,
-		"addressDelivery": "Ho Chi Minh,Thu Duc,Linh Trung,Benh Vien Da khoa khu vuc Thu Duc",
+		"addressDelivery": "Ho Chi Minh,Binh Thanh,Phuong 5,449 Le Quan Dinh",
 		"dayReceive": {
 			"day": 11,
 			"month": 4,
@@ -382,7 +382,7 @@
 		"idUser": "u0",
 		"idCustomer": "c7",
 		"cost": 130000,
-		"addressDelivery": "Ho Chi Minh,Thu Duc,Linh Chieu,56 Hoang Dieu 2",
+		"addressDelivery": "Ho Chi Minh,Go Vap,Phuong 5,366 Phan Van Tri",
 		"dayReceive": {
 			"day": 11,
 			"month": 3,
@@ -400,7 +400,7 @@
 		"idUser": "u1",
 		"idCustomer": "c2",
 		"cost": 130000,
-		"addressDelivery": "Ho Chi Minh,Thu Duc,Linh Chieu,Dai hoc Su Pham Ky Thuat TPHCM",
+		"addressDelivery": "Ho Chi Minh,Thu Duc,Hiep Binh Chanh,Duong so 10",
 		"dayReceive": {
 			"day": 11,
 			"month": 4,
@@ -418,7 +418,7 @@
 		"idUser": "u2",
 		"idCustomer": "c9",
 		"cost": 130000,
-		"addressDelivery": "Ho Chi Minh,Thu Duc,Binh Tho, Cong ty co phan Cap nuoc Thu Duc",
+		"addressDelivery": "Binh Duong,Thuan An,Binh Duc,1 Dai Lo Binh Duong ",
 		"dayReceive": {
 			"day": 11,
 			"month": 4,
@@ -436,7 +436,7 @@
 		"idUser": "u1",
 		"idCustomer": "c3",
 		"cost": 130000,
-		"addressDelivery": "Ho Chi Minh,Binh Thanh,26,Ben Xe Mien Dong",
+		"addressDelivery": "Binh Duong,Thu Dau Mot,Phu Cuong,35 Yersin",
 		"dayReceive": {
 			"day": 11,
 			"month": 4,
@@ -454,7 +454,7 @@
 		"idUser": "u0",
 		"idCustomer": "c4",
 		"cost": 130000,
-		"addressDelivery": "Ho Chi Minh,Binh Thanh,22,Landmark 81",
+		"addressDelivery": "Ho Chi Minh,Thu Duc,Linh Chieu,1 Vo Van Ngan",
 		"dayReceive": {
 			"day": 22,
 			"month": 3,
@@ -472,7 +472,7 @@
 		"idUser": "u1",
 		"idCustomer": "c5",
 		"cost": 130000,
-		"addressDelivery": "Ho Chi Minh,Thu Duc,Phuoc Binh,106 Dai lo 3",
+		"addressDelivery": "Ho Chi Minh,9,Phuoc Binh,106 Dai lo 3",
 		"dayReceive": {
 			"day": 10,
 			"month": 4,
@@ -490,7 +490,7 @@
 		"idUser": "u2",
 		"idCustomer": "c8",
 		"cost": 130000,
-		"addressDelivery": "Ho Chi Minh,Tan Phu,Tay Thanh,140 Le Trong Tan",
+		"addressDelivery": "Binh Duong,Di An,An Binh,140 Le Trong Tan",
 		"dayReceive": {
 			"day": 12,
 			"month": 1,
@@ -508,7 +508,7 @@
 		"idUser": "u2",
 		"idCustomer": "c8",
 		"cost": 130000,
-		"addressDelivery": "Ho Chi Minh,Thu Duc,Truong Tho,26 Vo Van Ngan",
+		"addressDelivery": "Ho Chi Minh,Thu Duc,Binh Tho,26 Vo Van Ngan",
 		"dayReceive": {
 			"day": 19,
 			"month": 2,
