@@ -3,7 +3,12 @@ import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./PackageDetail.css";
 import jquery from "jquery";
+
 import {useParams,useNavigate} from 'react-router-dom';
+
+import CurrentLocation from '../../Map';
+import { Map, GoogleApiWrapper ,InfoWindow, Marker} from 'google-maps-react';
+
 var packageinfo;
 packageinfo = {
   city: "Ho Chi Minh city",
@@ -139,38 +144,47 @@ class Component extends React.Component {
   }
   toList(){
     this.props.navigate("/packagelist")
+
+    navigator.geolocation.getCurrentPosition(function(position) {
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+    });
+  }
   }
   render() {
     return (
       <Container id="container-detail">
         <Row id="ta">
           <Col md={6}>
-            <table>
-              <thead>
-                <tr>
-                  <th>
+            <table class="table">
+              <thead class="thead">
+                <tr class="tr">
+                  <th class="th">
                     <h1>Package Info</h1>
                   </th>
                   <th></th>
                 </tr>
               </thead>
 
+
               <tr>
                 <td>Province/City</td>
                 <td>{packageinfo.city}</td>
+
               </tr>
-              <tr>
-                <td>District</td>
-                <td>{packageinfo.district}</td>
+              <tr class="tr">
+                <td class="td">District</td>
+                <td class="td">{packageinfo.district}</td>
               </tr>
-              <tr>
-                <td>Wards</td>
-                <td>{packageinfo.ward}</td>
+              <tr class="tr">
+                <td class="td">Wards</td>
+                <td class="td">{packageinfo.ward}</td>
               </tr>
-              <tr>
-                <td>Street/House</td>
-                <td>{packageinfo.street}</td>
+              <tr class="tr">
+                <td class="td">Street/House</td>
+                <td class="td">{packageinfo.street}</td>
               </tr>
+
               <tr>
                 <td>Delivery</td>
                 <td>{packageinfo.deliveryDate=="-1/-1/-1"?
@@ -182,18 +196,19 @@ class Component extends React.Component {
               <tr>
                 <td>Price</td>
                 <td>{packageinfo.price}</td>
+
               </tr>
-              <tr>
-                <td>Status</td>
-                <td>{packageinfo.status}</td>
+              <tr class="tr">
+                <td class="td">Status</td>
+                <td class="td">{packageinfo.status}</td>
               </tr>
-              <tr>
-                <td>Phone</td>
-                <td>{customer.phone}</td>
+              <tr class="tr">
+                <td class="td">Phone</td>
+                <td class="td">{customer.phone}</td>
               </tr>
-              <tr>
-                <td>Name</td>
-                <td>{customer.name}</td>
+              <tr class="tr">
+                <td class="td">Name</td>
+                <td class="td">{customer.name}</td>
               </tr>
             </table>
           </Col>
@@ -235,13 +250,16 @@ class Component extends React.Component {
                 variant="primary" >
                 Undo
                 </Button>
+
                 </div>
                 }
                 
               </Col>
             </Row>
+
             <Row class="map">
               <img onClick={this.toGoogleMap} src="http://laptrinhphp.info/uploads//images/2019/google-maps-banner.jpg"></img>
+
             </Row>
           </Col>
         </Row>
