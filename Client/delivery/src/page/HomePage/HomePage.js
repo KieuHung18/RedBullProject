@@ -33,12 +33,6 @@ export class HomePage extends React.Component {
           </Col>
         </Row>
         <hr></hr>
-        <Row>
-          <Row class="row">
-            <h3 class="text-bold">Google Map</h3>
-          </Row>
-        </Row>
-        <hr></hr>
         <Row class="row">
           <h3 class="text-h2">Customer testimonials</h3>
         </Row>
