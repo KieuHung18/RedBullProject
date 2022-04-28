@@ -12,8 +12,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle,faExclamationCircle, faCircleArrowRight} from '@fortawesome/free-solid-svg-icons'
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import {useNavigate } from 'react-router-dom'; 
-
-
+import CurrentLocation from '../../Map';
+import { Map, GoogleApiWrapper ,InfoWindow, Marker} from 'google-maps-react';
 function productsGenerator(quantity){
   const items = [];
   let address= "City,District,Ward,detailadress".split(",");
@@ -105,6 +105,10 @@ export class Component extends React.Component {
        }
     });
     }
+    navigator.geolocation.getCurrentPosition(function(position) {
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+    });
   }
   
   render() {
@@ -170,6 +174,10 @@ export class Component extends React.Component {
     </div>
     );
   }
+ 
+    
+  
+  
 }
 
 
