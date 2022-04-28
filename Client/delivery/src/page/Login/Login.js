@@ -49,8 +49,8 @@ class Component extends React.Component {
   }
   render() {
     return (
-      <Row class="row">
-        <Form id="form">
+      <Row class="row-login">
+        <Form id="form-login">
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Control type="email" placeholder="User name" />
           </Form.Group>
