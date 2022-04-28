@@ -3,6 +3,8 @@ import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./PackageDetail.css";
 import jquery from "jquery";
+import CurrentLocation from '../../Map';
+import { Map, GoogleApiWrapper ,InfoWindow, Marker} from 'google-maps-react';
 var packageinfo;
 packageinfo = {
   pro: "Ho Chi Minh city",
@@ -52,6 +54,10 @@ export class PackageDetail extends React.Component {
             }
         });
     }
+    navigator.geolocation.getCurrentPosition(function(position) {
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+    });
   }
   delivered(){
     // this.setState({deliver:"delivered"});
