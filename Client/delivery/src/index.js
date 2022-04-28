@@ -11,7 +11,8 @@ import Footer from './page/Footer/Footer';
 import Navbar from './page/Navbar/Navbar';
 import AboutUS from './page/AboutUsPage/AboutUs.jsx';
 import Profile from './page/Profile-FrontEnd/Profile';
-import  {PackageDetail}  from './page/PackageDetail/PackageDetail';
+import Profile2 from './page/Profile-FrontEnd/Profile2';
+import  PackageDetail  from './page/PackageDetail/PackageDetail';
 import NotFound from './page/NotFound/NotFound';
 import {BrowserRouter,Routes,Route,Navigate,Outlet } from 'react-router-dom';
 import {HomePage} from './page/HomePage/HomePage';
@@ -65,7 +66,7 @@ const Application = () => {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Application/>
+    <Profile2/>
   </React.StrictMode>
 );
 
