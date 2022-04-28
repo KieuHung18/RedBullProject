@@ -10,7 +10,16 @@ export class HomePage extends React.Component {
       <Container id="container">
         {/* HIGHLIGHT  */}
         <Row class="row">
-          <h2 class="text-h2">Highlights</h2>
+        <div className="col-md-6 content_banner ">
+          <h1>Delivering happiness since 2017</h1>
+          {/* <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+          when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          <div className="search_order">
+              <input type="text" placeholder="Order search" name="" id="" />
+              <button className="btn ">Search</button>
+          </div> */}
+        </div> 
+          {/* <h2 class="text-h2">Highlights</h2> */}
         </Row>
         <Row>
           <Col sm={12} md={4} lg={4}>
@@ -31,6 +40,12 @@ export class HomePage extends React.Component {
             </div>
             <h5 class="text-h5">24/7 online management system</h5>
           </Col>
+        </Row>
+        <hr></hr>
+        <Row>
+          <Row class="row">
+            <h3 class="text-bold">A new Perspective of Business Delivery</h3>
+          </Row>
         </Row>
         <hr></hr>
         <Row class="row">

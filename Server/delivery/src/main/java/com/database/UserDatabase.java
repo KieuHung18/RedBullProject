@@ -10,13 +10,14 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class UserDatabase {
-	private static String link = PackageDatabase.LINK+"\\user.json";
+//	private static String link = PackageDatabase.LINK+"\\user.json";
 	/**
 	 * Phương thức lấy người giao hàng(JSONObject) bao gồm tất cả hông tin theo ID
 	 **/
 	public JSONObject getUser(String id_user) {
 		JSONParser parser = new JSONParser();
 		JSONObject obj0 = new JSONObject();
+		String link = PackageDatabase.relativePath()+"\\user.json";
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 			JSONObject user = (JSONObject) jsonObject.get(id_user);
@@ -37,6 +38,7 @@ public class UserDatabase {
 	public String getUserID(String userName) {
 		JSONParser parser = new JSONParser();
 		String result  = null;
+		String link = PackageDatabase.relativePath()+"\\user.json";
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 			for (int i = 0; i < jsonObject.size(); i++) {
@@ -63,6 +65,7 @@ public class UserDatabase {
 	public boolean checkExistAccount(String accountInput) {
 		JSONParser parser = new JSONParser();
 		ArrayList<String> list = new ArrayList<String>();
+		String link = PackageDatabase.relativePath()+"\\user.json";
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 			for (int i = 0; i < jsonObject.size(); i++) {
@@ -86,6 +89,7 @@ public class UserDatabase {
 	/** Phương thức kiểm tra mật khẩu nhập vào có tồn tại hay không? **/
 	public boolean checkExistPassword(String passwordInput) {
 		JSONParser parser = new JSONParser();
+		String link = PackageDatabase.relativePath()+"\\user.json";
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 			for (int i = 0; i < jsonObject.size(); i++) {

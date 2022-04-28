@@ -9,17 +9,18 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.core.io.ClassPathResource;
 
 public class PackageDatabase {
 
-	public static final String LINK = "E:\\RedBull\\RedBullProject\\Server\\delivery";
-	private static String link = LINK+"\\packages.json";
+//	public static final String LINK = "E:\\RedBull\\RedBullProject\\Server\\delivery";
+//	private static 
 
 	/** Phương thức lấy gói hàng(JSONObject) bao gồm tất cả hông tin theo ID **/
 	public JSONObject getPackage(String id_package) {
 		JSONParser parser = new JSONParser();
 		JSONObject obj0 = new JSONObject();
-
+		String link = relativePath()+"\\packages.json";
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 //			System.out.println(jsonObject);
@@ -41,7 +42,7 @@ public class PackageDatabase {
 	/** Phương thức update ngày giao của gói hàng **/
 	public static void updateDayDelivery(Date dayDelivery, String id_package) {
 		JSONParser parser = new JSONParser();
-
+		String link = relativePath()+"\\packages.json";
 		try (Reader reader = new FileReader(link)) {
 
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
@@ -72,7 +73,7 @@ public class PackageDatabase {
 	/** Phương thức update gói hàng đã được giao thành công **/
 	public static void updateDelivered(String id_package,String status) {
 		JSONParser parser = new JSONParser();
-
+		String link = relativePath()+"\\packages.json";
 		try (Reader reader = new FileReader(link)) {
 
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
@@ -97,7 +98,7 @@ public class PackageDatabase {
 	/** Phương thức update trạng thái của gói hàng **/
 	public static void updateStatus(String status, String id_package) {
 		JSONParser parser = new JSONParser();
-
+		String link = relativePath()+"\\packages.json";
 		try (Reader reader = new FileReader(link)) {
 
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
@@ -123,7 +124,7 @@ public class PackageDatabase {
 	public JSONArray getListPackages() {
 		JSONParser parser = new JSONParser();
 		JSONArray arrobj0 = new JSONArray();
-//		String link = "packages.json";
+		String link = relativePath()+"\\packages.json";
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 //			System.out.println(jsonObject);
@@ -178,7 +179,7 @@ public class PackageDatabase {
 	public JSONArray getListPackages(String userID) {
 		JSONParser parser = new JSONParser();
 		JSONArray arrobj0 = new JSONArray();
-//		String link = "packages.json";
+		String link = relativePath()+"\\packages.json";
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 //			System.out.println(jsonObject);
@@ -233,4 +234,24 @@ public class PackageDatabase {
 		}
 		return arrobj0;
 	}
+	public static String relativePath() {
+		String path = "";
+		try {
+			path=new ClassPathResource("").getFile().getAbsolutePath();
+			String[] pathArr=path.split("\\\\");
+			path="";
+			for(int i=0;i<pathArr.length;i++) {
+				if(pathArr[i].equals("Server")) {
+					return path+"Server\\delivery";
+				}else {
+					path+=pathArr[i]+"\\";
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return path;
+	}
+	
 }

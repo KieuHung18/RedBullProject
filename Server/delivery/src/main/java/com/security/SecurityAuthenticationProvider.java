@@ -21,30 +21,31 @@ public class SecurityAuthenticationProvider implements AuthenticationProvider
 		@Override
 		public Authentication authenticate(Authentication authentication) throws AuthenticationException
 		{
-				String account = authentication.getName();
-				String password = authentication.getCredentials().toString();
-				System.out.println(account);
-				System.out.println(password);
-				if (authorizedUser(account, password))
-				{
-					List<GrantedAuthority> grantedAuths = new ArrayList<>();
-					grantedAuths.add(new GrantedAuthority() {
-						@Override
-						public String getAuthority() {
-							// TODO Auto-generated method stub
-							return "AUTH_USER";
-						}
-					});
-					
-					Authentication auth = new UsernamePasswordAuthenticationToken(account, password, grantedAuths);
-					System.out.println(auth.getAuthorities());
-					return auth;
-				}
-				else
-				{
-						throw new AuthenticationCredentialsNotFoundException("Invalid Credentials!");
-				}
+			String account = authentication.getName();
+			String password = authentication.getCredentials().toString();
+			System.out.println(account);
+			System.out.println(password);
+			if (authorizedUser(account, password))
+			{
+				List<GrantedAuthority> grantedAuths = new ArrayList<>();
+				grantedAuths.add(new GrantedAuthority() {
+					@Override
+					public String getAuthority() {
+						// TODO Auto-generated method stub
+						return "AUTH_USER";
+					}
+				});
+				
+				Authentication auth = new UsernamePasswordAuthenticationToken(account, password, grantedAuths);
+				System.out.println(auth.getAuthorities());
+				return auth;
+			}
+			else
+			{
+					throw new AuthenticationCredentialsNotFoundException("Invalid Credentials!");
+			}
 		}
+		
 		private boolean authorizedUser(String account, String password)
 		{	
 			UserDatabase database =new UserDatabase();

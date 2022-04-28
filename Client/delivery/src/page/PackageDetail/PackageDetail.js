@@ -40,6 +40,7 @@ class Component extends React.Component {
     this.toList=this.toList.bind(this)
     this.toGoogleMap=this.toGoogleMap.bind(this)
   }
+  
   updatePackage(){
     var display=this;
     jquery.ajax({
@@ -62,7 +63,7 @@ class Component extends React.Component {
                   receiveDate: res.response.receiveDate,
                   price:  res.response.price,
                   status:  res.response.status}
-              customer={phone: res.response.customerName,name: res.response.customerPhone};
+              customer={phone: res.response.customerPhone,name: res.response.customerName};
           display.setState({ deliver: res.response.status });
       }
   });
@@ -92,9 +93,12 @@ class Component extends React.Component {
   }
 
   toGoogleMap(){
-    let location="10.9071568,106.7433273";
-    let target=this.geturl(url);
-    window.open("https://www.google.com/maps/dir/"+location+"/"+target);
+    var display=this;
+    navigator.geolocation.getCurrentPosition(function(position) {
+      let target=display.geturl(url);
+      window.open("https://www.google.com/maps/dir/"+position.coords.latitude+","+position.coords.longitude+"/"+target);
+    });
+    
   }
 
   delivered(){
@@ -145,12 +149,9 @@ class Component extends React.Component {
   toList(){
     this.props.navigate("/packagelist")
 
-    navigator.geolocation.getCurrentPosition(function(position) {
-      console.log("Latitude is :", position.coords.latitude);
-      console.log("Longitude is :", position.coords.longitude);
-    });
+    
   }
-  }
+  
   render() {
     return (
       <Container id="container-detail">
@@ -167,9 +168,9 @@ class Component extends React.Component {
               </thead>
 
 
-              <tr>
-                <td>Province/City</td>
-                <td>{packageinfo.city}</td>
+              <tr class="tr">
+                <td class="td">Province/City</td>
+                <td class="td">{packageinfo.city}</td>
 
               </tr>
               <tr class="tr">
@@ -185,17 +186,17 @@ class Component extends React.Component {
                 <td class="td">{packageinfo.street}</td>
               </tr>
 
-              <tr>
-                <td>Delivery</td>
-                <td>{packageinfo.deliveryDate=="-1/-1/-1"?
+              <tr class="tr">
+                <td class="td">Delivery</td>
+                <td class="td">{packageinfo.deliveryDate=="-1/-1/-1"?
                 "Not Deliver":
                 packageinfo.deliveryDate
                 }</td>
               </tr>
               
-              <tr>
-                <td>Price</td>
-                <td>{packageinfo.price}</td>
+              <tr class="tr">
+                <td class="td">Price</td>
+                <td class="td">{packageinfo.price}</td>
 
               </tr>
               <tr class="tr">
@@ -203,11 +204,11 @@ class Component extends React.Component {
                 <td class="td">{packageinfo.status}</td>
               </tr>
               <tr class="tr">
-                <td class="td">Phone</td>
+                <td class="td">Customer Phone</td>
                 <td class="td">{customer.phone}</td>
               </tr>
               <tr class="tr">
-                <td class="td">Name</td>
+                <td class="td">Customer Name</td>
                 <td class="td">{customer.name}</td>
               </tr>
             </table>
@@ -226,7 +227,7 @@ class Component extends React.Component {
                     disabled="true"
                   ></Form.Control>
                 </Form.Group> */}
-                <Button class="btn" onClick={this.toList} 
+                <Button className="packagelist-btn" onClick={this.toList} 
                 variant="dark" >
                 Package List
                 </Button>
@@ -250,7 +251,7 @@ class Component extends React.Component {
                 variant="primary" >
                 Undo
                 </Button>
-
+                <input class="btn"  type="hidden"/>
                 </div>
                 }
                 
@@ -258,7 +259,7 @@ class Component extends React.Component {
             </Row>
 
             <Row class="map">
-              <img onClick={this.toGoogleMap} src="http://laptrinhphp.info/uploads//images/2019/google-maps-banner.jpg"></img>
+              <img className="gg-map-img" onClick={this.toGoogleMap} src="http://laptrinhphp.info/uploads//images/2019/google-maps-banner.jpg"></img>
 
             </Row>
           </Col>
@@ -267,3 +268,4 @@ class Component extends React.Component {
     );
   }
 }
+
