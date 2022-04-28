@@ -51,13 +51,13 @@ class Component extends React.Component {
     return (
       <div id="container-login">
         <Row sm={12} id="row-login">
-          <Form id="form-login">
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Control type="email" placeholder="User name" />
+          <Form onSubmit= {this.doLogin} id="form-login">
+            <Form.Group className="mb-3" controlId="account">
+              <Form.Control required placeholder="User name" />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Control type="password" placeholder="Password" />
+            <Form.Group className="mb-3" controlId="password">
+              <Form.Control required type="password" placeholder="Password" />
             </Form.Group>
             {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check id="checkbox" type="checkbox" label="Remember" />

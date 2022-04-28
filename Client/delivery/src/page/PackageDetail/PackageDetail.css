@@ -7,7 +7,9 @@
   border-radius: 20px;
   /* border: 2px solid green; */
 }
-
+.packagelist-btn{
+  width: 100%;
+}
 #map {
 }
 
@@ -61,4 +63,10 @@
 
 #note {
   padding: 0px;
+}
+.gg-map-img{
+  opacity: 0.9;
+}
+.gg-map-img:hover{
+  opacity: 1;
 }
