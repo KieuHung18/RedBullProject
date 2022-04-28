@@ -31,8 +31,7 @@ function productsGenerator(quantity){
     customerName: `someName ${i}`,
     customerPhone: "0937446809" ,
     price:  2100 + i,
-    status:"pending",
-    distance: Math.floor(Math.random()*1000)/100+"km"});
+    status:"pending"});
   }
   return items;
 }
@@ -80,6 +79,9 @@ export class Component extends React.Component {
         if(res.result!="FAIL"){
            packageTable=[];
            userName=res.result;
+           numDelivered=0;
+           numPending=0;
+           numException=0;
            let address;
           for (let i = 0; i < res.response.length; i++) {
             address= res.response[i].address.split(",");
@@ -91,8 +93,7 @@ export class Component extends React.Component {
               ward:address[2],
               customerName: res.response[i].customerName, 
               customerPhone: res.response[i].customerPhone ,
-              status: res.response[i].status,
-              distance: Math.floor(Math.random()*1000)/100+"km"});
+              status: res.response[i].status});
           }
           count();display.setState({ loadData: false });
         }
@@ -113,16 +114,16 @@ export class Component extends React.Component {
   
   render() {
     const tableRowEvents = {
-      onClick: (row) => {
-        console.log(row.id);
-        this.props.navigate("/package/"+row.id);
+      onClick: (row,rowIndex) => {
+        let pid="/package/"+rowIndex.id;
+        this.props.navigate(pid);
       },
     }
     const columns = [
       { dataField: 'city', text: 'Province/City',filter: textFilter()},
       { dataField: 'district', text: 'District',filter: textFilter()},
       { dataField: 'ward', text: 'Ward',filter: textFilter()},
-      { dataField: 'distance', text: 'Distance', sort: true ,className: "aasd"},
+      
       { dataField: 'status', text: 'Status'},
       { dataField: 'customerName', text: 'Customer Name'},
       { dataField: 'customerPhone', text: 'Customer Phone'},
@@ -143,6 +144,7 @@ export class Component extends React.Component {
       prePageText: '<',
       showTotal: true,
       alwaysShowAllBtns: true,
+      hideSizePerPage: true
     });
     
     return (

@@ -42,8 +42,14 @@
 .status-number-container{
 
 }
-
-
+/* tr.package-list-row>td:nth-child(4) {
+    color: red;
+    font-weight: 600;
+} */
+.red{
+    color: red;
+    font-weight: 600;
+}
 .filter {
     max-width: 165px;
     margin: auto;
