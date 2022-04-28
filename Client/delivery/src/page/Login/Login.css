@@ -1,19 +1,29 @@
-#container {
-  width: 2000px;
+#container-login {
+  width: 100%;
   font-family: "Poppins", sans-serif;
-  /* background-color: brown; */
+
+  background-image: url("bg.jpg");
+  height: 600px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
-.row-login {
+
+#row-login {
   width: 100%;
   margin: 0 auto;
   text-align: center;
   padding: 20px 20px;
+  padding-top: 100px;
 }
 
 #form-login {
-  width: 20%;
+  padding: 50px;
+  border-radius: 20px;
+  width: 400px;
   margin: 0 auto;
   text-align: center;
+  background-color: #eee;
 }
 
 #btn-submit {

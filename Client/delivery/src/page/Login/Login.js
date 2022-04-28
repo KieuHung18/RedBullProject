@@ -49,23 +49,25 @@ class Component extends React.Component {
   }
   render() {
     return (
-      <Row class="row-login">
-        <Form id="form-login">
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Control type="email" placeholder="User name" />
-          </Form.Group>
+      <div id="container-login">
+        <Row sm={12} id="row-login">
+          <Form id="form-login">
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Control type="email" placeholder="User name" />
+            </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Control type="password" placeholder="Password" />
-          </Form.Group>
-          {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Control type="password" placeholder="Password" />
+            </Form.Group>
+            {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check id="checkbox" type="checkbox" label="Remember" />
           </Form.Group> */}
-          <Button class="btn-submit" id="btn-submit" type="submit">
-            Login
-          </Button>
-        </Form>
-      </Row>
+            <Button class="btn-submit" id="btn-submit" type="submit">
+              Login
+            </Button>
+          </Form>
+        </Row>
+      </div>
     );
   }
 }

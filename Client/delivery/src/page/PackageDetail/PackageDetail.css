@@ -11,29 +11,29 @@
 #map {
 }
 
-table,
-thead,
-tr,
-td {
+.table,
+.thead,
+.tr,
+.td {
   padding: 10px;
   border: 2px inset #000;
 }
 
-table {
+.table {
   width: 100%;
   text-align: left;
   background-color: #eee;
   /* border: 2px solid salmon; */
 }
 
-tr {
+.tr {
   height: 30px;
 }
 
-tr:nth-child(even) {
+.tr:nth-child(even) {
   background-color: #d6eeee;
 }
-tr:hover {
+.tr:hover {
   background-color: #fff;
   color: green;
   font-weight: 600;
