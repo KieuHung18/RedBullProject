@@ -185,9 +185,9 @@ export class PackageDetail extends React.Component {
                 </div>
               </Col>
             </Row>
-            {/* <Row class="map">
-              <img src="http://laptrinhphp.info/uploads//images/2019/google-maps-banner.jpg"></img>
-            </Row> */}
+            <Row class="">
+              <img class="img-pack" src="pack.jpg"></img>
+            </Row>
           </Col>
         </Row>
       </Container>
