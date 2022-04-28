@@ -39,24 +39,29 @@ const ProtectedLogin = ({ redirectPath = "/home", children }) => {
 const Application = () => {
   return (
     <>
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          {/* PUBLIC ROUTES IN HERE */}
-          <Route path="*" element={<NotFound />} />
-          <Route path="/" element={<HomePage />} />
-          <Route path="home" element={<HomePage />} />
-          <Route path="login" element={<ProtectedLogin />} />
-          <Route path="aboutus" element={<AboutUS />} />
-          <Route path="package/:id" element={<PackageDetail />} />
-          <Route element={<ProtectedRoute />}>
-            {/* PROTECTED ROUTES IN HERE */}
-            <Route path="packagelist" element={<PackageList />} />
-            <Route path="profile" element={<Profile />} />
-          </Route>
-        </Routes>
-        <Footer />
-      </BrowserRouter>
+
+    <BrowserRouter>
+    <Navbar/>
+    <Routes>
+      {/* PUBLIC ROUTES IN HERE */}
+      <Route path="*" element={<NotFound />} />
+      <Route path="/" element={<HomePage />} />
+      <Route path="home" element={<HomePage />} />
+      <Route path="login" element={<ProtectedLogin />} />
+      <Route path="aboutus" element={<AboutUS />} />
+     
+      <Route element={<ProtectedRoute/>}>
+
+        {/* PROTECTED ROUTES IN HERE */}
+        <Route path="packagelist" element={<PackageList />} />
+        <Route path="package/:id" element={<PackageDetail />} />
+        <Route path="profile" element={<Profile />} />
+       
+      </Route>
+    </Routes>
+    <Footer/>
+    </BrowserRouter>
+
     </>
   );
 };
