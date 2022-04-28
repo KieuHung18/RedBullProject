@@ -1,5 +1,5 @@
 import React from "react";
-import {Card } from 'react-bootstrap';//{Card,ListGroupItem,ListGroup} 
+import {Card,Row,Col } from 'react-bootstrap';//{Card,ListGroupItem,ListGroup} 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Profile2.css';
 import jquery  from 'jquery';
@@ -49,9 +49,15 @@ class Component extends React.Component {
     }
     
     render() {
-        const profileInfo=[
+        const profileLeft=[
             ["First Name","First Name",user.FirstName],
             ["Last Name","Last Name",user.LastName],
+            // ["Address","Address",user.Address],
+            // ["Phone Number","Phone Number",user.PhoneNumber]
+        ];
+        const profileRight=[
+            // ["First Name","First Name",user.FirstName],
+            // ["Last Name","Last Name",user.LastName],
             ["Address","Address",user.Address],
             ["Phone Number","Phone Number",user.PhoneNumber]
         ];
@@ -59,23 +65,59 @@ class Component extends React.Component {
         
         return (
             <div className="profile-container">
-                <h2>Prifile</h2>
-                {profileInfo.map(
+                <h2 className="profile-title">Profile</h2>
+                <div className="profile-card-container">
+                <Row>
+                {profileLeft.map(
                     (p)=>(
-                    <Card>
-                        <Card.Header>
-                            <Card.Title>
+                    <Col>
+                    <Card className="profile-card">
+                        <Card.Header className="profile-card-header">
+                            <Card.Title className="profile-card-title">
                                 {p[0]}
                             </Card.Title>
-                        </Card.Header>
-                        <Card.Body>
-                            <Card.Text>
-                            {p[1]}{": "}{p[2]}
+                        </Card.Header >
+                        <Card.Body className="profile-card-body">
+                            <Card.Text className="profile-card-text">
+                            <Row className="profile-card-row">
+                                <Col className="profile-card-col">{p[1]}{": "}</Col>
+                                <Col className="profile-card-colinfo">{p[2]}</Col>
+                            </Row>
                             </Card.Text>
                         </Card.Body>
                         
-                    </Card>)
+                    </Card>
+                    </Col>
+                    )
                 )}
+                </Row>
+                <Row>
+                {profileRight.map(
+                    (p)=>(
+                    <Col>
+                    <Card className="profile-card">
+                        <Card.Header className="profile-card-header">
+                            <Card.Title className="profile-card-title">
+                                {p[0]}
+                            </Card.Title>
+                        </Card.Header >
+                        <Card.Body className="profile-card-body">
+                            <Card.Text className="profile-card-text">
+                            <Row className="profile-card-row">
+                                <Col className="profile-card-col">{p[1]}{": "}</Col>
+                                <Col className="profile-card-colinfo">{p[2]}</Col>
+                            </Row>
+                            </Card.Text>
+                        </Card.Body>
+                        
+                    </Card>
+                    </Col>
+                    )
+                )}
+                </Row>
+                
+                
+                </div>
                 
             </div>
             

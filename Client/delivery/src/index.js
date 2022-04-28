@@ -54,7 +54,7 @@ const Application = () => {
       <Route element={<ProtectedRoute/>}>
         {/* PROTECTED ROUTES IN HERE */}
         <Route path="packagelist" element={<PackageList />} />
-        <Route path="profile" element={<Profile />} />
+        <Route path="profile" element={<Profile2 />} />
         <Route path="package/:id" element={<PackageDetail />} />
       </Route>
     </Routes>
@@ -66,7 +66,7 @@ const Application = () => {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Profile2/>
+    <Application/>
   </React.StrictMode>
 );
 

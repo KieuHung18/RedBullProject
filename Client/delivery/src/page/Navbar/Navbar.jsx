@@ -77,15 +77,15 @@ function Navbar(){
               
             </nav>
             <div className="banner justify-content-center row">
-               <div className="col-md-6 content_banner ">
-                  <h1>Present your business in a whole new way</h1>
+               {/* <div className="col-md-6 content_banner ">
+                  <h1>Delivering happiness since 2017</h1>
                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                   when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                   <div className="search_order">
                      <input type="text" placeholder="Order search" name="" id="" />
                      <button className="btn ">Search</button>
                   </div>
-               </div>
+               </div> */}
             </div>
         </Div>
     )
