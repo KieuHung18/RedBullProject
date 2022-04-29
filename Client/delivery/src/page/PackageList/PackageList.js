@@ -126,7 +126,7 @@ export class Component extends React.Component {
 
     var status=[
       ["EXCEPTION",numDelivered,exception],
-      ["PEDDING",numPending,pending],
+      ["PENDING",numPending,pending],
       ["DELIVERED",numException,delivered],
     ]
     
