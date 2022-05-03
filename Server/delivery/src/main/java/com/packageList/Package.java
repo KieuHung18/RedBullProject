@@ -4,7 +4,7 @@ public class Package {
 	private String address;
 	private String deliveryDate;
 	private String receiveDate;
-	int price;
+	private int price;
 	private String status;
 	private String customerName;
 	private String customerPhone;
