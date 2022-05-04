@@ -41,10 +41,16 @@ public class CustomerListController {
 			@RequestParam(value = "address") String address, @RequestParam(value = "phoneNumber") String phoneNumber)
 			throws IOException, ParseException {
 		JsonResponse res = new JsonResponse();
-		String[] name = fullName.split(" ");
-		res.setResult(name[name.length - 1]);
-		boolean success = new com.database.CustomerDatabase().addCustomer(fullName, address, phoneNumber);
-		res.setResponse(success);
+		if (new com.database.CustomerDatabase().addCustomer(fullName, address, phoneNumber)) {
+			res.setResponse("PHONE");
+			res.setResult("SUCCESS");
+
+		} else {
+
+			res.setResponse("PHONE");
+			res.setResult("FAIL");
+		}
+
 		return res;
 	}
 
@@ -55,9 +61,16 @@ public class CustomerListController {
 			@RequestParam(value = "fullName") String fullName, @RequestParam(value = "address") String address,
 			@RequestParam(value = "phoneNumber") String phoneNumber) throws IOException, ParseException {
 		JsonResponse res = new JsonResponse();
-		String[] name = fullName.split(" ");
-		res.setResult(name[name.length - 1]);
-		new com.database.CustomerDatabase().editCustomer(id, fullName, address, phoneNumber);
+		if (new com.database.CustomerDatabase().editCustomer(id, fullName, address, phoneNumber)) {
+			res.setResponse("PHONE");
+			res.setResult("SUCCESS");
+
+		} else {
+
+			res.setResponse("PHONE");
+			res.setResult("FAIL");
+		}
+
 		return res;
 	}
 
