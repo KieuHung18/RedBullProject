@@ -1,44 +1,69 @@
-
 import React from "react";
-import styled from "styled-components"
+import styled from "styled-components";
+import {Row,Col} from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {useNavigate} from 'react-router-dom';
+import {useState} from "react";
+
+function add(event){
+    event.preventDefault();
+}
+
 function InsertCustomer(){
+    const navigate =useNavigate();
+    function cancel(event){
+        event.preventDefault();
+        navigate(-1)
+    }
     return (
         <Div>
+             <h1 className="packagelist-welcome">Add Customer</h1>
             <div className="insertCustomer">
                 <div className="Content_Insert">
                         <form className="mainForm" action="">
+                        <Row>
+                            <Col>
                            <div className="YourName form_items">
                                 <div className="firtname">
                                     <p>First name</p>
-                                    <input type="text" name="" id="" />
+                                    <input placeholder="FisrtName" type="text" name="" id="" />
                                 </div>
-                                <div className="Lastname">
+                                <div placeholder="LastName" className="Lastname">
                                     <p>Last name</p>
                                     <input type="text" />
                                 </div>
-                           </div>
-
-                           <div className="Information form_items">
-                               <div className="email">
-                                   <p>Email</p>
-                                   <input type="text" placeholder="Phone Number" />
-                               </div>
-                               <div className="PhoneNumber">
+                                <div className="PhoneNumber">
                                    <p>Phone Number</p>
                                    <input type="text" placeholder="Phone number" />
                                </div>
                            </div>
-
+                           <Row style={{maxWidth:"300px"}}>
+                            <Col>
+                           <div className="btn_addUser">
+                                 <button>Add</button>
+                            </div>
+                            </Col>
+                            <Col>
+                            <div className="btn_addUser">
+                                 <button onClick={cancel}>Cancel</button>
+                            </div>
+                            </Col>
+                            </Row>
+                           </Col>
+                           <Col>
                            <div className="address form_items">
-                               <p>Your address</p>
-                               <input type="text" name="" placeholder="Tỉnh" id="" />
-                               <input type="text" name="" placeholder="Huyện" id="" />
-                               <input type="text" name="" placeholder="Địa chỉ cụ thể" id="" />
+                                <p>City</p>
+                               <input type="text" name="" placeholder="City" id="" />
+                               <p>District</p>
+                               <input type="text" name="" placeholder="District" id="" />
+                               <p>Ward</p>
+                               <input type="text" name="" placeholder="Ward" id="" />
+                               <p>Street</p>
+                               <input type="text" name="" placeholder="Street" id="" />
                            </div>
-
-                             <div className="btn_addUser">
-                                 <button>Add user</button>
-                             </div>
+                           </Col>
+                           </Row>
+                             
                         </form>
                     </div>
             </div>
@@ -50,8 +75,6 @@ const Div = styled.div`
   border: 1px solid #c2c2c23b;
     border-radius: 10px ;
     text-align: left;
-    margin-left: 40px;
-    margin-right: 20px;
     box-shadow:  5px 5px #8888883d;
     background-color: #dfdbdb3c;
     .insertCustomer{
@@ -60,7 +83,7 @@ const Div = styled.div`
 
         }
         input{
-            width: 500px;
+            width: 80%;
             height: 39px;
             border-radius: 7px;
             border: 1px solid #24242434;
@@ -70,12 +93,13 @@ const Div = styled.div`
             margin-left: 70px;
             margin-top: 30px;
             .form_items{
+                text-align: left;
                 z-index: 999;
                 color: #000000;
                 border-radius: 5px !important;
                 background-color: #FFFF ;
-                width: 70%;
-                height: 200px;
+                width: 95%;
+                padding-bottom: 20px;
                 box-shadow: 10px 5px 5px #afaeae;
                 p,input{
                     margin-left: 30px;
@@ -84,9 +108,7 @@ const Div = styled.div`
          }
          
          .btn_addUser{
-             margin-top: 10px;
-             margin-left: 55%;
-             margin-bottom: 10px;
+            margin: 50px auto;
              button{
                  padding: 10px 20px 10px 20px;
                  border-radius: 5px;

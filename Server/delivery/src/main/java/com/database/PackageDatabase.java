@@ -4,12 +4,17 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.core.io.ClassPathResource;
+
 
 public class PackageDatabase {
 
@@ -36,9 +41,133 @@ public class PackageDatabase {
 		return obj0;
 	}
 	
-	
-	
+	public void editPackage(String address, int price,String CustomerID,String userID,String packageID) {
+		JSONParser parser = new JSONParser();
+		String link = relativePath()+"\\packages.json";
+		try (Reader reader = new FileReader(link)){
+			JSONObject jsonObject = (JSONObject) parser.parse(reader);
+			JSONObject p = new JSONObject();
+			
+			p.put("idUser",userID);
+			
+			LocalDate currentDate = LocalDate.now();
+			int day = currentDate.getDayOfMonth();
+			int month = currentDate.getMonth().getValue();
+			int year = currentDate.getYear();
+			JSONObject date = new JSONObject();
+			date.put("day", day);
+			date.put("month", month);
+			date.put("year", year);
+			p.put("dayReceive",date);
+			
+			date = new JSONObject();
+			date.put("day", -1);
+			date.put("month", -1);
+			date.put("year", -1);
+			p.put("dayDelivery",date);
+			
+			p.put("cost",price);
+			p.put("id",packageID);
+			p.put("addressDelivery",address);
+//			
+			p.put("idCustomer",CustomerID);
+			p.put("status","pending");
+			
+			jsonObject.put(packageID,p);
+			 try (FileWriter file = new FileWriter(link)) {
+		            file.write(jsonObject.toJSONString());
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
 
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	public void addPackage(String address, int price,String CustomerID) {
+		JSONParser parser = new JSONParser();
+		String link = relativePath()+"\\packages.json";
+		try (Reader reader = new FileReader(link)){
+			JSONObject jsonObject = (JSONObject) parser.parse(reader);
+			JSONObject p = new JSONObject();
+			
+			p.put("idUser",findUser());
+			
+			LocalDate currentDate = LocalDate.now();
+			int day = currentDate.getDayOfMonth();
+			int month = currentDate.getMonth().getValue();
+			int year = currentDate.getYear();
+			JSONObject date = new JSONObject();
+			date.put("day", day);
+			date.put("month", month);
+			date.put("year", year);
+			p.put("dayReceive",date);
+			
+			date = new JSONObject();
+			date.put("day", -1);
+			date.put("month", -1);
+			date.put("year", -1);
+			p.put("dayDelivery",date);
+			
+			p.put("cost",price);
+			p.put("id","p"+jsonObject.size());
+			p.put("addressDelivery",address);
+//			
+			p.put("idCustomer",CustomerID);
+			p.put("status","pending");
+			
+			jsonObject.put("p"+jsonObject.size(),p);
+			 try (FileWriter file = new FileWriter(link)) {
+		            file.write(jsonObject.toJSONString());
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
+
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	public String findUser(){
+		String result="";
+		HashMap<String, Integer> map=new UserDatabase().getMapUser();
+		
+		JSONParser parser = new JSONParser();
+		JSONArray arrobj0 = new JSONArray();
+		String link = relativePath()+"\\packages.json";
+		try (Reader reader = new FileReader(link)) {
+			JSONObject jsonObject = (JSONObject) parser.parse(reader);
+			for (int i = 0; i < jsonObject.size(); i++) {
+				JSONObject packages = (JSONObject) jsonObject.get("p" + i);
+				
+				if(packages.get("status").equals("pending")) {
+					String idUser = (String) packages.get("idUser");
+					int number=map.get(idUser);
+					map.put(idUser, number+1);
+				}
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		Iterator<Entry<String, Integer>>iter= map.entrySet().iterator();
+		Entry<String, Integer>entry=iter.next();
+		int min=entry.getValue();result=entry.getKey();
+		while(iter.hasNext()) {
+			entry=iter.next();
+			if(entry.getValue()<min) {
+				result=entry.getKey();
+				min=entry.getValue();
+			}
+			
+		}
+		return result;
+		
+	}
 	/** Phương thức update ngày giao của gói hàng **/
 	public static void updateDayDelivery(Date dayDelivery, String id_package) {
 		JSONParser parser = new JSONParser();

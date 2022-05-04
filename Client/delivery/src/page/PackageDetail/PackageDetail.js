@@ -11,24 +11,23 @@ import { Map, GoogleApiWrapper ,InfoWindow, Marker} from 'google-maps-react';
 
 var packageinfo;
 packageinfo = {
-  city: "Ho Chi Minh city",
-  district: "Quan 1",
-  ward: "Dakao",
-  street: "Cong vien Le Van Tam",
-  deliveryDate: "Not Delivery",
-  receiveDate: "26/4/2022",
-  price: 200000,
-  status: "",
+  city: "Loading...",
+  district: "Loading...",
+  ward: "Loading...",
+  street: "Loading...",
+  deliveryDate: "Loading...",
+  receiveDate: "Loading...",
+  price: 0,
+  status: "Loading...",
 };
 var customer;
-customer = { phone: "0367751252", name: "cusName" };
-var address="153 Nguyễn Du,Dĩ An,Bình Dương";
+customer = { phone: "Loading...", name: "Loading..." };
 export default function PackageDetail (){
   return (
     <Component param={useParams()} navigate={useNavigate()}/>
   );
 }
-let url="";
+var url="";
 class Component extends React.Component {
   constructor(props) {
     super(props);

@@ -19,7 +19,6 @@ public class FeedSuccessHandler implements AuthenticationSuccessHandler{
 		String account = request.getParameter("account");
 		request.getSession(false).setAttribute("account", account);
 		response.sendRedirect(request.getContextPath()+"/authorize");
-		
 	}
 
 }

@@ -35,7 +35,8 @@ class Component extends React.Component {
       crossDomain: true,
       success: function (response) {
         if (response.result != "FAIL") {
-          localStorage.setItem("user", response.response);
+          let user={userID:response.response.userID,userRole:response.response.userRole};
+          localStorage.setItem("user", JSON.stringify(user));
           display.props.navigate("/profile");
           window.location.reload(false);
         } else {
@@ -76,11 +77,11 @@ class Component extends React.Component {
         <Row sm={12} id="row-login">
           <Form onSubmit= {this.doLogin} id="form-login">
             <Form.Group className="mb-3" controlId="account">
-              <Form.Control placeholder="User name" />
+              <Form.Control required placeholder="User name" />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="password">
-              <Form.Control  id="password" type="password" placeholder="Password" />
+              <Form.Control required  id="password" type="password" placeholder="Password" />
               <a className="unPassword" onClick={this.unPassword}>
                 <i id="eye" class="fa-solid fa-eye"></i>
               </a>              

@@ -68,7 +68,7 @@ export class Component extends React.Component {
     jquery.ajax({
       type: "GET",
       url: "http://localhost:8080/delivery/packagelist",
-      data: {userID: localStorage.getItem("user")},
+      data: {userID: JSON.parse(localStorage.getItem("user")).userID},
       xhrFields: {
         withCredentials: true
         },

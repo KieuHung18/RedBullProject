@@ -37,7 +37,8 @@ public class PackageController {
 			return null;
 		} else {
 			result.setAddress((String) jsonPackage.get("addressDelivery"));
-
+			result.setUserID((String) jsonPackage.get("idUser"));
+			
 			com.database.Date dateD = new Date();
 			JSONObject jsonDateD = (JSONObject) jsonPackage.get("dayDelivery");
 			Long day = (long) jsonDateD.get("day");
@@ -65,50 +66,13 @@ public class PackageController {
 			result.setStatus(status);
 
 			String customerID = (String) jsonPackage.get("idCustomer");
-
+			
 			JSONObject jsonCustomer = new CustomerDatabase().getCustomer(customerID);
+			result.setCustomerID(customerID);
 			result.setCustomerName((String) jsonCustomer.get("fullName"));
 			result.setCustomerPhone((String) jsonCustomer.get("phoneNumber"));
 			return result;
 		}
 
-// 		Package pck = new Package();
-// 		JSONObject packageJSObj = new PackageDatabase().getPackage(packageID);
-
-// 		String address = (String) packageJSObj.get("addressDelivery");
-
-// 		JSONObject deliveryDate = (JSONObject) packageJSObj.get("dayDelivery");
-// 		long dayDe = (long) deliveryDate.get("day");
-// 		long monthDe = (long) deliveryDate.get("month");
-// 		long yearDe = (long) deliveryDate.get("year");
-// 		Date DateDe = new Date((int) dayDe, (int) monthDe, (int) yearDe);
-
-// 		JSONObject receiveDate = (JSONObject) packageJSObj.get("dayReceive");
-// 		long dayRe = (long) receiveDate.get("day");
-// 		long monthRe = (long) receiveDate.get("month");
-// 		long yearRe = (long) receiveDate.get("year");
-// 		Date DateRe = new Date((int) dayRe, (int) monthRe, (int) yearRe);
-
-// 		Long price = (long) packageJSObj.get("cost");
-// 		boolean status = (boolean) packageJSObj.get("status");
-
-// 		String customerID = (String) packageJSObj.get("idCustomer");
-// 		JSONObject customer = (JSONObject) new CustomerDatabase().getCustomer(customerID);
-// 		String customerName = (String) customer.get("fullName");
-// 		String customerPhone = (String) customer.get("phoneNumber");
-
-// 		pck.setAddress(address);
-// 		pck.setDeliveryDate(DateDe.toString());
-// 		pck.setReceiveDate(DateRe.toString());
-// 		pck.setPrice(price.intValue());
-// 		pck.setStatus(status);
-// 		pck.setCustomerName(customerName);
-// 		pck.setCustomerPhone(customerPhone);
-
-// 		return pck;
-
 	}
-public static void main(String[] args) {
-	System.out.println(new PackageController().getPackage("p2"));
-}
 }

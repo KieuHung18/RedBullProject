@@ -6,6 +6,7 @@
     "fullName": "Tran Thanh Tam",
     "phoneNumber": "0903235674",
     "address": "Ho Chi Minh,Thu Duc,Binh Chieu,46 Go Dua"
+    ,"role": "ROLE_USER"
   },
   "u1": {
     "id": "u1",
@@ -14,6 +15,7 @@
     "fullName": "Tong Van Long",
     "phoneNumber": "0903235674",
     "address": "Ho Chi Minh,Thu Duc,Linh Trung,60 Le Van Chi"
+    ,"role": "ROLE_USER"
   },
   "u2": {
     "id": "u2",
@@ -22,7 +24,15 @@
     "fullName": "Bui Minh An",
     "phoneNumber": "0903235674",
     "address": "Hai Phong,Trai Cau,Le Chan,129 P.To Hieu"
+    ,"role": "ROLE_USER"
+  },
+  "u3": {
+    "id": "u3",
+    "account": "TangKieuHung",
+    "password": "123456",
+    "fullName": "Tang Kieu Hung",
+    "phoneNumber": "0903235674",
+    "address": "Hai Phong,Trai Cau,Le Chan,129 P.To Hieu"
+    ,"role": "ROLE_ADMIN"
   }
-
 }
-

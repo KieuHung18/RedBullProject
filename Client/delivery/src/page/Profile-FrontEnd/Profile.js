@@ -21,10 +21,12 @@ class Component extends React.Component {
       }
     componentDidMount() {
         var display=this;
+        
         jquery.ajax({
             type: "GET",
             url: "http://localhost:8080/delivery/user",
-            data:{userID: localStorage.getItem("user")},
+            
+            data:{userID: "u1"},
             xhrFields: {
                 withCredentials: true
                 },
