@@ -26,10 +26,10 @@ public class PackageListController {
 	@ResponseBody
 	public JsonResponse getPackageList(@RequestParam(value = "userID") String userID) {
 		JsonResponse res = new JsonResponse();
-		UserDatabase user= new UserDatabase();
-		String fullName=(String) new UserDatabase().getUser(userID).get("fullName");
-		String[]name=fullName.split(" ");
-		res.setResult(name[name.length-1]);
+		UserDatabase user = new UserDatabase();
+		String fullName = (String) new UserDatabase().getUser(userID).get("fullName");
+		String[] name = fullName.split(" ");
+		res.setResult(name[name.length - 1]);
 		List<PackageList> list = loadData(userID);
 		res.setResponse(list);
 		return res;
@@ -38,17 +38,17 @@ public class PackageListController {
 	public List<PackageList> loadData(String userID) {
 		List<PackageList> result = new ArrayList<PackageList>();
 		JSONArray jsonPackage = new com.database.PackageDatabase().getListPackages(userID);
-		
+
 		for (int i = 0; i < jsonPackage.size(); i++) {
 			PackageList packageList = new PackageList();
 			Package packageDB = (Package) jsonPackage.get(i);
-			
+
 			packageList.setPackageID(packageDB.getId());
 			packageList.setAddress(packageDB.getAddressDelivery());
 			packageList.setPrice(packageDB.getCost());
 			packageList.setStatus(packageDB.getStatus());
 			JSONObject jsonCustomer = new CustomerDatabase().getCustomer(packageDB.getIdCustomer());
-			
+
 			packageList.setCustomerName((String) jsonCustomer.get("fullName"));
 			packageList.setCustomerPhone((String) jsonCustomer.get("phoneNumber"));
 
@@ -58,5 +58,4 @@ public class PackageListController {
 
 		return result;
 	}
-
 }
