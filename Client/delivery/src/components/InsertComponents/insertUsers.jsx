@@ -6,40 +6,55 @@ import {useState} from "react";
 function add(event){
     event.preventDefault();
 }
-  function InsertUsers(){
-    const navigate=useNavigate();
+
+   
+
+
+    function InsertUsers(){
+        
+        const navigate=useNavigate();
+        const [age, setAge] = useState();
+       
+    
+        // Chỉ nhập được kiểu số
+        const handleChange = (e) => {
+        const value = e.target.value.replace(/\D/g, "");
+        setAge(value);
+    };
+
     return(
         <Section>
             <h1 className="packagelist-welcome">Add User</h1>
             <div className="insertCustomer">
                 <div className="Content_Insert">
-                        <form className="mainForm" action="">
+                        <form className="mainForm" action="" >
                             <Row>
                             <Col>
                            <div className="YourName form_items">
                                 <div className="firtname">
                                     <p>First name</p>
-                                    <input type="text" name="" id="" />
+                                    <input type="text" id="id" required  placeholder="First name" name=""/>
                                 </div>
                                 <div className="Lastname">
                                     <p>Last name</p>
-                                    <input type="text" />
+                                    <input type="text" id="input" required placeholder="Last name" />
                                 </div>
                                 <div className="PhoneNumber">
                                    <p>Phone Number</p>
-                                   <input type="text" placeholder="Phone number" />
+                                   <input value={age} id="input" required  placeholder="Your phone number" onChange={handleChange} />
                                </div>
                            </div>
                            
                            <div className="YourAccount form_items">
                                 <div className="Username">
                                     <p>Username</p>
-                                    <input type="text" name="" placeholder="username" id="" />
+                                    <input type="text" id="input" required name=""  placeholder="username"  />
                                 </div>
                                 <div className="password">
                                     <p>Password</p>
-                                    <input type="text" name="" placeholder="password" id="" />
+                                    <input type="password"  required name="" placeholder="password" />
                                 </div>
+                                
                             </div>
                            
                            </Col>
@@ -48,23 +63,23 @@ function add(event){
 
                             <div className="address form_items">
                                <p>City</p>
-                               <input type="text" name="" placeholder="City" id="" />
+                               <input type="text" id="input" required name="" placeholder="City"   />
                                <p>District</p>
-                               <input type="text" name="" placeholder="District" id="" />
+                               <input type="text" id="input" required name="" placeholder="District"   />
                                <p>Ward</p>
-                               <input type="text" name="" placeholder="Ward" id="" />
+                               <input type="text" id="input" required name="" placeholder="Ward" />
                                <p>Street</p>
-                               <input type="text" name="" placeholder="Street" id="" />
+                               <input type="text"  required  name="" placeholder="Street" id="input"/>
                            </div>
 
                             <div className="Role form_items">
                                 <form>
                                     <div className="user_role ">
-                                        <input name="gender" type="radio" value="User" />
+                                        <input name="gender"   type="radio" value="User" />
                                         <span>User</span>
                                     </div>
                                     <div className="admin_role">
-                                        <input name="gender" type="radio" value="Admin" />
+                                        <input name="gender"   type="radio" value="Admin" />
                                         <span>Admin</span>
                                     </div>
                                 </form>
@@ -74,7 +89,7 @@ function add(event){
                              <Row style={{maxWidth:"300px"}}>
                             <Col>
                            <div className="btn_addUser">
-                                 <button>Add</button>
+                                 <button >Add</button>
                             </div>
                             </Col>
                             <Col>

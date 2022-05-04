@@ -11,10 +11,21 @@ function add(event){
 
 function InsertCustomer(){
     const navigate =useNavigate();
+    const [age, setAge] = useState();
+   
+
+    // Chỉ nhập được kiểu số
+    const handleChange = (e) => {
+    const value = e.target.value.replace(/\D/g, "");
+
+    setAge(value);
+};
     function cancel(event){
         event.preventDefault();
         navigate(-1)
     }
+
+    
     return (
         <Div>
              <h1 className="packagelist-welcome">Add Customer</h1>
@@ -26,15 +37,15 @@ function InsertCustomer(){
                            <div className="YourName form_items">
                                 <div className="firtname">
                                     <p>First name</p>
-                                    <input placeholder="FisrtName" type="text" name="" id="" />
+                                    <input placeholder="FisrtName" required type="text" name="" id="" />
                                 </div>
-                                <div placeholder="LastName" className="Lastname">
+                                <div placeholder="LastName" required className="Lastname">
                                     <p>Last name</p>
-                                    <input type="text" />
+                                    <input type="text" required placeholder="Last name" />
                                 </div>
                                 <div className="PhoneNumber">
                                    <p>Phone Number</p>
-                                   <input type="text" placeholder="Phone number" />
+                                   <input type="text" required value={age} onChange={handleChange} placeholder="Phone number" />
                                </div>
                            </div>
                            <Row style={{maxWidth:"300px"}}>
@@ -53,13 +64,13 @@ function InsertCustomer(){
                            <Col>
                            <div className="address form_items">
                                 <p>City</p>
-                               <input type="text" name="" placeholder="City" id="" />
+                               <input type="text" required name="" placeholder="City" id="" />
                                <p>District</p>
-                               <input type="text" name="" placeholder="District" id="" />
+                               <input type="text" required name="" placeholder="District" id="" />
                                <p>Ward</p>
-                               <input type="text" name="" placeholder="Ward" id="" />
+                               <input type="text" required name="" placeholder="Ward" id="" />
                                <p>Street</p>
-                               <input type="text" name="" placeholder="Street" id="" />
+                               <input type="text" required name="" placeholder="Street" id="" />
                            </div>
                            </Col>
                            </Row>
