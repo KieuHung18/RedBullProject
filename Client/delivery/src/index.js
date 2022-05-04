@@ -17,6 +17,7 @@ import NotFound from './page/NotFound/NotFound';
 import {BrowserRouter,Routes,Route,Navigate,Outlet } from 'react-router-dom';
 import {HomePage} from './page/HomePage/HomePage';
 import Login from './page/Login/Login';
+import Insert from "./page/InsertPage/Insert";
 
 
 const ProtectedRoute = ({ redirectPath = "/login", children }) => {
@@ -41,7 +42,7 @@ const Application = () => {
     <Routes>
       {/* PUBLIC ROUTES IN HERE */}
       <Route path="*" element={<NotFound />} />
-      <Route path="/" element={<HomePage />} />
+      <Route path="/" element={<Insert />} />
       <Route path="home" element={<HomePage />} />
       <Route path="login" element={<ProtectedLogin />} />
       <Route path="aboutus" element={<AboutUS />} />

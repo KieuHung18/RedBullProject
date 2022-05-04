@@ -125,9 +125,9 @@ export class Component extends React.Component {
     ];
 
     var status=[
-      ["EXCEPTION",numDelivered,exception],
-      ["PEDDING",numPending,pending],
-      ["DELIVERED",numException,delivered],
+      ["EXCEPTION",numException,exception],
+      ["PENDING",numPending,pending],
+      ["DELIVERED",numDelivered,delivered],
     ]
     
     const pagination = paginationFactory({
