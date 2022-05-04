@@ -68,7 +68,7 @@ export class Component extends React.Component {
     jquery.ajax({
       type: "GET",
       url: "http://localhost:8080/delivery/packagelist",
-      data: {userID: localStorage.getItem("user")},
+      data: {userID: JSON.parse(localStorage.getItem("user")).userID},
       xhrFields: {
         withCredentials: true
         },
@@ -125,9 +125,11 @@ export class Component extends React.Component {
     ];
 
     var status=[
-      ["EXCEPTION",numDelivered,exception],
+
+      ["EXCEPTION",numException,exception],
       ["PENDING",numPending,pending],
-      ["DELIVERED",numException,delivered],
+      ["DELIVERED",numDelivered,delivered],
+
     ]
     
     const pagination = paginationFactory({

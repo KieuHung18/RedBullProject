@@ -20,34 +20,59 @@ public class SecurityAuthenticationProvider implements AuthenticationProvider
 {
 		@Override
 		public Authentication authenticate(Authentication authentication) throws AuthenticationException
-		{
+		{	
 			String account = authentication.getName();
 			String password = authentication.getCredentials().toString();
 			System.out.println(account);
 			System.out.println(password);
-			if (authorizedUser(account, password))
+			
+			if (authenticationdUser(account, password))
 			{
-				List<GrantedAuthority> grantedAuths = new ArrayList<>();
-				grantedAuths.add(new GrantedAuthority() {
-					@Override
-					public String getAuthority() {
-						// TODO Auto-generated method stub
-						return "AUTH_USER";
-					}
-				});
-				
-				Authentication auth = new UsernamePasswordAuthenticationToken(account, password, grantedAuths);
-				System.out.println(auth.getAuthorities());
+				List<GrantedAuthority> authoritys = new ArrayList<>();
+				grantedAuths(account, authoritys);
+				Authentication auth = new UsernamePasswordAuthenticationToken(account, password, authoritys);
 				return auth;
 			}
 			else
 			{
-					throw new AuthenticationCredentialsNotFoundException("Invalid Credentials!");
+				throw new AuthenticationCredentialsNotFoundException("Invalid Credentials!");
 			}
 		}
 		
-		private boolean authorizedUser(String account, String password)
-		{	
+		private void grantedAuths(String account,List<GrantedAuthority> authoritys) {
+			authoritys.add(new GrantedAuthority() {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				public String getAuthority() {
+					// TODO Auto-generated method stub
+					return "ROLE_USER";
+				}
+			});
+			UserDatabase database =new  UserDatabase();
+			String UR=database.getUserRole(account);
+			if(UR.equals("ROLE_ADMIN")) {
+				authoritys.add(new GrantedAuthority() {
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+
+					@Override
+					public String getAuthority() {
+						// TODO Auto-generated method stub
+						return "ROLE_ADMIN";
+					}
+				});
+			}
+			
+		}
+		
+		private boolean authenticationdUser(String account, String password)
+		{
 			UserDatabase database =new UserDatabase();
 			if(database.checkExistAccount(account)&&database.checkExistPassword(password)) {
 				return true;

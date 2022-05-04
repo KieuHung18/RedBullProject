@@ -39,6 +39,7 @@ public class UserController {
 		return res;
 	}
 
+	
 	public User getUser(String userID) {
 		User result = new User();
 		JSONObject jsonPackage = new com.database.UserDatabase().getUser(userID);
@@ -58,10 +59,12 @@ public class UserController {
 			result.setPhoneNumber((String) jsonPackage.get("phoneNumber"));
 			result.setAddress((String) jsonPackage.get("address"));
 			result.setUserName((String) jsonPackage.get("account"));
+			result.setRole((String) jsonPackage.get("role"));
 
 		}
 		return result;
 	}
+	
 
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(path = "/addUser", method = RequestMethod.GET)

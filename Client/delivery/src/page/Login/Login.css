@@ -18,6 +18,7 @@
 }
 
 #form-login {
+  height: 260px;
   padding: 50px;
   border-radius: 20px;
   width: 400px;
@@ -43,4 +44,17 @@
   text-align: left;
   /* margin-left: 0px; */
   justify-content: left;
+}
+#eye{
+  position: absolute;
+  margin-left: 116px;
+  margin-top: -32px;
+  color: black;
+}
+.RedNotice{
+  color: red;
+  display: none;
+}
+.displayNotice{
+  display: block;
 }

@@ -13,6 +13,7 @@ function Login() {
   // const [password,setPassword]=useState("")
   return <Component navigate={useNavigate()} />;
 }
+ 
 class Component extends React.Component {
   constructor(props) {
     super(props);
@@ -34,11 +35,13 @@ class Component extends React.Component {
       crossDomain: true,
       success: function (response) {
         if (response.result != "FAIL") {
-          localStorage.setItem("user", response.response);
+          let user={userID:response.response.userID,userRole:response.response.userRole};
+          localStorage.setItem("user", JSON.stringify(user));
           display.props.navigate("/profile");
           window.location.reload(false);
         } else {
-          alert("Wrongg user name or password");
+          const getNotice = document.getElementById('redNotice');
+          getNotice.classList.toggle("displayNotice")
         }
       },
       error: function () {
@@ -47,6 +50,27 @@ class Component extends React.Component {
     });
     //
   }
+  // ẩn hiển pass
+  unPassword(){
+    const getPassword = document.getElementById("password");
+    const getEye = document.getElementById("eye");
+
+    const passwordType = getPassword.getAttribute('type');
+    const currentEye = getEye.getAttribute('class');
+
+     getPassword.setAttribute(
+      'type',
+      passwordType==='password'?'type':'password'
+     );
+
+     getEye.setAttribute(
+      'class',
+      currentEye==='fa-solid fa-eye-slash'?'fa-solid fa-eye':'fa-solid fa-eye-slash'
+     );
+  }
+
+
+ 
   render() {
     return (
       <div id="container-login">
@@ -57,7 +81,10 @@ class Component extends React.Component {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="password">
-              <Form.Control required type="password" placeholder="Password" />
+              <Form.Control required  id="password" type="password" placeholder="Password" />
+              <a className="unPassword" onClick={this.unPassword}>
+                <i id="eye" class="fa-solid fa-eye"></i>
+              </a>              
             </Form.Group>
             {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check id="checkbox" type="checkbox" label="Remember" />
@@ -65,6 +92,10 @@ class Component extends React.Component {
             <Button class="btn-submit" id="btn-submit" type="submit">
               Login
             </Button>
+
+            <div id="redNotice" className="RedNotice">
+                <p>Wrong password or username</p>
+            </div>
           </Form>
         </Row>
       </div>
