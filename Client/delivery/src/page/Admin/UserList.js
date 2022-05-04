@@ -55,18 +55,14 @@ export class Component extends React.Component {
       success: function(res){
         if(res.result!="FAIL"){
            userTable=[];
-           let address;
           for (let i = 0; i < res.response.length; i++) {
-            address= res.response[i].address.split(",");
-            
             userTable.push({
-              id:res.response[i].packageID, 
-              city:address[0],
-              district:address[1],
-              ward:address[2],
-              customerName: res.response[i].customerName, 
-              customerPhone: res.response[i].customerPhone ,
-              status: res.response[i].status});
+              userID:res.response[i].id,
+              userName:res.response[i].fullName,
+              userAddress:res.response[i].address,
+              userPhone:res.response[i].phoneNumber,
+              role:res.response[i].role,
+              });
           }
           display.setState({ loadData: false });
         }
@@ -124,7 +120,7 @@ export class Component extends React.Component {
       pagination={pagination}
       filter={ filterFactory() }
        />
-       <Button style={{marginLeft: "60px"}} variant="dark">Add User <FontAwesomeIcon style={{paddingLeft: "5px"}} icon={faAdd}/></Button>
+       <Button onClick={()=>this.props.navigate("/insertuser")} style={{marginLeft: "60px"}} variant="dark">Add User <FontAwesomeIcon style={{paddingLeft: "5px"}} icon={faAdd}/></Button>
     </div>
     );
   }

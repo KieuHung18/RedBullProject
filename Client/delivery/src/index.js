@@ -21,8 +21,10 @@ import Login from './page/Login/Login';
 import Admin from "./page/Admin/Admin";
 import EditPackage from "./page/EditPackage/EditPackage";
 import AccessDenied from "./page/AccessDenied/AccessDenied";
-import Insert from "./page/InsertPage/Insert";
-
+import InsertCustomer from './page/InsertPage/InsertCustomer.jsx';
+import InsertUser from './page/InsertPage/InsertUser.jsx';
+import EditUser from './page/InsertPage/EditUser.jsx';
+import EditCustomer from './page/InsertPage/EditCustomer.jsx';
 
 const ProtectedRoute = ({ redirectPath = "/login", children }) => {
   if (!localStorage.getItem("user")) {
@@ -65,10 +67,17 @@ const Application = () => {
       <Route path="*" element={<NotFound />} />
       <Route path="denied" element={<AccessDenied />} />
       <Route path="/" element={<HomePage />} />
-      
       <Route path="home" element={<HomePage />} />
       <Route path="login" element={<ProtectedLogin />} />
       <Route path="aboutus" element={<AboutUS />} />
+
+      <Route path="/insertuser" element={<InsertUser />} />
+      <Route path="/insertcustomer" element={<InsertCustomer/>} />
+      <Route path="/edituser/:id" element={<EditUser />} />
+      <Route path="/editcustomer/:id" element={<EditCustomer/>} />
+      <Route path="admin" element={<Admin />} />
+      <Route path="addpackage" element={<AddPackage />} />
+      <Route path="editpackage/:id" element={<EditPackage/>} />
 
       <Route element={<ProtectedRoute/>}>
         {/* PROTECTED ROUTES IN HERE */}
@@ -79,10 +88,7 @@ const Application = () => {
 
        <Route element={<AdminProtectedRoute/>}>
         {/* ADMIN PROTECTED ROUTES IN HERE */}
-        <Route path="/" element={<Insert />} />
-        <Route path="admin" element={<Admin />} />
-        <Route path="addpackage" element={<AddPackage />} />
-        <Route path="editpackage/:id" element={<EditPackage />} />
+        
        </Route>
       </Route>
     </Routes>

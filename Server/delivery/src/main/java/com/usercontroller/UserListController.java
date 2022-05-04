@@ -21,11 +21,9 @@ public class UserListController {
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(path = "/userlist", method = RequestMethod.GET)
 	@ResponseBody
-	public JsonResponse getListUsers(@RequestParam(value = "userID") String userID) {
+	public JsonResponse getListUsers() {
 		JsonResponse res = new JsonResponse();
-		String fullName = (String) new CustomerDatabase().getCustomer(userID).get("fullName");
-		String[] name = fullName.split(" ");
-		res.setResult(name[name.length - 1]);
+		res.setResult("SUCCESS");
 		List<User> list = loadData();
 		res.setResponse(list);
 		return res;

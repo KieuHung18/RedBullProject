@@ -1,36 +1,29 @@
 import React from "react";
 import styled from "styled-components";
-import {Row,Col} from 'react-bootstrap';
+import {Row,Col,Form,Button,FormGroup,FormControl} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {useNavigate} from 'react-router-dom';
-import {useState} from "react";
-
-function add(event){
+import {useNavigate,useParams} from 'react-router-dom';
+import {useEffect,useState} from "react";
+function update(event){
     event.preventDefault();
 }
-
-function InsertCustomer(){
-    const navigate =useNavigate();
-    function cancel(event){
-        event.preventDefault();
-        navigate(-1)
-    }
+function EditCustomer(){
     return (
         <Div>
-             <h1 className="packagelist-welcome">Add Customer</h1>
+             <h1 className="packagelist-welcome">Edit Customer</h1>
             <div className="insertCustomer">
                 <div className="Content_Insert">
                         <form className="mainForm" action="">
-                        <Row>
+                        <Row >
                             <Col>
                            <div className="YourName form_items">
                                 <div className="firtname">
                                     <p>First name</p>
                                     <input placeholder="FisrtName" type="text" name="" id="" />
                                 </div>
-                                <div placeholder="LastName" className="Lastname">
+                                <div className="Lastname">
                                     <p>Last name</p>
-                                    <input type="text" />
+                                    <input placeholder="LastName" type="text" />
                                 </div>
                                 <div className="PhoneNumber">
                                    <p>Phone Number</p>
@@ -40,12 +33,12 @@ function InsertCustomer(){
                            <Row style={{maxWidth:"300px"}}>
                             <Col>
                            <div className="btn_addUser">
-                                 <button>Add</button>
+                                 <button>Save</button>
                             </div>
                             </Col>
                             <Col>
                             <div className="btn_addUser">
-                                 <button onClick={cancel}>Cancel</button>
+                                 <button>Cancel</button>
                             </div>
                             </Col>
                             </Row>
@@ -70,7 +63,7 @@ function InsertCustomer(){
         </Div>
     )
 }
-export default InsertCustomer;
+export default EditCustomer;
 const Div = styled.div`
   border: 1px solid #c2c2c23b;
     border-radius: 10px ;
