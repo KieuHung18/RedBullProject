@@ -26,18 +26,16 @@ public class CustomerListController {
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(path = "/customerlist", method = RequestMethod.GET)
 	@ResponseBody
-	public JsonResponse getListCustomers(@RequestParam(value = "customerID") String customerID) {
+	public JsonResponse getListCustomers() {
 		JsonResponse res = new JsonResponse();
-		String fullName = (String) new CustomerDatabase().getCustomer(customerID).get("fullName");
-		String[] name = fullName.split(" ");
-		res.setResult(name[name.length - 1]);
+		res.setResult("SUCCESS");
 		List<Customer> list = loadData();
 		res.setResponse(list);
 		return res;
 	}
 
 	@CrossOrigin(origins = "http://localhost:3000")
-	@RequestMapping(path = "/addcustomer", method = RequestMethod.GET)
+	@RequestMapping(path = "/addcustomer", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResponse addCustomer(@RequestParam(value = "fullName") String fullName,
 			@RequestParam(value = "address") String address, @RequestParam(value = "phoneNumber") String phoneNumber)
@@ -51,7 +49,7 @@ public class CustomerListController {
 	}
 
 	@CrossOrigin(origins = "http://localhost:3000")
-	@RequestMapping(path = "/editcustomer", method = RequestMethod.GET)
+	@RequestMapping(path = "/editcustomer", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResponse editCustomer(@RequestParam(value = "id") String id,
 			@RequestParam(value = "fullName") String fullName, @RequestParam(value = "address") String address,

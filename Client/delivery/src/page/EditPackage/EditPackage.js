@@ -2,7 +2,7 @@ import "./EditPackage.css";
 import React, { useState } from "react";
 import jquery from "jquery";
 import { useNavigate, useParams } from "react-router-dom";
-import {Form,Button, Row,Col} from 'react-bootstrap';
+import {Form,Button, Row,Col,FormCheck} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
@@ -12,8 +12,10 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faAdd} from '@fortawesome/free-solid-svg-icons'
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
+import CurrentLocation from '../../Map';
+import { Map, GoogleApiWrapper ,InfoWindow, Marker} from 'google-maps-react';
 // asdasdasd
-var url;
+var url="";
 var fullAddress;
 var customer={id:"Loading...", phone: "Loading...", name: "Loading..." };
 var packageinfo = {
@@ -26,7 +28,7 @@ var packageinfo = {
     receiveDate: "Loading...",
     price: 0,
     status: "Loading...",
-  };;
+  };
 function generator(quantity){
   const items = [];
   for (let i = 0; i < quantity; i++) {
@@ -50,9 +52,10 @@ export default function EditPackage() {
 class Component extends React.Component {
   constructor(props) {
     super(props);
-    this.state={checked:false,customer:"Loading...",loadData:true}
+    this.state={checked:false,customer:"Loading...",loadData:false}
     this.checkAddress=this.checkAddress.bind(this)
     this.savePackage=this.savePackage.bind(this)
+    this.toGoogleMap=this.toGoogleMap.bind(this)
     this.updatePackage=this.updatePackage.bind(this)
   }
 
@@ -88,33 +91,37 @@ class Component extends React.Component {
 
   componentDidMount() {
     var display=this;
-    // jquery.ajax({
-    //   type: "GET",
-    //   url: "http://localhost:8080/delivery/userlist",
-    //   xhrFields: {
-    //     withCredentials: true
-    //     },
-    //     crossDomain: true,
-    //   success: function(res){
-    //     if(res.result!="FAIL"){
-    //        customerTable=[];
-    //       for (let i = 0; i < res.response.length; i++) {
-    //         customerTable.push({
-    //           customerID:"c"+i,
-    //           customerName:"userName"+i,
-    //           customerAddress:"District"+i,
-    //           customerPhone:"099492626"+i,
-    //           });
-    //       }
-    //     }
-    //     else{console.log("fail");
-    //       //redirect
-    //     }
-    //     },
-    //    error: function(){
-    //      console.log("error");
-    //    }
-    // });
+    if(display.state.loadData){
+    jquery.ajax({
+      type: "GET",
+      url: "http://localhost:8080/delivery/customerlist",
+      xhrFields: {
+        withCredentials: true
+        },
+        crossDomain: true,
+      success: function(res){
+        url=res.response.address;
+        if(res.result!="FAIL"){
+           customerTable=[];
+          for (let i = 0; i < res.response.length; i++) {
+            customerTable.push({
+              customerID:res.response[i].id,
+              customerName:res.response[i].fullName,
+              customerAddress:res.response[i].address,
+              customerPhone:res.response[i].phoneNumber,
+              });
+          }
+          display.setState({ loadData: false });
+        }
+        else{console.log("fail");
+          //redirect
+        }
+        },
+       error: function(){
+         console.log("error");
+       }
+    });
+    }
     this.updatePackage();
   }
 
@@ -122,7 +129,7 @@ class Component extends React.Component {
     fullAddress=jquery("#CityID").val()+","+jquery("#DistrictID").val()+","+jquery("#WardID").val()+","+jquery("#StreetID").val();
     console.log(fullAddress)
     this.setState({
-      checked:true
+      checked: this.state.checked? false:true
     })
   }
   savePackage(event){
@@ -184,6 +191,7 @@ class Component extends React.Component {
       onClick: (row,rowElement,rowIndex) => {
         customer.id= rowElement.customerID;
         this.setState({customer:rowElement.customerName});
+        
       },
     }
     const columns = [
@@ -209,36 +217,9 @@ class Component extends React.Component {
       <div id="add-package-container">
         <Row>
         <Col>
-        {this.state.loadData?"Loading...":
-        <Form className="add-package-form" onSubmit={this.savePackage}>
-            <Form.Group className="add-package-group" controlId="CityID">
-              <Form.Control defaultValue={packageinfo.city} placeholder="Province/City" />
-            </Form.Group>
-            <Form.Group className="add-package-group" controlId="DistrictID">
-              <Form.Control defaultValue={packageinfo.district} placeholder="District" />
-            </Form.Group>
-            <Form.Group className="add-package-group" controlId="WardID">
-              <Form.Control defaultValue={packageinfo.ward} placeholder="Ward" />
-            </Form.Group>
-            <Form.Group className="add-package-group" controlId="StreetID">
-              <Form.Control defaultValue={packageinfo.street} placeholder="Street" />
-            </Form.Group>
-            <Form.Group className="add-package-group" controlId="PriceID">
-              <Form.Control defaultValue={packageinfo.price} placeholder="Price" />
-            </Form.Group>
-            <Button onClick={this.checkAddress} variant="dark" className="add-package-btn">
-              Check Address
-            </Button >
-            <Button disabled={this.state.checked?false:true} variant="dark" className="add-package-btn"  type="submit">
-              Update
-            </Button>
-        </Form>
-        }
-        </Col>
-        <Col>
         <div className="customer-list-container">
         <h1 className="packagelist-welcome">{this.state.customer}</h1>
-          <Button style={{marginLeft: "30px",marginBottom:"20px",float:"left"}} variant="dark">Add Customer <FontAwesomeIcon style={{paddingLeft: "5px"}} icon={faAdd}/></Button>
+          <Button onClick={()=>this.props.navigate("/insertcustomer")} style={{marginLeft: "30px",marginBottom:"20px",float:"left"}} variant="dark">Add Customer <FontAwesomeIcon style={{paddingLeft: "5px"}} icon={faAdd}/></Button>
           <BootstrapTable 
           rowEvents={ tableRowEvents } 
           rowClasses="package-list-row"  
@@ -249,6 +230,44 @@ class Component extends React.Component {
           filter={ filterFactory() }
           />
         </div>
+        </Col>
+        
+        <Col>
+        {this.state.loadData?"Loading...":
+        <Form className="add-package-form" onSubmit={this.savePackage}>
+            <Form.Group className="add-package-group" controlId="CityID">
+              <Form.Control required defaultValue={packageinfo.city} placeholder="Province/City" />
+            </Form.Group>
+            <Form.Group className="add-package-group" controlId="DistrictID">
+              <Form.Control required defaultValue={packageinfo.district} placeholder="District" />
+            </Form.Group>
+            <Form.Group className="add-package-group" controlId="WardID">
+              <Form.Control required defaultValue={packageinfo.ward} placeholder="Ward" />
+            </Form.Group>
+            <Form.Group className="add-package-group" controlId="StreetID">
+              <Form.Control required defaultValue={packageinfo.street} placeholder="Street" />
+            </Form.Group>
+            <Form.Group className="add-package-group" controlId="PriceID">
+              <Form.Control required defaultValue={packageinfo.price} placeholder="Price" />
+            </Form.Group>
+            <Form.Check  onChange={this.checkAddress}
+              required
+              style={{marginLeft:"20px"}}
+              type="checkbox"
+              id="editpackageCB"
+              label="Checked"
+            />
+            <Button onClick={(event)=>{event.preventDefault();this.props.navigate(-1)}} variant="dark" className="add-package-btn">
+              Back
+            </Button >
+            <Button onClick={this.toGoogleMap} variant="dark" className="add-package-btn">
+              Check Address
+            </Button >
+            <Button disabled={this.state.checked?false:true} variant="dark" className="add-package-btn"  type="submit">
+              Update
+            </Button>
+        </Form>
+        }
         </Col>
         
         </Row>

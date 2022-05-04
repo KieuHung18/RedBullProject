@@ -55,6 +55,7 @@ export class Component extends React.Component {
   constructor(props) {
     super(props);
     this.state = { loadData: true };
+    this.toAddPackage=this.toAddPackage.bind(this);
   }
 
   componentDidMount() {
@@ -98,7 +99,9 @@ export class Component extends React.Component {
     }
     
   }
-  
+  toAddPackage(){
+    this.props.navigate("/addpackage")
+  }
   render() {
     const tableRowEvents = {
       onClick: (row,rowElement,rowIndex) => {
@@ -159,7 +162,7 @@ export class Component extends React.Component {
       pagination={pagination}
       filter={ filterFactory() }
        />
-       <Button style={{marginLeft: "60px"}} variant="dark">Add Package <FontAwesomeIcon style={{paddingLeft: "5px"}} icon={faAdd}/></Button>
+       <Button onClick={this.toAddPackage} style={{marginLeft: "60px"}} variant="dark">Add Package <FontAwesomeIcon style={{paddingLeft: "5px"}} icon={faAdd}/></Button>
     </div>
     );
   }

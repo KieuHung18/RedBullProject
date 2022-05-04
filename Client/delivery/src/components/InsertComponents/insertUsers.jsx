@@ -1,11 +1,21 @@
 import styled from "styled-components";
-
-function insertUsers(){
+import {Row,Col} from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {useNavigate} from 'react-router-dom';
+import {useState} from "react";
+function add(event){
+    event.preventDefault();
+}
+  function InsertUsers(){
+    const navigate=useNavigate();
     return(
         <Section>
+            <h1 className="packagelist-welcome">Add User</h1>
             <div className="insertCustomer">
                 <div className="Content_Insert">
                         <form className="mainForm" action="">
+                            <Row>
+                            <Col>
                            <div className="YourName form_items">
                                 <div className="firtname">
                                     <p>First name</p>
@@ -15,27 +25,13 @@ function insertUsers(){
                                     <p>Last name</p>
                                     <input type="text" />
                                 </div>
-                           </div>
-
-                           <div className="Information form_items">
-                               <div className="email">
-                                   <p>Email</p>
-                                   <input type="text" placeholder="Phone Number" />
-                               </div>
-                               <div className="PhoneNumber">
+                                <div className="PhoneNumber">
                                    <p>Phone Number</p>
                                    <input type="text" placeholder="Phone number" />
                                </div>
                            </div>
-
-                           <div className="address form_items">
-                               <p>Your address</p>
-                               <input type="text" name="" placeholder="Tỉnh" id="" />
-                               <input type="text" name="" placeholder="Huyện" id="" />
-                               <input type="text" name="" placeholder="Địa chỉ cụ thể" id="" />
-                           </div>
-
-                            <div className="YourAccount form_items">
+                           
+                           <div className="YourAccount form_items">
                                 <div className="Username">
                                     <p>Username</p>
                                     <input type="text" name="" placeholder="username" id="" />
@@ -44,8 +40,23 @@ function insertUsers(){
                                     <p>Password</p>
                                     <input type="text" name="" placeholder="password" id="" />
                                 </div>
-                                
                             </div>
+                           
+                           </Col>
+
+                            <Col>
+
+                            <div className="address form_items">
+                               <p>City</p>
+                               <input type="text" name="" placeholder="City" id="" />
+                               <p>District</p>
+                               <input type="text" name="" placeholder="District" id="" />
+                               <p>Ward</p>
+                               <input type="text" name="" placeholder="Ward" id="" />
+                               <p>Street</p>
+                               <input type="text" name="" placeholder="Street" id="" />
+                           </div>
+
                             <div className="Role form_items">
                                 <form>
                                     <div className="user_role ">
@@ -58,23 +69,31 @@ function insertUsers(){
                                     </div>
                                 </form>
                              </div>
-
-                             <div className="btn_addUser">
-                                 <button>Add user</button>
-                             </div>
+                             </Col>
+                             </Row>
+                             <Row style={{maxWidth:"300px"}}>
+                            <Col>
+                           <div className="btn_addUser">
+                                 <button>Add</button>
+                            </div>
+                            </Col>
+                            <Col>
+                            <div className="btn_addUser">
+                                 <button onClick={(event)=>{event.preventDefault();navigate(-1)}}>Cancel</button>
+                            </div>
+                            </Col>
+                            </Row>
                         </form>
                     </div>
             </div>
         </Section>
     )
 }
-export default insertUsers
+export default InsertUsers;
 const Section = styled.section`
     border: 1px solid #c2c2c23b;
     border-radius: 10px ;
     text-align: left;
-    margin-left: 40px;
-    margin-right: 20px;
     box-shadow:  5px 5px #8888883d;
     background-color: #dfdbdb3c;
     .insertCustomer{
@@ -83,7 +102,7 @@ const Section = styled.section`
 
         }
         input{
-            width: 500px;
+            width: 80%;
             height: 39px;
             border-radius: 7px;
             border: 1px solid #24242434;
@@ -97,9 +116,10 @@ const Section = styled.section`
                 color: #000000;
                 border-radius: 5px !important;
                 background-color: #FFFF ;
-                width: 70%;
-                height: 200px;
+                width: 95%;
+                padding-bottom: 20px;
                 box-shadow: 10px 5px 5px #afaeae;
+                text-align: left;
                 p,input{
                     margin-left: 30px;
                 }

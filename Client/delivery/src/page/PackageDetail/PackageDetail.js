@@ -27,7 +27,7 @@ export default function PackageDetail (){
     <Component param={useParams()} navigate={useNavigate()}/>
   );
 }
-let url="";
+var url="";
 class Component extends React.Component {
   constructor(props) {
     super(props);

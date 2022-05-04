@@ -117,7 +117,9 @@ public class UserDatabase {
 		ArrayList<String> list = new ArrayList<String>();
 		String link = PackageDatabase.relativePath() + "\\user.json";
 		try (Reader reader = new FileReader(link)) {
+			
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
+			
 			for (int i = 0; i < jsonObject.size(); i++) {
 
 				JSONObject user = (JSONObject) jsonObject.get("u" + i);
@@ -161,30 +163,12 @@ public class UserDatabase {
 		return false;
 	}
 
-	public static String relativePath() {
-		String path = "";
-		try {
-			path = new ClassPathResource("").getFile().getAbsolutePath();
-			String[] pathArr = path.split("\\\\");
-			path = "";
-			for (int i = 0; i < pathArr.length; i++) {
-				if (pathArr[i].equals("Server")) {
-					return path + "Server\\delivery";
-				} else {
-					path += pathArr[i] + "\\";
-				}
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return path;
-	}
+	
 	/** Phương thức getListUsers cho API **/
 	public JSONArray getListUsers() {
 		JSONParser parser = new JSONParser();
 		JSONArray arrObj0 = new JSONArray();
-		String link = relativePath() + "\\user.json";
+		String link = PackageDatabase.relativePath() + "\\user.json";
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 			for (int i = 0; i < jsonObject.size(); i++) {
