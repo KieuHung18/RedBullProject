@@ -34,7 +34,8 @@ class Component extends React.Component {
       crossDomain: true,
       success: function (response) {
         if (response.result != "FAIL") {
-          localStorage.setItem("user", response.response);
+          let user={userID:response.response.userID,userRole:response.response.userRole};
+          localStorage.setItem("user", JSON.stringify(user));
           display.props.navigate("/profile");
           window.location.reload(false);
         } else {

@@ -37,7 +37,8 @@ public class PackageController {
 			return null;
 		} else {
 			result.setAddress((String) jsonPackage.get("addressDelivery"));
-
+			result.setUserID((String) jsonPackage.get("idUser"));
+			
 			com.database.Date dateD = new Date();
 			JSONObject jsonDateD = (JSONObject) jsonPackage.get("dayDelivery");
 			Long day = (long) jsonDateD.get("day");
@@ -65,8 +66,9 @@ public class PackageController {
 			result.setStatus(status);
 
 			String customerID = (String) jsonPackage.get("idCustomer");
-
+			
 			JSONObject jsonCustomer = new CustomerDatabase().getCustomer(customerID);
+			result.setCustomerID(customerID);
 			result.setCustomerName((String) jsonCustomer.get("fullName"));
 			result.setCustomerPhone((String) jsonCustomer.get("phoneNumber"));
 			return result;
