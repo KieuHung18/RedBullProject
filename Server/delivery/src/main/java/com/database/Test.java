@@ -1,7 +1,11 @@
 package com.database;
 
+import java.io.IOException;
+
+import org.json.simple.parser.ParseException;
+
 public class Test {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, ParseException {
 
 		/** Phương thức Package **/
 		PackageDatabase packageDatabase = new PackageDatabase();
@@ -21,11 +25,18 @@ public class Test {
 		System.out.println(userDatabase.checkExistAccount("ab"));
 		System.out.println(userDatabase.checkExistPassword("123456"));
 		System.out.println(userDatabase.getUserID("abcdef"));
+		System.out.println(userDatabase.getListUsers());
 		/*******/
 
 		/** Phương thức Customer **/
 		CustomerDatabase customerDatabase = new CustomerDatabase();
-		System.out.println(customerDatabase.getCustomer("c0"));
+//		System.out.println(customerDatabase.getCustomer("c0"));
+//		System.out.println(customerDatabase.getListCustomers());
+//		System.out.println(customerDatabase.checkExistPhone("091355315"));
+		System.out.println(customerDatabase.addCustomer("a", "a", "017361615"));
+//		System.out.println(customerDatabase.addCustomer("a", "a", "017361615"));
+//		System.out.println(
+//		customerDatabase.editCustomer("c0", "", "", "");
 		/*******/
 	}
 }

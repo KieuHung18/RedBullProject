@@ -6,16 +6,18 @@ public class User {
 	private String phoneNumber;
 	private String address;
 	private String userName;
+	private String role;
 
 	public User() {
 	}
 
-	public User(String firstName, String lastName, String phoneNumber, String address, String userName) {
+	public User(String firstName, String lastName, String phoneNumber, String address, String userName, String role) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.userName = userName;
+		this.role = role;
 	}
 
 	public String getFirstName() {
@@ -32,6 +34,14 @@ public class User {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public String getPhoneNumber() {
@@ -57,12 +67,11 @@ public class User {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
 	@Override
 	public String toString() {
 		return "User [firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", address="
 				+ address + ", userName=" + userName + "]";
 	}
 
-}	
-
-
+}

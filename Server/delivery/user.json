@@ -1,28 +1,38 @@
 {
-  "u0": {
-    "id": "u0",
-    "account": "Tran Thanh Tam",
-    "password": "123456",
-    "fullName": "Tran Thanh Tam",
-    "phoneNumber": "0903235674",
-    "address": "Ho Chi Minh,Thu Duc,Binh Chieu,46 Go Dua"
-  },
-  "u1": {
-    "id": "u1",
-    "account": "Tong Van Long",
-    "password": "123456",
-    "fullName": "Tong Van Long",
-    "phoneNumber": "0903235674",
-    "address": "Ho Chi Minh,Thu Duc,Linh Trung,60 Le Van Chi"
-  },
-  "u2": {
-    "id": "u2",
-    "account": "Bui Minh An",
-    "password": "123456",
-    "fullName": "Bui Minh An",
-    "phoneNumber": "0903235674",
-    "address": "Hai Phong,Trai Cau,Le Chan,129 P.To Hieu"
-  }
-
+	"u0": {
+		"id": "u0",
+		"account": "Tran Thanh Tam",
+		"password": "123456",
+		"fullName": "Tran Thanh Tam",
+		"phoneNumber": "0903235674",
+		"address": "Ho Chi Minh,Thu Duc,Binh Chieu,46 Go Dua",
+		"role": "ROLE_USER"
+	},
+	"u1": {
+		"id": "u1",
+		"account": "Tong Van Long",
+		"password": "123456",
+		"fullName": "Tong Van Long",
+		"phoneNumber": "0903235674",
+		"address": "Ho Chi Minh,Thu Duc,Linh Trung,60 Le Van Chi",
+		"role": "ROLE_ADMIN"
+	},
+	"u2": {
+		"id": "u2",
+		"account": "Bui Minh An",
+		"password": "123456",
+		"fullName": "Bui Minh An",
+		"phoneNumber": "0903235674",
+		"address": "Hai Phong,Trai Cau,Le Chan,129 P.To Hieu",
+		"role": "ROLE_USER"
+	},
+	"u3": {
+		"id": "u3",
+		"account": "Le Trong Tan",
+		"password": "123456",
+		"fullName": "Le Trong Tan",
+		"phoneNumber": "0908273611",
+		"address": "Ho Chi Minh,Thu Duc,Linh Trung,80C Xa lo Ha Noi",
+		"role": "ROLE_USER"
+	}
 }
-
