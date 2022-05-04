@@ -40,31 +40,36 @@ public class CustomerDatabase {
 	}
 
 	/** Phương thức editCustomer cho API **/
-	public void editCustomer(String customerId, String fullName, String address, String phoneNumber) {
-		JSONParser parser = new JSONParser();
-		String link = PackageDatabase.relativePath() + "\\customer.json";
-		try (Reader reader = new FileReader(link)) {
+	public boolean editCustomer(String customerId, String fullName, String address, String phoneNumber) {
+		if (!checkExistPhone(phoneNumber)) {
+			JSONParser parser = new JSONParser();
+			String link = PackageDatabase.relativePath() + "\\customer.json";
+			try (Reader reader = new FileReader(link)) {
 
-			JSONObject jsonObject = (JSONObject) parser.parse(reader);
-			System.out.println(jsonObject);
+				JSONObject jsonObject = (JSONObject) parser.parse(reader);
+				System.out.println(jsonObject);
 
-			JSONObject user = (JSONObject) jsonObject.get(customerId);
-			user.put("phoneNumber", phoneNumber);
-			user.put("address", address);
-			user.put("fullName", fullName);
+				JSONObject user = (JSONObject) jsonObject.get(customerId);
+				user.put("phoneNumber", phoneNumber);
+				user.put("address", address);
+				user.put("fullName", fullName);
 
-			try (FileWriter file = new FileWriter(link)) {
-				file.write(jsonObject.toJSONString());
+				try (FileWriter file = new FileWriter(link)) {
+					file.write(jsonObject.toJSONString());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				return true;
 			} catch (IOException e) {
 				e.printStackTrace();
+			} catch (ParseException e) {
+				e.printStackTrace();
 			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
+		} else {
+			return false;
 		}
-		;
+		return false;
 	}
 
 	public static String relativePath() {
