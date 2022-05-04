@@ -1,6 +1,6 @@
 import React from 'react';
 import './PackageList.css';
-import { Row,Col} from 'react-bootstrap';
+import { Button,Row,Col} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
@@ -9,27 +9,21 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import jquery from 'jquery';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckCircle,faExclamationCircle, faCircleArrowRight} from '@fortawesome/free-solid-svg-icons'
+import { faCheckCircle,faExclamationCircle, faCircleArrowRight,faAdd} from '@fortawesome/free-solid-svg-icons'
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import {useNavigate } from 'react-router-dom'; 
-function productsGenerator(quantity){
+function generator(quantity){
   const items = [];
   let address= "City,District,Ward,detailadress".split(",");
   for (let i = 0; i < quantity; i++) {
-    
-    // let City=address[0];
-    // let District=address[1];
-    // let Ward=address[2];
-    
     items.push({
-    id:'item'+i,
-    city:address[0]+i,
-    district:address[1],
-    ward:address[2],
-    customerName: `someName ${i}`,
-    customerPhone: "0937446809" ,
-    price:  2100 + i,
-    status:"pending"});
+    id:'p'+i,
+    userID:"u"+i,
+    userName:"userName"+i,
+    customerName:"cusName"+i,
+    customerPhone:"099492626"+i,
+    status:"pending"
+    });
   }
   return items;
 }
@@ -38,6 +32,7 @@ const pending=(<FontAwesomeIcon style={{color:"hsl(268deg 83% 24%)",transform: "
 const exception=(<FontAwesomeIcon style={{color:"hsl(345deg 67% 41%)",transform: "scale(1.75)"}} icon={faExclamationCircle} />);
 
 var packageTable=[];
+packageTable=generator(20);
 var userName;
 var numDelivered=0;
 var numPending=0;
@@ -67,7 +62,7 @@ export class Component extends React.Component {
     if(display.state.loadData){
     jquery.ajax({
       type: "GET",
-      url: "http://localhost:8080/delivery/packagelist",
+      url: "http://localhost:8080/delivery/adminpackagelist",
       data: {userID: JSON.parse(localStorage.getItem("user")).userID},
       xhrFields: {
         withCredentials: true
@@ -80,18 +75,15 @@ export class Component extends React.Component {
            numDelivered=0;
            numPending=0;
            numException=0;
-           let address;
           for (let i = 0; i < res.response.length; i++) {
-            address= res.response[i].address.split(",");
-            
             packageTable.push({
-              id:res.response[i].packageID, 
-              city:address[0],
-              district:address[1],
-              ward:address[2],
-              customerName: res.response[i].customerName, 
-              customerPhone: res.response[i].customerPhone ,
-              status: res.response[i].status});
+              id: res.response[i].packageID,
+              userID:res.response[i].userID,
+              userName:res.response[i].userName,
+              customerName:res.response[i].customerName,
+              customerPhone:res.response[i].customerPhone,
+              status:res.response[i].status},
+              );
           }
           count();display.setState({ loadData: false });
         }
@@ -109,19 +101,18 @@ export class Component extends React.Component {
   
   render() {
     const tableRowEvents = {
-      onClick: (row,rowIndex) => {
-        let pid="/package/"+rowIndex.id;
+      onClick: (row,rowElement,rowIndex) => {
+        let pid="/editpackage/"+rowElement.id;
         this.props.navigate(pid);
       },
     }
     const columns = [
-      { dataField: 'city', text: 'Province/City',filter: textFilter()},
-      { dataField: 'district', text: 'District',filter: textFilter()},
-      { dataField: 'ward', text: 'Ward',filter: textFilter()},
-      
+      { dataField: 'id', text: 'Package ID',filter: textFilter()},
+      { dataField: 'userID', text: 'User ID',filter: textFilter()},
+      { dataField: 'userName', text: 'User Name',filter: textFilter()},
+      { dataField: 'customerName', text: 'Customer Name',filter: textFilter()},
+      { dataField: 'customerPhone', text: 'Customer Phone',filter: textFilter()},
       { dataField: 'status', text: 'Status'},
-      { dataField: 'customerName', text: 'Customer Name'},
-      { dataField: 'customerPhone', text: 'Customer Phone'},
     ];
 
     var status=[
@@ -168,6 +159,7 @@ export class Component extends React.Component {
       pagination={pagination}
       filter={ filterFactory() }
        />
+       <Button style={{marginLeft: "60px"}} variant="dark">Add Package <FontAwesomeIcon style={{paddingLeft: "5px"}} icon={faAdd}/></Button>
     </div>
     );
   }

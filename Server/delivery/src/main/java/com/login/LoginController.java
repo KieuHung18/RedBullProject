@@ -19,6 +19,10 @@ public class LoginController {
 	public void user() {
 		System.out.println("user");
 	}
+	@RequestMapping(path="/protectedadmin",method = RequestMethod.GET)
+	public void admin() {
+		System.out.println("admin");
+	}
 	
 	@RequestMapping(path="/denied",method = RequestMethod.GET)
 	@ResponseBody
@@ -42,9 +46,10 @@ public class LoginController {
 		System.out.println("login");
 		return res;
 	}
-	public String provideAuthorize(String account) {
+	public Authorize provideAuthorize(String account) {
 		UserDatabase database =new  UserDatabase();
-		
-		return database.getUserID(account);
+		String UID=database.getUserID(account);
+		String UR=database.getUserRole(account);
+		return new Authorize(UID, UR);
 	}
 }

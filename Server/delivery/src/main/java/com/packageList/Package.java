@@ -1,11 +1,13 @@
 package com.packageList;
 
 public class Package {
+	private String userID;
 	private String address;
 	private String deliveryDate;
 	private String receiveDate;
 	private int price;
 	private String status;
+	private String customerID;
 	private String customerName;
 	private String customerPhone;
 
@@ -13,15 +15,16 @@ public class Package {
 		// TODO Auto-generated constructor stub
 	}
 
-
-	public Package(String address, String deliveryDate, String receiveDate, int price, String status,
-			String customerName, String customerPhone) {
+	public Package(String userID, String packageID, String address, String deliveryDate, String receiveDate, int price,
+			String status, String customerID, String customerName, String customerPhone) {
 		super();
+		this.userID = userID;
 		this.address = address;
 		this.deliveryDate = deliveryDate;
 		this.receiveDate = receiveDate;
 		this.price = price;
 		this.status = status;
+		this.customerID = customerID;
 		this.customerName = customerName;
 		this.customerPhone = customerPhone;
 	}
@@ -94,7 +97,26 @@ public class Package {
 	public void setCustomerPhone(String customerPhone) {
 		this.customerPhone = customerPhone;
 	}
+	
 
+	public String getCustomerID() {
+		return customerID;
+	}
+
+
+	public void setCustomerID(String customerID) {
+		this.customerID = customerID;
+	}
+
+	
+		
+	public String getUserID() {
+		return userID;
+	}
+
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
 
 	@Override
 	public String toString() {

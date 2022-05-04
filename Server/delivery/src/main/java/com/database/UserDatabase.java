@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -50,6 +51,54 @@ public class UserDatabase {
 				String account = (String) user.get("account");
 				if (userName.equals(account)) {
 					result = "u" + i;
+					break;
+				}
+
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	public HashMap getMapUser() {
+		JSONParser parser = new JSONParser();
+		HashMap<String, Integer> result  = new HashMap<String, Integer>();
+		String link = PackageDatabase.relativePath()+"\\user.json";
+		try (Reader reader = new FileReader(link)) {
+			JSONObject jsonObject = (JSONObject) parser.parse(reader);
+			for (int i = 0; i < jsonObject.size(); i++) {
+				JSONObject user = (JSONObject) jsonObject.get("u" + i);
+				if(!checkDeleted("u"+i)&&user.get("role").equals("ROLE_USER")) {
+					result.put("u"+i, 0);
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	public boolean checkDeleted(String userID) {
+		return false;
+	}
+	
+	public String getUserRole(String userName) {
+		JSONParser parser = new JSONParser();
+		String result  = null;
+		String link = PackageDatabase.relativePath()+"\\user.json";
+		try (Reader reader = new FileReader(link)) {
+			JSONObject jsonObject = (JSONObject) parser.parse(reader);
+			for (int i = 0; i < jsonObject.size(); i++) {
+
+				JSONObject user = (JSONObject) jsonObject.get("u" + i);
+
+				String account = (String) user.get("account");
+				
+				if (userName.equals(account)) {
+					result= (String) user.get("role");
 					break;
 				}
 
