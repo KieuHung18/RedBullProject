@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import React from "react"
 import Logo from "../../assets/LogoCompany.png"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function Footer(){
     
     return(
@@ -18,14 +19,14 @@ function Footer(){
                                         </div>
                                     </div>
                                 <div className="logo-padding" style={{height:"10px"}}></div>
-                                <div className="social mt-2 mb-3">
+                                <div className="social_1 mt-2 mb-3">
                                     <div class="social mt-2 mb-3">
-                                        <i class="fa fa-facebook-official fa-lg"></i> 
-                                        <i class="fa fa-instagram fa-lg"></i>
-                                        <i class="fa fa-twitter fa-lg"></i>
-                                        <i class="fa fa-linkedin-square fa-lg"></i>
-                                        <i class="fa fa-facebook"></i> </div>
+                                        <i class="fa-brands fa-facebook"></i>
+                                        <i class="fa-brands fa-twitter"></i>
+                                        <i class="fa-brands fa-linkedin"></i>
+                                        <i class="fa-brands fa-instagram-square"></i>
                                     </div>
+                                </div>
                             </div>
                         </div>
                         <div class=" information_content col-md-2 col-sm-1 col-xs-1 mb-2"></div>
@@ -66,9 +67,9 @@ function Footer(){
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-6">
                             <div class="pull-right mr-4 d-flex policy">
-                                <div>Terms of Use</div>
-                                <div>Privacy Policy</div>
-                                <div>Cookie Policy</div>
+                                <div className="pull_items">Terms of Use </div>
+                                <div className="pull_items">Privacy Policy </div>
+                                <div className="pull_items">Cookie Policy </div>
                             </div>
                         </div>
                     </div>
@@ -104,6 +105,7 @@ const Div = styled.div`
             text-align: left;
         }
         .social{
+            margin-left: 50px;
             i{
                 margin-right: 10px;
                 float: left;
@@ -135,7 +137,17 @@ const Div = styled.div`
                 }
             }
         }
+       
     }
+    .pull-right{
+            .pull_items{
+                cursor: pointer;
+                margin-left: 10px;
+                :hover{
+                    color: #ff0000;
+                }
+            }
+        }
     @media all and (max-width: 390px){
         .social{
             margin-left:18px;

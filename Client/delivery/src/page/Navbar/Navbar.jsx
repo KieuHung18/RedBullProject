@@ -113,16 +113,19 @@ const Div = styled.div`
               font-size: 20px;
               color: #000000 !important;
             li {
+                  text-align: center;
+
                a{
                   color: #000000;
                   cursor: pointer;
                   padding: 10px 10px 10px 10px;
+                  width: 110px;
+                  height: 50px;
                   :hover{
                      color: #ff0000;
-                     padding: 0px 10px 0px 10px;
-                     border-left: 2px  solid #FFFF;
-                     border-right: 2px  solid #FFFF;
-                     transition: 1.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                     border: 1px solid #30bdff;
+                     border-radius: 5px;
+                     transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
                   }
                }
             }

@@ -21,6 +21,7 @@ import Login from './page/Login/Login';
 import Admin from "./page/Admin/Admin";
 import EditPackage from "./page/EditPackage/EditPackage";
 import AccessDenied from "./page/AccessDenied/AccessDenied";
+import Insert from "./page/InsertPage/Insert";
 
 
 const ProtectedRoute = ({ redirectPath = "/login", children }) => {
@@ -64,6 +65,7 @@ const Application = () => {
       <Route path="*" element={<NotFound />} />
       <Route path="denied" element={<AccessDenied />} />
       <Route path="/" element={<HomePage />} />
+      
       <Route path="home" element={<HomePage />} />
       <Route path="login" element={<ProtectedLogin />} />
       <Route path="aboutus" element={<AboutUS />} />
@@ -77,6 +79,7 @@ const Application = () => {
 
        <Route element={<AdminProtectedRoute/>}>
         {/* ADMIN PROTECTED ROUTES IN HERE */}
+        <Route path="/" element={<Insert />} />
         <Route path="admin" element={<Admin />} />
         <Route path="addpackage" element={<AddPackage />} />
         <Route path="editpackage/:id" element={<EditPackage />} />
