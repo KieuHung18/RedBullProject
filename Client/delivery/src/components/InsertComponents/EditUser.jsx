@@ -7,6 +7,15 @@ function update(event){
     event.preventDefault();
     }
 function EditUser(){
+    const navigate=useNavigate();
+        const [age, setAge] = useState();
+       
+    
+        // Chỉ nhập được kiểu số
+        const handleChange = (e) => {
+        const value = e.target.value.replace(/\D/g, "");
+        setAge(value);
+    };
     return(
         <Section>
             <h1 className="packagelist-welcome">Edit User</h1>
@@ -18,26 +27,26 @@ function EditUser(){
                            <div className="YourName form_items">
                                 <div className="firtname">
                                     <p>First name</p>
-                                    <input type="text" name="" id="" />
+                                    <input type="text" placeholder="First name" required name="" id="" />
                                 </div>
                                 <div className="Lastname">
                                     <p>Last name</p>
-                                    <input type="text" />
+                                    <input required placeholder="Last name" type="text" />
                                 </div>
                                 <div className="PhoneNumber">
                                    <p>Phone Number</p>
-                                   <input type="text" placeholder="Phone number" />
+                                   <input type="text" value={age} required placeholder="Phone number" />
                                </div>
                            </div>
                            
                            <div className="YourAccount form_items">
                                 <div className="Username">
                                     <p>Username</p>
-                                    <input type="text" name="" placeholder="username" id="" />
+                                    <input type="text" name="" required placeholder="username" id="" />
                                 </div>
                                 <div className="password">
                                     <p>Password</p>
-                                    <input type="text" name="" placeholder="password" id="" />
+                                    <input type="text" name="" required placeholder="password" id="" />
                                 </div>
                             </div>
                            
@@ -47,13 +56,13 @@ function EditUser(){
 
                             <div className="address form_items">
                                <p>City</p>
-                               <input type="text" name="" placeholder="City" id="" />
+                               <input type="text" name="" required placeholder="City" id="" />
                                <p>District</p>
-                               <input type="text" name="" placeholder="District" id="" />
+                               <input type="text" name="" required placeholder="District" id="" />
                                <p>Ward</p>
-                               <input type="text" name="" placeholder="Ward" id="" />
+                               <input type="text" name="" required placeholder="Ward" id="" />
                                <p>Street</p>
-                               <input type="text" name="" placeholder="Street" id="" />
+                               <input type="text" name="" required placeholder="Street" id="" />
                            </div>
 
                             <div className="Role form_items">
