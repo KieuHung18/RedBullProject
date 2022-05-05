@@ -83,8 +83,8 @@ class Component extends React.Component {
 
     const tableRowEvents = {
       onClick: (row,rowElement,rowIndex) => {
-        customerID= rowElement.customerID;
-        this.setState({customer:rowElement.customerName});
+        let pid="/editcustomer/"+rowElement.customerID;
+        this.props.navigate(pid);
       },
     }
     const columns = [

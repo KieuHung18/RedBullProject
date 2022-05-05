@@ -74,7 +74,7 @@ public class SecurityAuthenticationProvider implements AuthenticationProvider
 		private boolean authenticationdUser(String account, String password)
 		{
 			UserDatabase database =new UserDatabase();
-			if(database.checkExistAccount(account)&&database.checkExistPassword(password)) {
+			if(!database.checkDeleted(database.getUserID(account))&&database.checkExistAccount(account)&&database.checkExistPassword(password)) {
 				return true;
 			}else {return false;}
 		}

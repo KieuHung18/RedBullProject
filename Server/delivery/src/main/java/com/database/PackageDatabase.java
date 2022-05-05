@@ -15,6 +15,9 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.core.io.ClassPathResource;
 
+import com.packagelistcontroller.PackageList;
+import com.sun.tools.javac.comp.Check;
+
 
 public class PackageDatabase {
 
@@ -40,7 +43,16 @@ public class PackageDatabase {
 		}
 		return obj0;
 	}
-
+	public void transferPackage(String userID) {
+		JSONArray jsonPackage = getListPackages(userID);
+		for (int i = 0; i < jsonPackage.size(); i++) {
+			PackageList packageList = new PackageList();
+			Package packageDB = (Package) jsonPackage.get(i);
+			if(packageDB.getStatus().equals("pending")) {
+				editPackage(packageDB.getAddressDelivery(), packageDB.getCost(), packageDB.getIdCustomer(), findUser(), packageDB.getId());
+			}
+		}
+	}
 	public void editPackage(String address, int price,String CustomerID,String userID,String packageID) {
 		JSONParser parser = new JSONParser();
 		String link = relativePath()+"\\packages.json";
@@ -131,7 +143,8 @@ public class PackageDatabase {
 	}
 	public String findUser(){
 		String result="";
-		HashMap<String, Integer> map=new UserDatabase().getMapUser();
+		UserDatabase userDB=new UserDatabase();
+		HashMap<String, Integer> map=userDB.getMapUser();
 		
 		JSONParser parser = new JSONParser();
 		JSONArray arrobj0 = new JSONArray();
@@ -143,8 +156,10 @@ public class PackageDatabase {
 				
 				if(packages.get("status").equals("pending")) {
 					String idUser = (String) packages.get("idUser");
-					int number=map.get(idUser);
-					map.put(idUser, number+1);
+					if(!userDB.checkDeleted(idUser)) {
+						int number=map.get(idUser);
+						map.put(idUser, number+1);
+					}
 				}
 			}
 

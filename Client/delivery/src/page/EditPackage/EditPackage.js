@@ -15,7 +15,6 @@ import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import CurrentLocation from '../../Map';
 import { Map, GoogleApiWrapper ,InfoWindow, Marker} from 'google-maps-react';
 // asdasdasd
-var url="";
 var fullAddress;
 var customer={id:"Loading...", phone: "Loading...", name: "Loading..." };
 var packageinfo = {
@@ -70,7 +69,7 @@ class Component extends React.Component {
           },
           crossDomain: true,
       success: function(res){
-          url=res.response.address;
+        fullAddress=res.response.address;
           let address= res.response.address.split(",");
               packageinfo={
                   userID: res.response.userID,
@@ -100,7 +99,6 @@ class Component extends React.Component {
         },
         crossDomain: true,
       success: function(res){
-        url=res.response.address;
         if(res.result!="FAIL"){
            customerTable=[];
           for (let i = 0; i < res.response.length; i++) {
@@ -124,7 +122,15 @@ class Component extends React.Component {
     }
     this.updatePackage();
   }
-
+  checkPrice(price){
+    if(!isNaN(price)&&price>=0){
+      return true;
+    }
+    else{console.log(false)
+      return false;
+      
+    }
+  }
   checkAddress(){
     fullAddress=jquery("#CityID").val()+","+jquery("#DistrictID").val()+","+jquery("#WardID").val()+","+jquery("#StreetID").val();
     console.log(fullAddress)
@@ -133,8 +139,12 @@ class Component extends React.Component {
     })
   }
   savePackage(event){
+  fullAddress=jquery("#CityID").val()+","+jquery("#DistrictID").val()+","+jquery("#WardID").val()+","+jquery("#StreetID").val();
   var display=this;
   event.preventDefault();
+  if(!this.checkPrice(jquery("#PriceID").val())){
+    this.setState({price:true})
+  }else{this.setState({price:false});
     jquery.ajax({
       type: "POST",
       url: "http://localhost:8080/delivery/editpackage",
@@ -154,6 +164,7 @@ class Component extends React.Component {
         alert("Update complete")
       }
     });
+  }
   }
 
   transform(address){
@@ -176,9 +187,10 @@ class Component extends React.Component {
   }
 
   toGoogleMap(){
+    fullAddress=jquery("#CityID").val()+","+jquery("#DistrictID").val()+","+jquery("#WardID").val()+","+jquery("#StreetID").val();
     var display=this;
     navigator.geolocation.getCurrentPosition(function(position) {
-      let target=display.geturl(url);
+      let target=display.geturl(fullAddress);
       window.open("https://www.google.com/maps/dir/"+position.coords.latitude+","+position.coords.longitude+"/"+target);
     });
     
@@ -220,6 +232,9 @@ class Component extends React.Component {
         <div className="customer-list-container">
         <h1 className="packagelist-welcome">{this.state.customer}</h1>
           <Button onClick={()=>this.props.navigate("/insertcustomer")} style={{marginLeft: "30px",marginBottom:"20px",float:"left"}} variant="dark">Add Customer <FontAwesomeIcon style={{paddingLeft: "5px"}} icon={faAdd}/></Button>
+          <Button style={{float: "left",marginLeft: "20px"}} onClick={(event)=>{event.preventDefault();this.props.navigate(-1)}} variant="dark" >
+              Back
+          </Button >
           <BootstrapTable 
           rowEvents={ tableRowEvents } 
           rowClasses="package-list-row"  
@@ -257,9 +272,7 @@ class Component extends React.Component {
               id="editpackageCB"
               label="Checked"
             />
-            <Button onClick={(event)=>{event.preventDefault();this.props.navigate(-1)}} variant="dark" className="add-package-btn">
-              Back
-            </Button >
+            {this.state.price&&<div style={{color:"red",margin:"auto",width:"fit-content"}}>Price must be a number and greater than 0</div>}
             <Button onClick={this.toGoogleMap} variant="dark" className="add-package-btn">
               Check Address
             </Button >
