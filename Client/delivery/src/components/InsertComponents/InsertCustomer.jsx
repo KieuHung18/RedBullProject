@@ -34,6 +34,7 @@ function InsertCustomer(){
                 if(res.result=="SUCCESS"){
                     alert("Customer Added")
                     setPhone(false)
+                    navigate(-1)
                 }
                 else{
                     setPhone(true)

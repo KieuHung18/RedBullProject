@@ -49,7 +49,7 @@ function EditUser(){
               crossDomain: true,
               success:function(res){
                 if(res.result=="SUCCESS"){
-                    alert("User Added")
+                    alert("User Updated")
                     setAccount(false)
                     setPhone(false)
                 }
