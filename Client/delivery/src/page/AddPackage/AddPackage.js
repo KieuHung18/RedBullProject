@@ -97,6 +97,7 @@ class Component extends React.Component {
     }
   }
   savePackage(event){
+    var display=this;
     fullAddress=jquery("#CityID").val()+","+jquery("#DistrictID").val()+","+jquery("#WardID").val()+","+jquery("#StreetID").val();
     event.preventDefault();
     if(!this.checkPrice(jquery("#PriceID").val())){
@@ -115,7 +116,8 @@ class Component extends React.Component {
           },
           crossDomain: true,
         success:function(res){
-          alert("Package Added To"+res.response)
+          alert("Package Added To "+res.response)
+          display.props.navigate(-1)
         }
       });
     }

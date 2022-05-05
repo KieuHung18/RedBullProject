@@ -230,11 +230,13 @@ class Component extends React.Component {
         <Row>
         <Col>
         <div className="customer-list-container">
-        <h1 className="packagelist-welcome">{this.state.customer}</h1>
+        
+          <h1 className="packagelist-welcome">{this.state.customer}</h1>
           <Button onClick={()=>this.props.navigate("/insertcustomer")} style={{marginLeft: "30px",marginBottom:"20px",float:"left"}} variant="dark">Add Customer <FontAwesomeIcon style={{paddingLeft: "5px"}} icon={faAdd}/></Button>
           <Button style={{float: "left",marginLeft: "20px"}} onClick={(event)=>{event.preventDefault();this.props.navigate(-1)}} variant="dark" >
               Back
           </Button >
+          {packageinfo.status=="pending"&&
           <BootstrapTable 
           rowEvents={ tableRowEvents } 
           rowClasses="package-list-row"  
@@ -244,28 +246,35 @@ class Component extends React.Component {
           pagination={pagination}
           filter={ filterFactory() }
           />
+        }
         </div>
+        {packageinfo.status=="delivered"&&
+        <h1 style={{color:"green"}}>Package Delivered</h1>
+        }
+        {packageinfo.status=="exception"&&
+        <h1 style={{color:"darkorange"}}>Package Aborted</h1>
+        }
         </Col>
         
         <Col>
         {this.state.loadData?"Loading...":
         <Form className="add-package-form" onSubmit={this.savePackage}>
             <Form.Group className="add-package-group" controlId="CityID">
-              <Form.Control required defaultValue={packageinfo.city} placeholder="Province/City" />
+              <Form.Control disabled={packageinfo.status=="pending"?false:true} required defaultValue={packageinfo.city} placeholder="Province/City" />
             </Form.Group>
-            <Form.Group className="add-package-group" controlId="DistrictID">
-              <Form.Control required defaultValue={packageinfo.district} placeholder="District" />
+            <Form.Group  className="add-package-group" controlId="DistrictID">
+              <Form.Control disabled={packageinfo.status=="pending"?false:true} required defaultValue={packageinfo.district} placeholder="District" />
             </Form.Group>
             <Form.Group className="add-package-group" controlId="WardID">
-              <Form.Control required defaultValue={packageinfo.ward} placeholder="Ward" />
+              <Form.Control disabled={packageinfo.status=="pending"?false:true} required defaultValue={packageinfo.ward} placeholder="Ward" />
             </Form.Group>
             <Form.Group className="add-package-group" controlId="StreetID">
-              <Form.Control required defaultValue={packageinfo.street} placeholder="Street" />
+              <Form.Control disabled={packageinfo.status=="pending"?false:true} required defaultValue={packageinfo.street} placeholder="Street" />
             </Form.Group>
             <Form.Group className="add-package-group" controlId="PriceID">
-              <Form.Control required defaultValue={packageinfo.price} placeholder="Price" />
+              <Form.Control disabled={packageinfo.status=="pending"?false:true} required defaultValue={packageinfo.price} placeholder="Price" />
             </Form.Group>
-            <Form.Check  onChange={this.checkAddress}
+            <Form.Check disabled={packageinfo.status=="pending"?false:true} checked={packageinfo.status=="pending"?false:true}  onChange={this.checkAddress}
               required
               style={{marginLeft:"20px"}}
               type="checkbox"

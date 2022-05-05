@@ -41,7 +41,8 @@ public class CustomerDatabase {
 
 	/** Phương thức editCustomer cho API **/
 	public boolean editCustomer(String customerId, String fullName, String address, String phoneNumber) {
-		if (!checkExistPhone(phoneNumber)) {
+		String phone =(String) getCustomer(customerId).get("phoneNumber");
+		if (phone.equals(phoneNumber)||!checkExistPhone(phoneNumber)) {
 			JSONParser parser = new JSONParser();
 			String link = PackageDatabase.relativePath() + "\\customer.json";
 			try (Reader reader = new FileReader(link)) {

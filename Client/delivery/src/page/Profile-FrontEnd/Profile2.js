@@ -7,7 +7,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen,faCancel,faSave} from '@fortawesome/free-solid-svg-icons'
 var user;
 user={
-    FirstName:"Loading...",LastName:"Loading...",PhoneNumber:"Loading...",Address:"Loading...",
+    FirstName:"Loading...",
+    LastName:"Loading...",
+    PhoneNumber:"Loading...",
+    Account:"Loading...",
+    City: "Loading...",
+    District:"Loading...",
+    Ward:"Loading...",
+    Street:"Loading..."
 };
 export default function Profile2(){
     return(
@@ -21,9 +28,11 @@ class Component extends React.Component {
         this.switchUpdate=this.switchUpdate.bind(this);
         this.saveUser=this.saveUser.bind(this);
         this.checkPhone=this.checkPhone.bind(this);
+        this.updateUser=this.updateUser.bind(this);
       }
-    componentDidMount() {
+    updateUser(){
         var display=this;
+        
         jquery.ajax({
             type: "GET",
             url: "http://localhost:8080/delivery/user",
@@ -33,12 +42,20 @@ class Component extends React.Component {
                 },
                 crossDomain: true,
             success: function(res){
+            let address= res.response.address.split(",");
             if(res.result=="SUCCESS"){
                 if(display.state.loadData){
                     user={
-                        FirstName:res.response.firstName,LastName:res.response.lastName,PhoneNumber:res.response.phoneNumber,Address:res.response.address
+                        FirstName:res.response.firstName,
+                        LastName:res.response.lastName,
+                        PhoneNumber:res.response.phoneNumber,
+                        City:address[0],
+                        District:address[1],
+                        Ward:address[2],
+                        Street:address[3],
+                        Account:res.response.userName
                     };
-                display.setState({ loadData: false });
+                display.setState({ loadData: display.loadData?false:true });
             }
                 
             }
@@ -51,9 +68,13 @@ class Component extends React.Component {
             }
         });
     }
+    componentDidMount() {
+        this.updateUser();
+    }
     saveUser(event){
         var display=this;
-        event.preventDefault();
+        let fullAddress=jquery("#picity").val()+","+jquery("#pidistrict").val()+","+jquery("#piward").val()+","+jquery("#pistreet").val();
+        
         if(jquery("#pipassword").val()===jquery("#picpassword").val()
         ){
         jquery.ajax({
@@ -61,10 +82,11 @@ class Component extends React.Component {
             url: "http://localhost:8080/delivery/updateinfo",
             data:{
                 id: JSON.parse(localStorage.getItem("user")).userID,
-                password:jquery("#pipassword").val(),
                 name:jquery("#pifname").val()+" "+jquery("#pilname").val(),
                 phone:jquery("#piphone").val(),
-                address:jquery("#piaddress").val()
+                address:fullAddress,
+                password:jquery("#pipassword").val(),
+                account:jquery("#piaccount").val(),
             },
             xhrFields: {
                 withCredentials: true
@@ -72,12 +94,13 @@ class Component extends React.Component {
                 crossDomain: true,
             success: function(res){
             if(res.result=="SUCCESS"){
-                this.setState({update:this.state.update?false:true})
-                this.setState({wrong:false})
+                display.setState({update:display.state.update?false:true})
+                display.setState({wrong:false})
+                display.updateUser();
                 alert("Update success")
             }
             else{
-                this.setState({phone:true})
+                display.setState({phone:true})
             }
             },
             error: function(){
@@ -112,13 +135,15 @@ class Component extends React.Component {
             ["Last Name","Last Name",user.LastName,"pilname"],
         ];
         const profileRight=[
-            ["Address","Address",user.Address,"piaddress"],
+            ["Account","Account",user.Account,"piaccount"],
             ["Phone Number","Phone Number",user.PhoneNumber,"piphone"]
         ];
+        
         const profileUpdate=[
             ["New Password","New Password","pipassword"],
             ["Confirm Password","Confirm Password","picpassword"]
         ];
+
 
         
         return (
@@ -156,6 +181,7 @@ class Component extends React.Component {
                     )
                 )}
                 </Row>
+                
                 <Row>
                 {profileRight.map(
                     (p)=>(
@@ -185,6 +211,60 @@ class Component extends React.Component {
                 )}
                 </Row>
                 <Row>
+                <Card className="profile-card">
+                        <Card.Header className="profile-card-header">
+                            <Card.Title className="profile-card-title">
+                                Address
+                            </Card.Title>
+                        </Card.Header >
+                        <Card.Body className="profile-card-body">
+                            <Card.Text className="profile-card-text">
+                            <Row>
+                                <Col>
+                                    <Row className="profile-card-row">
+                                    <Col className="profile-card-col">City{": "}</Col>
+                                    <Col className="profile-card-colinfo">
+                                    <Form.Group className="" controlId="picity">
+                                    <Form.Control required defaultValue={user.City}/>
+                                    </Form.Group>
+                                    </Col>
+                                    </Row>
+                                    <Row className="profile-card-row">
+                                    <Col className="profile-card-col">Ward{": "}</Col>
+                                    <Col className="profile-card-colinfo">
+                                    <Form.Group className="" controlId="piward">
+                                    <Form.Control required defaultValue={user.Ward}/>
+                                    </Form.Group>
+                                    </Col>
+                                    </Row>
+                                </Col>
+                                <Col>
+                                    <Row className="profile-card-row">
+                                    <Col className="profile-card-col">District{": "}</Col>
+                                    <Col className="profile-card-colinfo">
+                                    <Form.Group className="" controlId="pidistrict">
+                                    <Form.Control required defaultValue={user.District}/>
+                                    </Form.Group>
+                                    </Col>
+                                    </Row>
+                                    <Row className="profile-card-row">
+                                    <Col className="profile-card-col">Street{": "}</Col>
+                                    <Col className="profile-card-colinfo">
+                                    <Form.Group className="" controlId="pistreet">
+                                    <Form.Control required defaultValue={user.Street}/>
+                                    </Form.Group>
+                                    </Col>
+                                    </Row>
+                                </Col>
+                            </Row>
+                            
+                            
+                            </Card.Text>
+                        </Card.Body>
+                        
+                    </Card>
+                </Row>
+                <Row>
                 {profileUpdate.map(
                     (p)=>(
                     <Col>
@@ -200,7 +280,7 @@ class Component extends React.Component {
                                 <Col className="profile-card-col">{p[1]}{": "}</Col>
                                 <Col className="profile-card-colinfo">
                                 <Form.Group className="" controlId={p[2]}>
-                                <Form.Control type="password" required/>
+                                <Form.Control type="password"/>
                                 </Form.Group>
                                 </Col>
                             </Row>

@@ -65,7 +65,7 @@ public class UserController {
 			String firstName = "";
 			String lastName = tmp[count - 1];
 			for (int i = 0; i < tmp.length - 1; i++) {
-				firstName += tmp[i] + " ";
+				firstName += tmp[i];
 			}
 			result.setFirstName(firstName);
 			result.setLastName(lastName);
@@ -90,7 +90,7 @@ public class UserController {
 			String firstName = "";
 			String lastName = tmp[count - 1];
 			for (int i = 0; i < tmp.length - 1; i++) {
-				firstName += tmp[i] + " ";
+				firstName += tmp[i];
 			}
 			result.setFirstName(firstName);
 			result.setLastName(lastName);
@@ -160,13 +160,17 @@ public class UserController {
 
 		UserDatabase userDB = new UserDatabase();
 		JSONObject userList = userDB.getUserList();
-
-		if (userDB.checkExistAccount(account)) {
+		JSONObject user=userDB.getUser(id);
+		String pn=(String) user.get("phoneNumber");
+		String act=(String) user.get("account");
+		
+		if (!act.equals(account)&&userDB.checkExistAccount(account)) {
 			res.setResult("FAIL");
 			res.setResponse("ACCOUNT");
 			return res;
 		}
-		if (userDB.checkExistPhone(phone)) {
+		
+		if (!pn.equals(phone)&&userDB.checkExistPhone(phone)) {
 			res.setResult("FAIL");
 			res.setResponse("PHONE");
 			return res;
@@ -180,6 +184,66 @@ public class UserController {
 		userJSObj.put("phoneNumber", phone);
 		userJSObj.put("address", address);
 		userJSObj.put("role", role);
+
+		userList.replace(id, userJSObj);
+
+		String link = PackageDatabase.relativePath() + "\\user.json";
+		try (FileWriter writer = new FileWriter(link)) {
+			writer.write(userList.toJSONString());
+			writer.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		res.setResult("SUCCESS");
+		return res;
+	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(path = "/updateinfo", method = RequestMethod.POST)
+	@ResponseBody
+	public JsonResponse updateinfo(
+			@RequestParam(value = "id") String id,
+			@RequestParam(value = "password") String password, 
+			@RequestParam(value = "name") String name,
+			@RequestParam(value = "phone") String phone, 
+			@RequestParam(value = "address") String address,
+			@RequestParam(value = "account") String account)
+			
+			{
+		JsonResponse res = new JsonResponse();
+
+		UserDatabase userDB = new UserDatabase();
+		JSONObject userList = userDB.getUserList();
+		JSONObject user=userDB.getUser(id);
+		String pn=(String) user.get("phoneNumber");
+		String act=(String) user.get("account");
+		String rl=(String) user.get("role");
+		String pass=(String) user.get("password");
+		if(password.equals("")) {
+			pass=(String) user.get("password");
+		}
+		
+		if (!act.equals(account)&&userDB.checkExistAccount(account)) {
+			res.setResult("FAIL");
+			res.setResponse("ACCOUNT");
+			return res;
+		}
+		
+		if (!pn.equals(phone)&&userDB.checkExistPhone(phone)) {
+			res.setResult("FAIL");
+			res.setResponse("PHONE");
+			return res;
+		}
+		System.out.println();
+		JSONObject userJSObj = new JSONObject();
+		userJSObj.put("id", id);
+		userJSObj.put("account", act);
+		userJSObj.put("password", pass);
+		userJSObj.put("fullName", name);
+		userJSObj.put("phoneNumber", phone);
+		userJSObj.put("address", address);
+		userJSObj.put("role", rl);
 
 		userList.replace(id, userJSObj);
 

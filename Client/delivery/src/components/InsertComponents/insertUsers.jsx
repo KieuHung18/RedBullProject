@@ -37,6 +37,7 @@ var fullAddress;
                         alert("User Added")
                         setAccount(false)
                         setPhone(false)
+                        navigate(-1)
                     }
                     else{
                         if(res.response=="PHONE"){
