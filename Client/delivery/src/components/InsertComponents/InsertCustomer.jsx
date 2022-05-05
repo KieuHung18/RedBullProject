@@ -4,15 +4,46 @@ import {Row,Col} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useNavigate} from 'react-router-dom';
 import {useState} from "react";
+import jquery from "jquery";
 
-function add(event){
-    event.preventDefault();
-}
 
+var fullAddress
 function InsertCustomer(){
+    
+    function saveCustomer(event){
+        console.log(fullAddress);
+        console.log(jquery("#uidFName").val()+" "+jquery("#uidLName").val());
+        console.log(jquery("#uidPhone").val());
+    }
+    function saveCustomer(event){
+        event.preventDefault();
+        fullAddress=jquery("#cidCity").val()+","+jquery("#cidDistrict").val()+","+jquery("#cidWard").val()+","+jquery("#cidStreet").val();
+          jquery.ajax({
+            type: "POST",
+            url: "http://localhost:8080/delivery/addcustomer",
+            data: {
+                address: fullAddress,
+                fullName: jquery("#cidFName").val()+" "+jquery("#cidLName").val(),
+                phoneNumber: jquery("#cidPhone").val(),
+            },
+            xhrFields: {
+              withCredentials: true
+              },
+              crossDomain: true,
+            success:function(res){
+                if(res.result=="SUCCESS"){
+                    alert("Customer Added")
+                    setPhone(false)
+                }
+                else{
+                    setPhone(true)
+                }
+            }
+          });
+    }
     const navigate =useNavigate();
     const [age, setAge] = useState();
-   
+    const [phone=false,setPhone] = useState();
 
     // Chỉ nhập được kiểu số
     const handleChange = (e) => {
@@ -31,32 +62,33 @@ function InsertCustomer(){
              <h1 className="packagelist-welcome">Add Customer</h1>
             <div className="insertCustomer">
                 <div className="Content_Insert">
-                        <form className="mainForm" action="">
+                        <form onSubmit={saveCustomer} className="mainForm" action="">
                         <Row>
                             <Col>
                            <div className="YourName form_items">
                                 <div className="firtname">
                                     <p>First name</p>
-                                    <input placeholder="FisrtName" required type="text" name="" id="" />
+                                    <input placeholder="FisrtName" required type="text" name="" id="cidFName" />
                                 </div>
                                 <div placeholder="LastName" required className="Lastname">
                                     <p>Last name</p>
-                                    <input type="text" required placeholder="Last name" />
+                                    <input type="text" required placeholder="Last name" id="cidLName" />
                                 </div>
                                 <div className="PhoneNumber">
                                    <p>Phone Number</p>
-                                   <input type="text" required value={age} onChange={handleChange} placeholder="Phone number" />
+                                   <input type="text" required value={age} onChange={handleChange} placeholder="Phone number" id="cidPhone"/>
+                                   {phone&&<div style={{color:"red",margin:"auto",width:"fit-content"}}>Duplicate phone number</div>}
                                </div>
                            </div>
                            <Row style={{maxWidth:"300px"}}>
                             <Col>
                            <div className="btn_addUser">
-                                 <button>Add</button>
+                                 <button  type="submit">Add</button>
                             </div>
                             </Col>
                             <Col>
                             <div className="btn_addUser">
-                                 <button onClick={cancel}>Cancel</button>
+                                 <button onClick={cancel}>Back</button>
                             </div>
                             </Col>
                             </Row>
@@ -64,13 +96,13 @@ function InsertCustomer(){
                            <Col>
                            <div className="address form_items">
                                 <p>City</p>
-                               <input type="text" required name="" placeholder="City" id="" />
+                               <input type="text" required name="" placeholder="City" id="cidCity" />
                                <p>District</p>
-                               <input type="text" required name="" placeholder="District" id="" />
+                               <input type="text" required name="" placeholder="District" id="cidDistrict" />
                                <p>Ward</p>
-                               <input type="text" required name="" placeholder="Ward" id="" />
+                               <input type="text" required name="" placeholder="Ward" id="cidWard" />
                                <p>Street</p>
-                               <input type="text" required name="" placeholder="Street" id="" />
+                               <input type="text" required name="" placeholder="Street" id="cidStreet" />
                            </div>
                            </Col>
                            </Row>

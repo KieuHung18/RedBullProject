@@ -54,6 +54,13 @@ const PackageListGate = () => {
   }
   
 };
+const PackageDetailGate = () => {
+  if (JSON.parse(localStorage.getItem("user")).userRole=="ROLE_ADMIN") {
+    return <EditPackage />;
+  }else{
+    return <PackageDetail />;
+  }
+};
 
 
 const Application = () => {
@@ -71,24 +78,24 @@ const Application = () => {
       <Route path="login" element={<ProtectedLogin />} />
       <Route path="aboutus" element={<AboutUS />} />
 
-      <Route path="/insertuser" element={<InsertUser />} />
-      <Route path="/insertcustomer" element={<InsertCustomer/>} />
-      <Route path="/edituser/:id" element={<EditUser />} />
-      <Route path="/editcustomer/:id" element={<EditCustomer/>} />
-      <Route path="admin" element={<Admin />} />
-      <Route path="addpackage" element={<AddPackage />} />
-      <Route path="editpackage/:id" element={<EditPackage/>} />
+      
 
       <Route element={<ProtectedRoute/>}>
         {/* PROTECTED ROUTES IN HERE */}
         <Route path="profile" element={<Profile2 />} />
         <Route path="packagelist" element={<PackageListGate />} />
-        <Route path="package/:id" element={<PackageDetail />} />
+        <Route path="package/:id" element={<PackageDetailGate />} />
         <Route path="profile" element={<Profile />} />
 
        <Route element={<AdminProtectedRoute/>}>
         {/* ADMIN PROTECTED ROUTES IN HERE */}
-        
+        <Route path="/insertuser" element={<InsertUser />} />
+        <Route path="/insertcustomer" element={<InsertCustomer/>} />
+        <Route path="/edituser/:id" element={<EditUser />} />
+        <Route path="/editcustomer/:id" element={<EditCustomer/>} />
+        <Route path="admin" element={<Admin />} />
+        <Route path="addpackage" element={<AddPackage />} />
+        <Route path="editpackage/:id" element={<EditPackage/>} />
        </Route>
       </Route>
     </Routes>

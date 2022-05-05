@@ -17,9 +17,10 @@ export default function Profile2(){
 class Component extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { loadData: true,update:false};
+        this.state = { loadData: true,update:false,wrong:false,phone:false,format:false};
         this.switchUpdate=this.switchUpdate.bind(this);
         this.saveUser=this.saveUser.bind(this);
+        this.checkPhone=this.checkPhone.bind(this);
       }
     componentDidMount() {
         var display=this;
@@ -50,12 +51,57 @@ class Component extends React.Component {
             }
         });
     }
-    saveUser(){
-        console.log(jquery("#pifname").val())
-        console.log(jquery("#pilname").val())
-        console.log(jquery("#piaddress").val())
-        console.log(jquery("#piphone").val())
-        this.setState({update:this.state.update?false:true})
+    saveUser(event){
+        var display=this;
+        event.preventDefault();
+        if(jquery("#pipassword").val()===jquery("#picpassword").val()
+        ){
+        jquery.ajax({
+            type: "POST",
+            url: "http://localhost:8080/delivery/updateinfo",
+            data:{
+                id: JSON.parse(localStorage.getItem("user")).userID,
+                password:jquery("#pipassword").val(),
+                name:jquery("#pifname").val()+" "+jquery("#pilname").val(),
+                phone:jquery("#piphone").val(),
+                address:jquery("#piaddress").val()
+            },
+            xhrFields: {
+                withCredentials: true
+                },
+                crossDomain: true,
+            success: function(res){
+            if(res.result=="SUCCESS"){
+                this.setState({update:this.state.update?false:true})
+                this.setState({wrong:false})
+                alert("Update success")
+            }
+            else{
+                this.setState({phone:true})
+            }
+            },
+            error: function(){
+                console.log("error");
+            }
+        });
+            
+        }else{
+            this.setState({wrong:true})
+        }
+        
+    }
+    checkPhone(event){
+        event.preventDefault();
+        let phone=jquery("#piphone").val()
+        if(!isNaN(phone)&&phone>=0){
+            this.setState({format:false})
+            this.saveUser()
+        return true;
+        }
+        else{
+            this.setState({format:true})
+        return false;
+        }
     }
     switchUpdate(){
         this.setState({update:this.state.update?false:true})
@@ -64,14 +110,14 @@ class Component extends React.Component {
         const profileLeft=[
             ["First Name","First Name",user.FirstName,"pifname"],
             ["Last Name","Last Name",user.LastName,"pilname"],
-            // ["Address","Address",user.Address],
-            // ["Phone Number","Phone Number",user.PhoneNumber]
         ];
         const profileRight=[
-            // ["First Name","First Name",user.FirstName],
-            // ["Last Name","Last Name",user.LastName],
             ["Address","Address",user.Address,"piaddress"],
             ["Phone Number","Phone Number",user.PhoneNumber,"piphone"]
+        ];
+        const profileUpdate=[
+            ["New Password","New Password","pipassword"],
+            ["Confirm Password","Confirm Password","picpassword"]
         ];
 
         
@@ -80,7 +126,7 @@ class Component extends React.Component {
                 <h2 className="profile-title">Profile</h2>
                 <div className="profile-card-container">
                 {this.state.update?
-                <Form onSubmit={this.saveUser}>
+                <Form onSubmit={this.checkPhone}>
                     <Row>
                 {profileLeft.map(
                     (p)=>(
@@ -138,6 +184,37 @@ class Component extends React.Component {
                     )
                 )}
                 </Row>
+                <Row>
+                {profileUpdate.map(
+                    (p)=>(
+                    <Col>
+                    <Card className="profile-card">
+                        <Card.Header className="profile-card-header">
+                            <Card.Title className="profile-card-title">
+                                {p[0]}
+                            </Card.Title>
+                        </Card.Header >
+                        <Card.Body className="profile-card-body">
+                            <Card.Text className="profile-card-text">
+                            <Row className="profile-card-row">
+                                <Col className="profile-card-col">{p[1]}{": "}</Col>
+                                <Col className="profile-card-colinfo">
+                                <Form.Group className="" controlId={p[2]}>
+                                <Form.Control type="password" required/>
+                                </Form.Group>
+                                </Col>
+                            </Row>
+                            </Card.Text>
+                        </Card.Body>
+                        
+                    </Card>
+                    </Col>
+                    )
+                )}
+                </Row>
+                {this.state.wrong&&<div style={{color:"red",margin:"auto",width:"fit-content"}}>Confirmation password is not correct</div>}
+                {this.state.phone&&<div style={{color:"red",margin:"auto",width:"fit-content"}}>Duplicate phone number</div>}
+                {this.state.format&&<div style={{color:"red",margin:"auto",width:"fit-content"}}>Illegal phone number format</div>}
                     <Button variant="dark" className="profile-edit-btn" onClick={this.switchUpdate}>CANCEL<FontAwesomeIcon style={{paddingLeft:"5px"}} icon={faCancel}/></Button>
                     <Button variant="dark" className="profile-edit-btn" style={{marginLeft: "10px"}} type="submit">SAVE<FontAwesomeIcon style={{paddingLeft:"5px"}} icon={faSave}/></Button>
                 </Form>
@@ -191,6 +268,7 @@ class Component extends React.Component {
                     )
                 )}
                 </Row>
+                
                 <Button variant="dark" className="profile-edit-btn" onClick={this.switchUpdate}>UPDATE<FontAwesomeIcon style={{paddingLeft:"5px"}} icon={faPen}/></Button>
                 </>
                 }

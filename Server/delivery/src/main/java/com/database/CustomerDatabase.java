@@ -100,7 +100,7 @@ public class CustomerDatabase {
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 //			System.out.println(jsonObject);
-			for (int i = 0; i < jsonObject.size() - 1; i++) {
+			for (int i = 0; i < jsonObject.size(); i++) {
 				JSONObject customers = (JSONObject) jsonObject.get("c" + i);
 //				String customer = (String) packages.get("idUser");
 //				if (customer.equals(customerID)) {
@@ -137,10 +137,8 @@ public class CustomerDatabase {
 			for (int i = 0; i < jsonObject.size(); i++) {
 
 				JSONObject customer = (JSONObject) jsonObject.get("c" + i);
-				System.out.println(customer);
 
 				String phoneNumberJson = (String) customer.get("phoneNumber");
-				System.out.println(phoneNumberJson);
 				if (phoneNumber.equals(phoneNumberJson)) {
 					return true;
 				}

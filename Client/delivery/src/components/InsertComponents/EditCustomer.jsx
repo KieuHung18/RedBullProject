@@ -4,13 +4,80 @@ import {Row,Col,Form,Button,FormGroup,FormControl} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useNavigate,useParams} from 'react-router-dom';
 import {useEffect,useState} from "react";
-function update(event){
-    event.preventDefault();
+import jquery from "jquery"
+var fullAddress
+var customerInfo={
+    id:"Loading...",
+    FName:"Loading...",
+    LName:"Loading...",
+    city: "Loading...",
+    district: "Loading...",
+    ward: "Loading...",
+    street: "Loading...",
+    phone: "Loading...",
 }
+
 function EditCustomer(){
+    const [customer, setCustomer] = useState();
+    function getCustomer(){
+        jquery.ajax({
+          type: "GET",
+          url: "http://localhost:8080/delivery/customer",
+          data: {id:param.id},
+          xhrFields: {
+              withCredentials: true
+              },
+              crossDomain: true,
+          success: function(res){
+            fullAddress=res.response.address;
+              let address= res.response.address.split(",");
+              customerInfo={
+                    FName:res.response.firstName,
+                    LName:res.response.lastName,
+                    phone:res.response.phoneNumber,
+                    city:address[0],
+                    district:address[1],
+                    ward:address[2],
+                    street:address[3],
+                    }
+                    setCustomer(customerInfo);
+          }
+      });
+      }
+    useEffect(()=>{
+        getCustomer()
+    },[]);
+    const param=useParams();
+    function saveCustomer(event){
+        event.preventDefault();
+        fullAddress=jquery("#cidCity").val()+","+jquery("#cidDistrict").val()+","+jquery("#cidWard").val()+","+jquery("#cidStreet").val();
+          jquery.ajax({
+            type: "POST",
+            url: "http://localhost:8080/delivery/editcustomer",
+            data: {
+                id:param.id,
+                address: fullAddress,
+                fullName: jquery("#cidFName").val()+" "+jquery("#cidLName").val(),
+                phoneNumber: jquery("#cidPhone").val(),
+            },
+            xhrFields: {
+              withCredentials: true
+              },
+              crossDomain: true,
+            success:function(res){
+                if(res.result=="SUCCESS"){
+                    alert("Customer Updated")
+                    setPhone(false)
+                }
+                else{
+                    setPhone(true)
+                }
+            }
+          });
+    }
     const navigate=useNavigate();
     const [age, setAge] = useState();
-   
+    const [phone=false,setPhone] = useState();
 
     // Chỉ nhập được kiểu số
     const handleChange = (e) => {
@@ -22,32 +89,34 @@ function EditCustomer(){
              <h1 className="packagelist-welcome">Edit Customer</h1>
              <div className="insertCustomer">
                 <div className="Content_Insert">
-                        <form className="mainForm" action="">
+                        <form onSubmit={saveCustomer} className="mainForm" action="">
+                        {!!customer?<>
                         <Row>
                             <Col>
                            <div className="YourName form_items">
                                 <div className="firtname">
                                     <p>First name</p>
-                                    <input placeholder="FisrtName" required type="text" name="" id="" />
+                                    <input defaultValue={customer.FName} placeholder="FisrtName" required type="text" name="" id="cidFName" />
                                 </div>
                                 <div placeholder="LastName" required className="Lastname">
                                     <p>Last name</p>
-                                    <input type="text" required placeholder="Last name" />
+                                    <input defaultValue={customer.LName} type="text" required placeholder="Last name" id="cidLName"/>
                                 </div>
                                 <div className="PhoneNumber">
                                    <p>Phone Number</p>
-                                   <input type="text" required value={age} onChange={handleChange} placeholder="Phone number" />
+                                   <input defaultValue={customer.phone} type="text" required value={age} onChange={handleChange} placeholder="Phone number" id="cidPhone"/>
+                                   {phone&&<div style={{color:"red",margin:"auto",width:"fit-content"}}>Duplicate phone number</div>}
                                </div>
                            </div>
                            <Row style={{maxWidth:"300px"}}>
                             <Col>
                            <div className="btn_addUser">
-                                 <button>Add</button>
+                                 <button  type="submit">Save</button>
                             </div>
                             </Col>
                             <Col>
                             <div className="btn_addUser">
-                                 <button >Cancel</button>
+                                 <button onClick={(event)=>{event.preventDefault();navigate(-1)}} >Back</button>
                             </div>
                             </Col>
                             </Row>
@@ -55,17 +124,18 @@ function EditCustomer(){
                            <Col>
                            <div className="address form_items">
                                 <p>City</p>
-                               <input type="text" required name="" placeholder="City" id="" />
+                               <input defaultValue={customer.city} type="text" required name="" placeholder="City" id="cidCity" />
                                <p>District</p>
-                               <input type="text" required name="" placeholder="District" id="" />
+                               <input defaultValue={customer.district} type="text" required name="" placeholder="District" id="cidDistrict" />
                                <p>Ward</p>
-                               <input type="text" required name="" placeholder="Ward" id="" />
+                               <input defaultValue={customer.ward} type="text" required name="" placeholder="Ward" id="cidWard" />
                                <p>Street</p>
-                               <input type="text" required name="" placeholder="Street" id="" />
+                               <input defaultValue={customer.street} type="text" required name="" placeholder="Street" id="cidStreet" />
                            </div>
                            </Col>
                            </Row>
-                             
+                           </>:
+                        "Loading..."}
                         </form>
                     </div>
             </div>

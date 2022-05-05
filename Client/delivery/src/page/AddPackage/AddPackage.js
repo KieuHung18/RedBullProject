@@ -14,8 +14,8 @@ import {faAdd} from '@fortawesome/free-solid-svg-icons'
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import CurrentLocation from '../../Map';
 import { Map, GoogleApiWrapper ,InfoWindow, Marker} from 'google-maps-react';
+import { parse } from "@fortawesome/fontawesome-svg-core";
 // asdasdasd
-var url="";
 var fullAddress;
 var customerID;
 function generator(quantity){
@@ -41,7 +41,7 @@ export default function AddPackage() {
 class Component extends React.Component {
   constructor(props) {
     super(props);
-    this.state={checked:false,loadData: true,customer:""}
+    this.state={checked:false,loadData: true,customer:"",price:false}
     this.checkAddress=this.checkAddress.bind(this)
     this.savePackage=this.savePackage.bind(this)
     this.toAddCustomer=this.toAddCustomer.bind(this)
@@ -58,7 +58,6 @@ class Component extends React.Component {
         },
         crossDomain: true,
       success: function(res){
-        url=res.response.address;
         if(res.result!="FAIL"){
            customerTable=[];
           for (let i = 0; i < res.response.length; i++) {
@@ -84,16 +83,25 @@ class Component extends React.Component {
 
   checkAddress(){
     fullAddress=jquery("#CityID").val()+","+jquery("#DistrictID").val()+","+jquery("#WardID").val()+","+jquery("#StreetID").val();
-    console.log(fullAddress)
     this.setState({
       checked: this.state.checked? false:true
     })
   }
+  checkPrice(price){
+    if(!isNaN(price)&&price>=0){
+      return true;
+    }
+    else{console.log(false)
+      return false;
+      
+    }
+  }
   savePackage(event){
+    fullAddress=jquery("#CityID").val()+","+jquery("#DistrictID").val()+","+jquery("#WardID").val()+","+jquery("#StreetID").val();
     event.preventDefault();
-    if(this.state.customer==""){
-      alert("Customer is empty. Please select customer")
-    }else{
+    if(!this.checkPrice(jquery("#PriceID").val())){
+      this.setState({price:true})
+    }else{this.setState({price:false});
       jquery.ajax({
         type: "POST",
         url: "http://localhost:8080/delivery/addpackage",
@@ -106,8 +114,8 @@ class Component extends React.Component {
           withCredentials: true
           },
           crossDomain: true,
-        success:function(){
-          alert("Package Added")
+        success:function(res){
+          alert("Package Added To"+res.response)
         }
       });
     }
@@ -134,8 +142,9 @@ class Component extends React.Component {
 
   toGoogleMap(){
     var display=this;
+    fullAddress=jquery("#CityID").val()+","+jquery("#DistrictID").val()+","+jquery("#WardID").val()+","+jquery("#StreetID").val();
     navigator.geolocation.getCurrentPosition(function(position) {
-      let target=display.geturl(url);
+      let target=display.geturl(fullAddress);
       window.open("https://www.google.com/maps/dir/"+position.coords.latitude+","+position.coords.longitude+"/"+target);
     });
     
@@ -178,6 +187,9 @@ class Component extends React.Component {
         <div className="customer-list-container">
         <h1 className="packagelist-welcome">{this.state.customer==""?"Please select customer":this.state.customer}</h1>
           <Button onClick={this.toAddCustomer} style={{marginLeft: "30px",marginBottom:"20px",float:"left"}} variant="dark">Add Customer <FontAwesomeIcon style={{paddingLeft: "5px"}} icon={faAdd}/></Button>
+          <Button style={{float: "left",marginLeft: "20px"}} onClick={(event)=>{event.preventDefault();this.props.navigate(-1)}} variant="dark" >
+              Back
+          </Button >
           <BootstrapTable 
           rowEvents={ tableRowEvents } 
           rowClasses="package-list-row"  
@@ -215,9 +227,7 @@ class Component extends React.Component {
               id="addpackageCB"
               label="Checked"
             />
-            <Button disabled={this.state.customer==""?true:false} onClick={(event)=>{event.preventDefault();this.props.navigate(-1)}} variant="dark" className="add-package-btn">
-              Back
-            </Button >
+            {this.state.price&&<div style={{color:"red",margin:"auto",width:"fit-content"}}>Price must be a number and greater than 0</div>}
             <Button disabled={this.state.customer==""?true:false} onClick={this.toGoogleMap} variant="dark" className="add-package-btn">
               Check Address
             </Button >

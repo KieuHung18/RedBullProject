@@ -11,10 +11,14 @@ import com.database.PackageDatabase;
 @RestController
 public class AddPackageController {
 	@RequestMapping(path="/addpackage",method = RequestMethod.POST)
-	public void addpackage(@RequestParam(value = "customerID") String customerID,
+	@ResponseBody
+	public JsonResponse addpackage(@RequestParam(value = "customerID") String customerID,
 							@RequestParam(value = "address") String address,
 							@RequestParam(value = "price") int price) {
-		new PackageDatabase().addPackage(address, price, customerID);
+		JsonResponse response=new JsonResponse();
+		String userName=new PackageDatabase().addPackage(address, price, customerID);
+		response.setResult("SUCCESS");response.setResponse(userName);
+		return response;
 		
 	}
 	@RequestMapping(path="/editpackage",method = RequestMethod.POST)

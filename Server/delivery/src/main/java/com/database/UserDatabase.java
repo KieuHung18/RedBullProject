@@ -82,6 +82,16 @@ public class UserDatabase {
 		return result;
 	}
 	public boolean checkDeleted(String userID) {
+		JSONParser parser = new JSONParser();
+		String link = PackageDatabase.relativePath()+"\\deleteduser.json";
+		try (Reader reader = new FileReader(link)) {
+			JSONObject jsonObject = (JSONObject) parser.parse(reader);
+			if(jsonObject.get(userID)!=null) {return true;};
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
 	
@@ -92,7 +102,7 @@ public class UserDatabase {
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 			for (int i = 0; i < jsonObject.size(); i++) {
-
+				if(!checkDeleted("u" + i)) {
 				JSONObject user = (JSONObject) jsonObject.get("u" + i);
 
 				String account = (String) user.get("account");
@@ -100,6 +110,7 @@ public class UserDatabase {
 				if (userName.equals(account)) {
 					result= (String) user.get("role");
 					break;
+				}
 				}
 
 			}
@@ -121,12 +132,13 @@ public class UserDatabase {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 			
 			for (int i = 0; i < jsonObject.size(); i++) {
-
+				if(!checkDeleted("u" + i)) {
 				JSONObject user = (JSONObject) jsonObject.get("u" + i);
-
+				
 				String account = (String) user.get("account");
 				if (accountInput.equals(account)) {
 					return true;
+				}
 				}
 
 			}
@@ -146,14 +158,14 @@ public class UserDatabase {
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 			for (int i = 0; i < jsonObject.size(); i++) {
-				
+				if(!checkDeleted("u" + i)) {
 				JSONObject user = (JSONObject) jsonObject.get("u" + i);
 				
 				String phone = (String) user.get("phoneNumber");
 				if (phoneInput.equals(phone)) {
 					return true;
 				}
-				
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -170,9 +182,7 @@ public class UserDatabase {
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 			for (int i = 0; i < jsonObject.size(); i++) {
-
 				JSONObject user = (JSONObject) jsonObject.get("u" + i);
-
 				String password = (String) user.get("password");
 				if (passwordInput.equals(password)) {
 					return true;
@@ -197,7 +207,20 @@ public class UserDatabase {
 // 		try (Reader reader = new FileReader(link)) {
 // 			list = (JSONObject) parser.parse(reader);
 // =======
-	
+	public JSONObject getUserList() {
+ 		JSONParser parser = new JSONParser();
+ 		JSONObject list = null;
+		
+ 		String link = PackageDatabase.relativePath()+"\\user.json";
+ 		try (Reader reader = new FileReader(link)) {
+ 			list = (JSONObject) parser.parse(reader);
+ 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+ 	 		return list;
+ 		}
 	/** Phương thức getListUsers cho API **/
 	public JSONArray getListUsers() {
 		JSONParser parser = new JSONParser();
@@ -206,25 +229,27 @@ public class UserDatabase {
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 			for (int i = 0; i < jsonObject.size(); i++) {
-				JSONObject user = (JSONObject) jsonObject.get("u" + i);
-				String id = (String) user.get("id");
-				String account = (String) user.get("account");
-				String password = (String) user.get("password");
-				String fullName = (String) user.get("fullName");
-				String phoneNumber = (String) user.get("phoneNumber");
-				String address = (String) user.get("address");
-				String role = (String) user.get("role");
+				if(!checkDeleted("u" + i)) {
+					JSONObject user = (JSONObject) jsonObject.get("u" + i);
+					String id = (String) user.get("id");
+					String account = (String) user.get("account");
+					String password = (String) user.get("password");
+					String fullName = (String) user.get("fullName");
+					String phoneNumber = (String) user.get("phoneNumber");
+					String address = (String) user.get("address");
+					String role = (String) user.get("role");
 
-				User user0 = new User();
-				user0.setId(id);
-				user0.setAccount(account);
-				user0.setPassword(password);
-				user0.setFullName(fullName);
-				user0.setPhoneNumber(phoneNumber);
-				user0.setAddress(address);
-				user0.setRole(role);
+					User user0 = new User();
+					user0.setId(id);
+					user0.setAccount(account);
+					user0.setPassword(password);
+					user0.setFullName(fullName);
+					user0.setPhoneNumber(phoneNumber);
+					user0.setAddress(address);
+					user0.setRole(role);
 
-				arrObj0.add(user0);
+					arrObj0.add(user0);
+				}
 //				}
 
 			}

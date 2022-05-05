@@ -1,20 +1,59 @@
 import styled from "styled-components";
-import {Row,Col} from 'react-bootstrap';
+import {Row,Col,Button} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useNavigate} from 'react-router-dom';
 import {useState} from "react";
-function add(event){
-    event.preventDefault();
-}
-
-   
-
+import jquery from "jquery"
+var fullAddress;
 
     function InsertUsers(){
+        function saveUser(event){
+            event.preventDefault();
+            fullAddress=jquery("#uidCity").val()+","+jquery("#uidDistrict").val()+","+jquery("#uidWard").val()+","+jquery("#uidStreet").val();
+            let userRole;
+            if(jquery('input[name="gender"]:checked').val()=="User"){
+                userRole="ROLE_USER"
+            }
+            if(jquery('input[name="gender"]:checked').val()=="Admin"){
+                userRole="ROLE_ADMIN"
+            }
+              jquery.ajax({
+                type: "POST",
+                url: "http://localhost:8080/delivery/addUser",
+                data: {
+                    account: jquery("#uidAccount").val(),
+                    role: userRole,
+                    password: jquery("#uidPassword").val(),
+                    name: jquery("#uidFName").val()+" "+jquery("#uidLName").val(),
+                    phone: jquery("#uidPhone").val(),
+                    address: fullAddress,
+                },
+                xhrFields: {
+                  withCredentials: true
+                  },
+                  crossDomain: true,
+                success:function(res){
+                    if(res.result=="SUCCESS"){
+                        alert("User Added")
+                        setAccount(false)
+                        setPhone(false)
+                    }
+                    else{
+                        if(res.response=="PHONE"){
+                            setPhone(true)
+                        }
+                        if(res.response=="ACCOUNT"){
+                            setAccount(true)
+                        }
+                    }
+                }
+              });
+        }
         
         const navigate=useNavigate();
         const [age, setAge] = useState();
-       
+        const [phone=false,setPhone] = useState();
+        const [account=false,setAccount] = useState();
     
         // Chỉ nhập được kiểu số
         const handleChange = (e) => {
@@ -27,32 +66,34 @@ function add(event){
             <h1 className="packagelist-welcome">Add User</h1>
             <div className="insertCustomer">
                 <div className="Content_Insert">
-                        <form className="mainForm" action="" >
+                        <form onSubmit={saveUser} className="mainForm" action="" >
                             <Row>
                             <Col>
                            <div className="YourName form_items">
                                 <div className="firtname">
                                     <p>First name</p>
-                                    <input type="text" id="id" required  placeholder="First name" name=""/>
+                                    <input  type="text" id="uidFName" required  placeholder="First name" name=""/>
                                 </div>
                                 <div className="Lastname">
                                     <p>Last name</p>
-                                    <input type="text" id="input" required placeholder="Last name" />
+                                    <input type="text" id="uidLName" required placeholder="Last name" />
                                 </div>
                                 <div className="PhoneNumber">
                                    <p>Phone Number</p>
-                                   <input value={age} id="input" required  placeholder="Your phone number" onChange={handleChange} />
+                                   <input value={age} id="uidPhone" required  placeholder="Your phone number" onChange={handleChange} />
+                                   {phone&&<div style={{color:"red",margin:"auto",width:"fit-content"}}>Duplicate phone number</div>}
                                </div>
                            </div>
                            
                            <div className="YourAccount form_items">
                                 <div className="Username">
-                                    <p>Username</p>
-                                    <input type="text" id="input" required name=""  placeholder="username"  />
+                                    <p>User name</p>
+                                    <input type="text" id="uidAccount" required name=""  placeholder="username"  />
+                                    {account&&<div style={{color:"red",margin:"auto",width:"fit-content"}}>Duplicate User name</div>}
                                 </div>
                                 <div className="password">
                                     <p>Password</p>
-                                    <input type="password"  required name="" placeholder="password" />
+                                    <input type="text" id="uidPassword"  required name="" placeholder="password" />
                                 </div>
                                 
                             </div>
@@ -63,38 +104,36 @@ function add(event){
 
                             <div className="address form_items">
                                <p>City</p>
-                               <input type="text" id="input" required name="" placeholder="City"   />
+                               <input type="text" id="uidCity" required name="" placeholder="City"   />
                                <p>District</p>
-                               <input type="text" id="input" required name="" placeholder="District"   />
+                               <input type="text" id="uidDistrict" required name="" placeholder="District"   />
                                <p>Ward</p>
-                               <input type="text" id="input" required name="" placeholder="Ward" />
+                               <input type="text" id="uidWard" required name="" placeholder="Ward" />
                                <p>Street</p>
-                               <input type="text"  required  name="" placeholder="Street" id="input"/>
+                               <input type="text" id="uidStreet" required  name="" placeholder="Street"/>
                            </div>
 
                             <div className="Role form_items">
-                                <form>
-                                    <div className="user_role ">
-                                        <input name="gender"   type="radio" value="User" />
-                                        <span>User</span>
-                                    </div>
-                                    <div className="admin_role">
-                                        <input name="gender"   type="radio" value="Admin" />
-                                        <span>Admin</span>
-                                    </div>
-                                </form>
+                                <div className="user_role ">
+                                    <input name="gender"   type="radio" value="User" />
+                                    <span>User</span>
+                                </div>
+                                <div className="admin_role">
+                                    <input name="gender"   type="radio" value="Admin" />
+                                    <span>Admin</span>
+                                </div>
                              </div>
                              </Col>
                              </Row>
                              <Row style={{maxWidth:"300px"}}>
                             <Col>
                            <div className="btn_addUser">
-                                 <button >Add</button>
+                                 <button type="submit" >Add</button>
                             </div>
                             </Col>
                             <Col>
                             <div className="btn_addUser">
-                                 <button onClick={(event)=>{event.preventDefault();navigate(-1)}}>Cancel</button>
+                                 <button onClick={(event)=>{event.preventDefault();navigate(-1)}}>Back</button>
                             </div>
                             </Col>
                             </Row>

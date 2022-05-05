@@ -38,8 +38,46 @@ public class UserController {
 		}
 		return res;
 	}
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(path = "/fulluser", method = RequestMethod.GET)
+	@ResponseBody
+	public JsonResponse fulluser(@RequestParam(value = "userID") String userID) {
+		JsonResponse res = new JsonResponse();
 
-	
+		if (getFullUser(userID) != null) {
+			res.setResult("SUCCESS");
+			res.setResponse(getFullUser(userID));
+		} else {
+			res.setResult("FAIL");
+		}
+		return res;
+	}
+
+	public FullUser getFullUser(String userID) {
+		FullUser result = new FullUser();
+		JSONObject jsonPackage = new com.database.UserDatabase().getUser(userID);
+		if (jsonPackage == null) {
+			return null;
+		} else {
+			String fullName = (String) jsonPackage.get("fullName");
+			String[] tmp = fullName.split(" ");
+			int count = tmp.length;
+			String firstName = "";
+			String lastName = tmp[count - 1];
+			for (int i = 0; i < tmp.length - 1; i++) {
+				firstName += tmp[i] + " ";
+			}
+			result.setFirstName(firstName);
+			result.setLastName(lastName);
+			result.setPhoneNumber((String) jsonPackage.get("phoneNumber"));
+			result.setAddress((String) jsonPackage.get("address"));
+			result.setUserName((String) jsonPackage.get("account"));
+			result.setRole((String) jsonPackage.get("role"));
+			result.setPassword((String) jsonPackage.get("password"));
+
+		}
+		return result;
+	}
 	public User getUser(String userID) {
 		User result = new User();
 		JSONObject jsonPackage = new com.database.UserDatabase().getUser(userID);
@@ -67,9 +105,9 @@ public class UserController {
 	
 
 	@CrossOrigin(origins = "http://localhost:3000")
-	@RequestMapping(path = "/addUser", method = RequestMethod.GET)
+	@RequestMapping(path = "/addUser", method = RequestMethod.POST)
 	@ResponseBody
-	public JsonResponse addUser(@RequestParam(value = "account") String account,
+	public JsonResponse addUser(@RequestParam(value = "account") String account,@RequestParam(value = "role") String role,
 			@RequestParam(value = "password") String password, @RequestParam(value = "name") String name,
 			@RequestParam(value = "phone") String phone, @RequestParam(value = "address") String address) {
 		JsonResponse res = new JsonResponse();
@@ -97,6 +135,7 @@ public class UserController {
 		userJSObj.put("fullName", name);
 		userJSObj.put("phoneNumber", phone);
 		userJSObj.put("address", address);
+		userJSObj.put("role", role);
 
 		userList.put(id, userJSObj);
 
@@ -112,11 +151,11 @@ public class UserController {
 	}
 
 	@CrossOrigin(origins = "http://localhost:3000")
-	@RequestMapping(path = "/editUser", method = RequestMethod.GET)
+	@RequestMapping(path = "/editUser", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResponse editUser(@RequestParam(value = "id") String id, @RequestParam(value = "account") String account,
 			@RequestParam(value = "password") String password, @RequestParam(value = "name") String name,
-			@RequestParam(value = "phone") String phone, @RequestParam(value = "address") String address) {
+			@RequestParam(value = "phone") String phone, @RequestParam(value = "address") String address,@RequestParam(value = "role") String role) {
 		JsonResponse res = new JsonResponse();
 
 		UserDatabase userDB = new UserDatabase();
@@ -140,6 +179,7 @@ public class UserController {
 		userJSObj.put("fullName", name);
 		userJSObj.put("phoneNumber", phone);
 		userJSObj.put("address", address);
+		userJSObj.put("role", role);
 
 		userList.replace(id, userJSObj);
 
@@ -178,6 +218,7 @@ public class UserController {
 
 		try (FileWriter writer = new FileWriter(link)) {
 			writer.write(userDeletedList.toJSONString());
+			
 			writer.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -188,15 +229,32 @@ public class UserController {
 
 		res.setResult("SUCCESS");
 		res.setResponse(pckListTransfered);
+		
+		UserDatabase userDB = new UserDatabase();
+		JSONObject userList = userDB.getUserList();
 
+		JSONObject userJSObj = userDB.getUser(id);
+		userJSObj.put("account", "");
+		userJSObj.put("password", "");
+
+		userList.replace(id, userJSObj);
+
+		link = PackageDatabase.relativePath() + "\\user.json";
+		try (FileWriter writer = new FileWriter(link)) {
+			writer.write(userList.toJSONString());
+			writer.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		new PackageDatabase().transferPackage(id);
 		return res;
 	}
 
 	public static void main(String[] args) {
-//		UserController uc = new UserController();
-//		System.out.println(uc.addUser("acc", "pass", "Nguyen Van Quyet", "0971619485", "thu duc"));
+		UserController uc = new UserController();
+//		System.out.println(uc.addUser("acc", "pass", "Nguyen Van Quyet", "0971619485", "thu duc","ROLE_USER"));
 //		System.out.println(uc.editUser("u3", "ngvanquyet2000", "5655", "Nguyen Van Quyet", "0971619480", "BD"));
-//		System.out.println(uc.deleteUser("u3"));
+		System.out.println(uc.deleteUser("u0"));
 	}
 
 }

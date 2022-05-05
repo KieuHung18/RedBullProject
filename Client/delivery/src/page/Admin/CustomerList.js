@@ -54,6 +54,7 @@ class Component extends React.Component {
         if(res.result!="FAIL"){
            customerTable=[];
           for (let i = 0; i < res.response.length; i++) {
+
             customerTable.push({
               customerID:res.response[i].id,
               customerName:res.response[i].fullName,
@@ -83,8 +84,8 @@ class Component extends React.Component {
 
     const tableRowEvents = {
       onClick: (row,rowElement,rowIndex) => {
-        customerID= rowElement.customerID;
-        this.setState({customer:rowElement.customerName});
+        let pid="/editcustomer/"+rowElement.customerID;
+        this.props.navigate(pid);
       },
     }
     const columns = [

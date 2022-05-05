@@ -33,6 +33,35 @@ public class CustomerListController {
 		res.setResponse(list);
 		return res;
 	}
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(path = "/customer", method = RequestMethod.GET)
+	@ResponseBody
+	public JsonResponse customer(@RequestParam(value = "id") String id) {
+		CustomerDatabase database=new CustomerDatabase();
+		JSONObject customer= database.getCustomer(id);
+		FECustomer response =new FECustomer();
+		
+		
+		String fullName = (String) customer.get("fullName");
+		String[] tmp = fullName.split(" ");
+		int count = tmp.length;
+		String firstName = "";
+		String lastName = tmp[count - 1];
+		for (int i = 0; i < tmp.length - 1; i++) {
+			firstName += tmp[i] + " ";
+		}
+		response.setId(id);
+		response.setAddress((String) customer.get("address"));
+		response.setFirstName(firstName);
+		response.setLastName(lastName);
+		response.setPhoneNumber((String) customer.get("phoneNumber"));
+		
+		JsonResponse res = new JsonResponse();
+		res.setResult("SUCCESS");
+		res.setResponse(response);
+		return res;
+	}
+	
 
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(path = "/addcustomer", method = RequestMethod.POST)

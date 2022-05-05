@@ -80,12 +80,9 @@ export class Component extends React.Component {
   
   render() {
     const tableRowEvents = {
-      onClick: (rowIndex,row,columns) => {
-        console.log(rowIndex)
-        console.log(row)
-        console.log(columns)
-        // let pid="/package/"+rowIndex.id;
-        // this.props.navigate(pid);
+      onClick: (row,rowElement,rowIndex) => {
+        let pid="/edituser/"+rowElement.userID;
+        this.props.navigate(pid);
       },
     }
     const columns = [
