@@ -17,6 +17,10 @@ function EditCustomer(){
     const value = e.target.value.replace(/\D/g, "");
     setAge(value);
 };
+function cancel(event){
+    event.preventDefault();
+    navigate(-1)
+}
     return (
         <Div>
              <h1 className="packagelist-welcome">Edit Customer</h1>
@@ -42,12 +46,12 @@ function EditCustomer(){
                            <Row style={{maxWidth:"300px"}}>
                             <Col>
                            <div className="btn_addUser">
-                                 <button>Add</button>
+                                 <button type="submit">Add</button>
                             </div>
                             </Col>
                             <Col>
                             <div className="btn_addUser">
-                                 <button >Cancel</button>
+                                 <button onClick={cancel} >Cancel</button>
                             </div>
                             </Col>
                             </Row>
