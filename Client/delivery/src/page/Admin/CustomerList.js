@@ -54,6 +54,7 @@ class Component extends React.Component {
         if(res.result!="FAIL"){
            customerTable=[];
           for (let i = 0; i < res.response.length; i++) {
+
             customerTable.push({
               customerID:res.response[i].id,
               customerName:res.response[i].fullName,

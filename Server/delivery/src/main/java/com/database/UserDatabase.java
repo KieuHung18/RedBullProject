@@ -102,7 +102,7 @@ public class UserDatabase {
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 			for (int i = 0; i < jsonObject.size(); i++) {
-
+				if(!checkDeleted("u" + i)) {
 				JSONObject user = (JSONObject) jsonObject.get("u" + i);
 
 				String account = (String) user.get("account");
@@ -110,6 +110,7 @@ public class UserDatabase {
 				if (userName.equals(account)) {
 					result= (String) user.get("role");
 					break;
+				}
 				}
 
 			}
@@ -131,12 +132,13 @@ public class UserDatabase {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 			
 			for (int i = 0; i < jsonObject.size(); i++) {
-
+				if(!checkDeleted("u" + i)) {
 				JSONObject user = (JSONObject) jsonObject.get("u" + i);
-
+				
 				String account = (String) user.get("account");
 				if (accountInput.equals(account)) {
 					return true;
+				}
 				}
 
 			}
@@ -156,14 +158,14 @@ public class UserDatabase {
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 			for (int i = 0; i < jsonObject.size(); i++) {
-				if(checkDeleted("u" + i)) {return false;}
+				if(!checkDeleted("u" + i)) {
 				JSONObject user = (JSONObject) jsonObject.get("u" + i);
 				
 				String phone = (String) user.get("phoneNumber");
 				if (phoneInput.equals(phone)) {
 					return true;
 				}
-				
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -180,9 +182,7 @@ public class UserDatabase {
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 			for (int i = 0; i < jsonObject.size(); i++) {
-				if(checkDeleted("u" + i)) {return false;}
 				JSONObject user = (JSONObject) jsonObject.get("u" + i);
-
 				String password = (String) user.get("password");
 				if (passwordInput.equals(password)) {
 					return true;

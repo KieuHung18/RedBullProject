@@ -38,8 +38,46 @@ public class UserController {
 		}
 		return res;
 	}
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(path = "/fulluser", method = RequestMethod.GET)
+	@ResponseBody
+	public JsonResponse fulluser(@RequestParam(value = "userID") String userID) {
+		JsonResponse res = new JsonResponse();
 
-	
+		if (getFullUser(userID) != null) {
+			res.setResult("SUCCESS");
+			res.setResponse(getFullUser(userID));
+		} else {
+			res.setResult("FAIL");
+		}
+		return res;
+	}
+
+	public FullUser getFullUser(String userID) {
+		FullUser result = new FullUser();
+		JSONObject jsonPackage = new com.database.UserDatabase().getUser(userID);
+		if (jsonPackage == null) {
+			return null;
+		} else {
+			String fullName = (String) jsonPackage.get("fullName");
+			String[] tmp = fullName.split(" ");
+			int count = tmp.length;
+			String firstName = "";
+			String lastName = tmp[count - 1];
+			for (int i = 0; i < tmp.length - 1; i++) {
+				firstName += tmp[i] + " ";
+			}
+			result.setFirstName(firstName);
+			result.setLastName(lastName);
+			result.setPhoneNumber((String) jsonPackage.get("phoneNumber"));
+			result.setAddress((String) jsonPackage.get("address"));
+			result.setUserName((String) jsonPackage.get("account"));
+			result.setRole((String) jsonPackage.get("role"));
+			result.setPassword((String) jsonPackage.get("password"));
+
+		}
+		return result;
+	}
 	public User getUser(String userID) {
 		User result = new User();
 		JSONObject jsonPackage = new com.database.UserDatabase().getUser(userID);

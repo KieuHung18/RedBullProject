@@ -21,6 +21,12 @@
 			authentication-failure-url="/denied" username-parameter="account"
 			password-parameter="password" />
 		
+		<sec:intercept-url pattern="/editcustomer" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/addcustomer" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/fulluser" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/deleteUser" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/editUser" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/addUser" access="hasRole('ROLE_ADMIN')" />
 		<sec:intercept-url pattern="/addpackage" access="hasRole('ROLE_ADMIN')" />
 		<sec:intercept-url pattern="/adminpackagelist" access="hasRole('ROLE_ADMIN')" />
 		<sec:intercept-url pattern="/protectedadmin" access="hasRole('ROLE_ADMIN')" />

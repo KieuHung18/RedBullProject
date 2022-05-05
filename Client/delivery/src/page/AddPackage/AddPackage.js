@@ -114,8 +114,8 @@ class Component extends React.Component {
           withCredentials: true
           },
           crossDomain: true,
-        success:function(){
-          alert("Package Added")
+        success:function(res){
+          alert("Package Added To"+res.response)
         }
       });
     }

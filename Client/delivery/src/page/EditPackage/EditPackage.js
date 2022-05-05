@@ -51,7 +51,7 @@ export default function EditPackage() {
 class Component extends React.Component {
   constructor(props) {
     super(props);
-    this.state={checked:false,customer:"Loading...",loadData:false}
+    this.state={checked:false,customer:"Loading...",loadData:true}
     this.checkAddress=this.checkAddress.bind(this)
     this.savePackage=this.savePackage.bind(this)
     this.toGoogleMap=this.toGoogleMap.bind(this)
@@ -83,7 +83,7 @@ class Component extends React.Component {
                   status:  res.response.status}
               customer={id: res.response.customerID,phone: res.response.customerPhone,name: res.response.customerName};
         display.setState({ customer: customer.name});
-        display.setState({ loadData: false});
+        
       }
   });
   }

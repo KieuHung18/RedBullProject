@@ -97,14 +97,14 @@ public class PackageDatabase {
 			// TODO: handle exception
 		}
 	}
-	public void addPackage(String address, int price,String CustomerID) {
+	public String addPackage(String address, int price,String CustomerID) {
 		JSONParser parser = new JSONParser();
 		String link = relativePath()+"\\packages.json";
+		String userID=findUser();
 		try (Reader reader = new FileReader(link)){
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 			JSONObject p = new JSONObject();
-			
-			p.put("idUser",findUser());
+			p.put("idUser",userID);
 			
 			LocalDate currentDate = LocalDate.now();
 			int day = currentDate.getDayOfMonth();
@@ -140,6 +140,7 @@ public class PackageDatabase {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		return (String) new UserDatabase().getUser(userID).get("fullName");
 	}
 	public String findUser(){
 		String result="";
