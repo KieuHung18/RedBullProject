@@ -42,9 +42,11 @@ var fullAddress;
                     else{
                         if(res.response=="PHONE"){
                             setPhone(true)
+                            setAccount(false)
                         }
                         if(res.response=="ACCOUNT"){
                             setAccount(true)
+                            setPhone(false)
                         }
                     }
                 }

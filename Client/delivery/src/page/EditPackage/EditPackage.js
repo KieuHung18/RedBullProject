@@ -83,13 +83,7 @@ class Component extends React.Component {
                   status:  res.response.status}
               customer={id: res.response.customerID,phone: res.response.customerPhone,name: res.response.customerName};
         display.setState({ customer: customer.name});
-        for (let i = 0; i < customerTable.length; i++) {
-          if(customerTable[i].name==customer.name){
-            let rowindex=i+1;
-            jquery(".package-list-row:nth-child("+rowindex+")").addClass("black-background");
-          }
-          
-        }
+        display.setState({ loadData: false });
       }
   });
   }
@@ -115,7 +109,6 @@ class Component extends React.Component {
               customerPhone:res.response[i].phoneNumber,
               });
           }
-          display.setState({ loadData: false });
         }
         else{console.log("fail");
           //redirect
@@ -245,7 +238,7 @@ class Component extends React.Component {
               Back
           </Button >
           {
-          // packageinfo.status=="pending"&&
+          packageinfo.status=="pending"&&
           <BootstrapTable 
           rowEvents={ tableRowEvents } 
           rowClasses="package-list-row"  
@@ -283,7 +276,7 @@ class Component extends React.Component {
             <Form.Group className="add-package-group" controlId="PriceID">
               <Form.Control disabled={packageinfo.status=="pending"?false:true} required defaultValue={packageinfo.price} placeholder="Price" />
             </Form.Group>
-            <Form.Check disabled={packageinfo.status=="pending"?false:true} checked={packageinfo.status=="pending"?false:true}  onChange={this.checkAddress}
+            <Form.Check disabled={packageinfo.status=="pending"?false:true}   onChange={this.checkAddress}
               required
               style={{marginLeft:"20px"}}
               type="checkbox"

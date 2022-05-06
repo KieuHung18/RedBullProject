@@ -65,7 +65,12 @@ public class UserController {
 			String firstName = "";
 			String lastName = tmp[count - 1];
 			for (int i = 0; i < tmp.length - 1; i++) {
-				firstName += tmp[i];
+				if(i!=tmp.length - 2) {
+					firstName += tmp[i]+" ";
+				}else {
+					firstName += tmp[i];
+				}
+				
 			}
 			result.setFirstName(firstName);
 			result.setLastName(lastName);
@@ -90,7 +95,12 @@ public class UserController {
 			String firstName = "";
 			String lastName = tmp[count - 1];
 			for (int i = 0; i < tmp.length - 1; i++) {
-				firstName += tmp[i];
+				if(i!=tmp.length - 2) {
+					firstName += tmp[i]+" ";
+				}else {
+					firstName += tmp[i];
+				}
+				
 			}
 			result.setFirstName(firstName);
 			result.setLastName(lastName);
@@ -168,20 +178,24 @@ public class UserController {
 			res.setResult("FAIL");
 			res.setResponse("ACCOUNT");
 			return res;
+		}else {
+			act=account;
 		}
 		
 		if (!pn.equals(phone)&&userDB.checkExistPhone(phone)) {
 			res.setResult("FAIL");
 			res.setResponse("PHONE");
 			return res;
+		}else {
+			pn=phone;
 		}
 
 		JSONObject userJSObj = new JSONObject();
 		userJSObj.put("id", id);
-		userJSObj.put("account", account);
+		userJSObj.put("account", act);
 		userJSObj.put("password", password);
 		userJSObj.put("fullName", name);
-		userJSObj.put("phoneNumber", phone);
+		userJSObj.put("phoneNumber", pn);
 		userJSObj.put("address", address);
 		userJSObj.put("role", role);
 
@@ -222,26 +236,33 @@ public class UserController {
 		String pass=(String) user.get("password");
 		if(password.equals("")) {
 			pass=(String) user.get("password");
+		}else {
+			pass=password;
 		}
 		
 		if (!act.equals(account)&&userDB.checkExistAccount(account)) {
 			res.setResult("FAIL");
 			res.setResponse("ACCOUNT");
 			return res;
+		}else {
+			act=account;
 		}
 		
 		if (!pn.equals(phone)&&userDB.checkExistPhone(phone)) {
 			res.setResult("FAIL");
 			res.setResponse("PHONE");
 			return res;
+		}else {
+			pn=phone;
 		}
+		
 		System.out.println();
 		JSONObject userJSObj = new JSONObject();
 		userJSObj.put("id", id);
 		userJSObj.put("account", act);
 		userJSObj.put("password", pass);
 		userJSObj.put("fullName", name);
-		userJSObj.put("phoneNumber", phone);
+		userJSObj.put("phoneNumber", pn);
 		userJSObj.put("address", address);
 		userJSObj.put("role", rl);
 
