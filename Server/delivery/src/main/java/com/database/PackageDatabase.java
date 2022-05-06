@@ -43,6 +43,7 @@ public class PackageDatabase {
 		}
 		return obj0;
 	}
+	
 	public void transferPackage(String userID) {
 		JSONArray jsonPackage = getListPackages(userID);
 		for (int i = 0; i < jsonPackage.size(); i++) {
@@ -322,6 +323,59 @@ public class PackageDatabase {
 	}
 
 	public JSONArray getListPackages(String userID) {
+		JSONParser parser = new JSONParser();
+		JSONArray arrobj0 = new JSONArray();
+		String link = relativePath() + "\\packages.json";
+		try (Reader reader = new FileReader(link)) {
+			JSONObject jsonObject = (JSONObject) parser.parse(reader);
+			for (int i = 0; i < jsonObject.size(); i++) {
+				JSONObject packages = (JSONObject) jsonObject.get("p" + i);
+				String user = (String) packages.get("idUser");
+				if (user.equals(userID)) {
+					String id = (String) packages.get("id");
+					String idCustomer = (String) packages.get("idCustomer");
+					String idUser = (String) packages.get("idUser");
+					JSONObject dayReceive = (JSONObject) packages.get("dayReceive");
+					long dr0 = (long) dayReceive.get("day");
+					long mr0 = (long) dayReceive.get("month");
+					long yr0 = (long) dayReceive.get("year");
+					JSONObject dayDelivery = (JSONObject) packages.get("dayDelivery");
+					long dd0 = (long) dayDelivery.get("day");
+					long md0 = (long) dayDelivery.get("month");
+					long yd0 = (long) dayDelivery.get("year");
+					String addressDelivery = (String) packages.get("addressDelivery");
+					long cost = (long) packages.get("cost");
+					String status = (String) packages.get("status");
+
+					Package package0 = new Package();
+					Date dater0 = new Date();
+					dater0.setDay((int) dr0);
+					dater0.setMonth((int) mr0);
+					dater0.setYear((int) yr0);
+					Date dated0 = new Date();
+					dated0.setDay((int) dd0);
+					dated0.setMonth((int) md0);
+					dated0.setYear((int) yd0);
+					package0.setId(id);
+					package0.setIdCustomer(idCustomer);
+					package0.setIdUser(idUser);
+					package0.setDayReceive(dater0);
+					package0.setDayDelivery(dated0);
+					package0.setAddressDelivery(addressDelivery);
+					package0.setCost((int) cost);
+					package0.setStatus(status);
+
+					arrobj0.add(package0);
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return arrobj0;
+	}
+	public JSONArray getAsignListPackages(String userID) {
 		JSONParser parser = new JSONParser();
 		JSONArray arrobj0 = new JSONArray();
 		String link = relativePath() + "\\packages.json";

@@ -25,6 +25,7 @@ import InsertCustomer from './page/InsertPage/InsertCustomer.jsx';
 import InsertUser from './page/InsertPage/InsertUser.jsx';
 import EditUser from './page/InsertPage/EditUser.jsx';
 import EditCustomer from './page/InsertPage/EditCustomer.jsx';
+import AsignPackage from "./page/AsignPackage/AsignPackage";
 
 const ProtectedRoute = ({ redirectPath = "/login", children }) => {
   if (!localStorage.getItem("user")) {
@@ -77,6 +78,7 @@ const Application = () => {
       <Route path="home" element={<HomePage />} />
       <Route path="login" element={<ProtectedLogin />} />
       <Route path="aboutus" element={<AboutUS />} />
+      <Route path="asignpackage" element={<AsignPackage />} />
 
       
 

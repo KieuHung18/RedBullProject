@@ -1,3 +1,7 @@
+.black-background{
+    background-color: black;
+    color: white;
+}
 .add-package-group{
     margin: 15px;
 }

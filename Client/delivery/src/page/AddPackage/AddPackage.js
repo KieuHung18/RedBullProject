@@ -30,7 +30,6 @@ function generator(quantity){
   }
   return items;
 }
-
 var customerTable=[];
 customerTable=generator(20);
 
