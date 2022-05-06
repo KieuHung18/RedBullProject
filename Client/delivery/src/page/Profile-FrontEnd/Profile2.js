@@ -25,7 +25,7 @@ export default function Profile2(){
 class Component extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { loadData: true,update:false,wrong:false,phone:false,format:false};
+        this.state = { loadData: true,update:false,wrong:false,phone:false,format:false,account:false};
         this.switchUpdate=this.switchUpdate.bind(this);
         this.saveUser=this.saveUser.bind(this);
         this.checkPhone=this.checkPhone.bind(this);
@@ -74,6 +74,7 @@ class Component extends React.Component {
         this.updateUser();
     }
     saveUser(event){
+        event.preventDefault();
         var display=this;
          fullAddress=jquery("#picity").val()+","+jquery("#pidistrict").val()+","+jquery("#piward").val()+","+jquery("#pistreet").val();
         
@@ -98,11 +99,23 @@ class Component extends React.Component {
             if(res.result=="SUCCESS"){
                 display.setState({update:display.state.update?false:true})
                 display.setState({wrong:false})
+                display.setState({phone:false})
+                display.setState({account:false})
                 display.updateUser();
                 alert("Update success")
             }
             else{
-                display.setState({phone:true})
+                if(res.response=="PHONE"){console.log(res.response);
+                    display.setState({phone:true})
+                    display.setState({account: false})
+                    display.setState({wrong:false})
+                }
+                if(res.response=="ACCOUNT"){
+                    display.setState({account: true})
+                    display.setState({phone:false})
+                    display.setState({wrong:false})
+                }
+                
             }
             },
             error: function(){
@@ -153,7 +166,7 @@ class Component extends React.Component {
                 <h2 className="profile-title">Profile</h2>
                 <div className="profile-card-container">
                 {this.state.update?
-                <Form onSubmit={this.checkPhone}>
+                <Form onSubmit={this.saveUser}>
                     <Row>
                 {profileLeft.map(
                     (p)=>(
@@ -296,6 +309,7 @@ class Component extends React.Component {
                 </Row>
                 {this.state.wrong&&<div style={{color:"red",margin:"auto",width:"fit-content"}}>Confirmation password is not correct</div>}
                 {this.state.phone&&<div style={{color:"red",margin:"auto",width:"fit-content"}}>Duplicate phone number</div>}
+                {this.state.account&&<div style={{color:"red",margin:"auto",width:"fit-content"}}>Duplicate account</div>}
                 {this.state.format&&<div style={{color:"red",margin:"auto",width:"fit-content"}}>Illegal phone number format</div>}
                     <Button variant="dark" className="profile-edit-btn" onClick={this.switchUpdate}>CANCEL<FontAwesomeIcon style={{paddingLeft:"5px"}} icon={faCancel}/></Button>
                     <Button variant="dark" className="profile-edit-btn" style={{marginLeft: "10px"}} type="submit">SAVE<FontAwesomeIcon style={{paddingLeft:"5px"}} icon={faSave}/></Button>
