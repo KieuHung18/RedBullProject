@@ -16,6 +16,7 @@ user={
     Ward:"Loading...",
     Street:"Loading..."
 };
+var fullAddress=user.City+","+user.District+","+user.Ward+","+user.Street;
 export default function Profile2(){
     return(
         <Component />
@@ -55,6 +56,7 @@ class Component extends React.Component {
                         Street:address[3],
                         Account:res.response.userName
                     };
+                fullAddress=user.City+","+user.District+","+user.Ward+","+user.Street;
                 display.setState({ loadData: display.loadData?false:true });
             }
                 
@@ -73,7 +75,7 @@ class Component extends React.Component {
     }
     saveUser(event){
         var display=this;
-        let fullAddress=jquery("#picity").val()+","+jquery("#pidistrict").val()+","+jquery("#piward").val()+","+jquery("#pistreet").val();
+         fullAddress=jquery("#picity").val()+","+jquery("#pidistrict").val()+","+jquery("#piward").val()+","+jquery("#pistreet").val();
         
         if(jquery("#pipassword").val()===jquery("#picpassword").val()
         ){
@@ -347,6 +349,26 @@ class Component extends React.Component {
                     </Col>
                     )
                 )}
+                </Row>
+                <Row>
+                <Col>
+                <Card className="profile-card">
+                    <Card.Header className="profile-card-header">
+                        <Card.Title className="profile-card-title">
+                            Address
+                        </Card.Title>
+                    </Card.Header >
+                    <Card.Body className="profile-card-body">
+                        <Card.Text className="profile-card-text">
+                        <Row className="profile-card-row">
+                            <Col className="profile-card-col">Address{": "}</Col>
+                            <Col className="profile-card-colinfo">{fullAddress}</Col>
+                        </Row>
+                        </Card.Text>
+                    </Card.Body>
+                    
+                </Card>
+                </Col>
                 </Row>
                 
                 <Button variant="dark" className="profile-edit-btn" onClick={this.switchUpdate}>UPDATE<FontAwesomeIcon style={{paddingLeft:"5px"}} icon={faPen}/></Button>
