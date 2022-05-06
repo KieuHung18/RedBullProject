@@ -83,11 +83,17 @@ class Component extends React.Component {
                   status:  res.response.status}
               customer={id: res.response.customerID,phone: res.response.customerPhone,name: res.response.customerName};
         display.setState({ customer: customer.name});
-        
+        for (let i = 0; i < customerTable.length; i++) {
+          if(customerTable[i].name==customer.name){
+            let rowindex=i+1;
+            jquery(".package-list-row:nth-child("+rowindex+")").addClass("black-background");
+          }
+          
+        }
       }
   });
   }
-
+  
   componentDidMount() {
     var display=this;
     if(display.state.loadData){
@@ -138,6 +144,7 @@ class Component extends React.Component {
       checked: this.state.checked? false:true
     })
   }
+
   savePackage(event){
   fullAddress=jquery("#CityID").val()+","+jquery("#DistrictID").val()+","+jquery("#WardID").val()+","+jquery("#StreetID").val();
   var display=this;
@@ -199,6 +206,7 @@ class Component extends React.Component {
       
   }
   render() {
+    
     const tableRowEvents = {
       onClick: (row,rowElement,rowIndex) => {
         customer.id= rowElement.customerID;
@@ -236,7 +244,8 @@ class Component extends React.Component {
           <Button style={{float: "left",marginLeft: "20px"}} onClick={(event)=>{event.preventDefault();this.props.navigate(-1)}} variant="dark" >
               Back
           </Button >
-          {packageinfo.status=="pending"&&
+          {
+          // packageinfo.status=="pending"&&
           <BootstrapTable 
           rowEvents={ tableRowEvents } 
           rowClasses="package-list-row"  
