@@ -195,7 +195,7 @@ public class PackageDatabase {
 			String compare = (String) packages.get("idUser");
 			if (compare.equals(userID)) {
 
-				r.put("idUser", "null");
+				r.put("idUser", null);
 
 				r.put("idPackage", packageID);
 
