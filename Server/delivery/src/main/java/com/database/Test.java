@@ -39,9 +39,9 @@ public class Test {
 //		customerDatabase.editCustomer("c0", "", "", "");
 		/*******/
 
-		System.out.println("request remove: " + packageDatabase.requesRemoveList());
-		System.out.println("request remove: " + packageDatabase.asignPackage("u2", "p0"));
+//		System.out.println("request remove: " + packageDatabase.requesRemoveList());
+//		System.out.println("request remove: " + packageDatabase.asignPackage("u2", "p0"));
 //		packageDatabase.requestRemove("u2", "p0");
-		packageDatabase.deasignPackage("u2", "p2");
+		packageDatabase.deasignPackage("u2", "p1");
 	}
 }

@@ -271,7 +271,7 @@ public class PackageDatabase {
 
 				r.put("idUser", null);
 
-				r.put("idPackage", packageID);
+				r.put("id", packageID);
 
 				int day = package0.getDayReceive().getDay();
 				int month = package0.getDayReceive().getMonth();
@@ -299,7 +299,7 @@ public class PackageDatabase {
 				r.put("status", package0.getStatus());
 
 				jsonObject.put(packageID, r);
-				try (FileWriter file = new FileWriter(link)) {
+				try (FileWriter file = new FileWriter(link0)) {
 					file.write(jsonObject.toJSONString());
 				} catch (IOException e) {
 					e.printStackTrace();
