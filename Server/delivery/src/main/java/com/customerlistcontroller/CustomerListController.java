@@ -48,7 +48,12 @@ public class CustomerListController {
 		String firstName = "";
 		String lastName = tmp[count - 1];
 		for (int i = 0; i < tmp.length - 1; i++) {
-			firstName += tmp[i];
+			if(i!=tmp.length - 2) {
+				firstName += tmp[i]+" ";
+			}else {
+				firstName += tmp[i];
+			}
+			
 		}
 		response.setId(id);
 		response.setAddress((String) customer.get("address"));

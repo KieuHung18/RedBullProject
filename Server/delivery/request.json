@@ -1,0 +1,42 @@
+{
+	"p0": {
+		"idUser": "u2",
+		"idPackage": "p0"
+	},
+	"p1": {
+		"idUser": "u2",
+		"idPackage": "p1"
+	},
+	"p2": {
+		"idUser": "u1",
+		"idPackage": "p2"
+	},
+	"p3": {
+		"idUser": "u0",
+		"idPackage": "p3"
+	},
+	"p4": {
+		"idUser": "u2",
+		"idPackage": "p4"
+	},
+	"p5": {
+		"idUser": "u0",
+		"idPackage": "p5"
+	},
+	"p6": {
+		"idUser": "u0",
+		"idPackage": "p6"
+	},
+	"p7": {
+		"idUser": "u0",
+		"idPackage": "p7"
+	},
+	"p8": {
+		"idUser": "u0",
+		"idPackage": "p8"
+	},
+	"p9": {
+		"idUser": "u1",
+		"idPackage": "p9"
+	}
+}

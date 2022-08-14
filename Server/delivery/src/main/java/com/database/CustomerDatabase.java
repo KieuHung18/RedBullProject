@@ -163,11 +163,11 @@ public class CustomerDatabase {
 		int customerLengh = customerList.size();
 		JSONObject obj = new JSONObject();
 		if (!checkExistPhone(phoneNumber)) {
-			obj.put("id", "c" + (customerLengh + 1));
+			obj.put("id", "c" + (customerLengh));
 			obj.put("fullName", fullName);
 			obj.put("address", address);
 			obj.put("phoneNumber", phoneNumber);
-			jsonObject.put("c" + (customerLengh + 1), obj);
+			jsonObject.put("c" + (customerLengh), obj);
 			try (FileWriter file = new FileWriter(link)) {
 
 				file.write(jsonObject.toJSONString().toString());
