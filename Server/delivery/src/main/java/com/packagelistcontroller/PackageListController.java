@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.connection.JsonResponse;
-import com.database.Customer;
 import com.database.CustomerDatabase;
-import com.database.Date;
 import com.database.Package;
+import com.database.PackageDatabase;
 import com.database.UserDatabase;
 
 @Controller
@@ -58,4 +57,55 @@ public class PackageListController {
 
 		return result;
 	}
+
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(path = "/asignpackage", method = RequestMethod.GET)
+	@ResponseBody
+	public JsonResponse asignPackage(@RequestParam(value = "userID") String userID,
+			@RequestParam(value = "packageID") String packageID) {
+		JsonResponse res = new JsonResponse();
+		PackageDatabase database = new PackageDatabase();
+		String list = database.asignPackage(userID, packageID);
+		res.setResult(list);
+		return res;
+	}
+
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(path = "/requestremove", method = RequestMethod.GET)
+	@ResponseBody
+	public JsonResponse requestRemove(@RequestParam(value = "userID") String userID,
+			@RequestParam(value = "packageID") String packageID) {
+		JsonResponse res = new JsonResponse();
+		PackageDatabase database = new PackageDatabase();
+		database.requestRemove(userID, packageID);
+		res.setResult("REQUEST SUCCESS!!!");
+		return res;
+	}
+
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(path = "/requesremovelist", method = RequestMethod.GET)
+	@ResponseBody
+	public JsonResponse requesRemoveList(@RequestParam(value = "userID") String userID,
+			@RequestParam(value = "packageID") String packageID) {
+		JsonResponse res = new JsonResponse();
+		List<PackageList> result = new ArrayList<PackageList>();
+		PackageDatabase database = new PackageDatabase();
+		result = database.requesRemoveList();
+		res.setResponse(result);
+		res.setResult("LIST REQUEST REMOVE");
+		return res;
+	}
+
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(path = "/deasignpackage", method = RequestMethod.GET)
+	@ResponseBody
+	public JsonResponse deasignPackage(@RequestParam(value = "userID") String userID,
+			@RequestParam(value = "packageID") String packageID) {
+		JsonResponse res = new JsonResponse();
+		PackageDatabase database = new PackageDatabase();
+		database.deasignPackage(userID, packageID);
+		res.setResult("SUCCESS REMOVE REQUEST FROM USER");
+		return res;
+	}
+
 }
