@@ -26,6 +26,7 @@ import InsertUser from './page/InsertPage/InsertUser.jsx';
 import EditUser from './page/InsertPage/EditUser.jsx';
 import EditCustomer from './page/InsertPage/EditCustomer.jsx';
 import AsignPackage from "./page/AsignPackage/AsignPackage";
+import jquery from "jquery";
 
 const ProtectedRoute = ({ redirectPath = "/login", children }) => {
   if (!localStorage.getItem("user")) {
@@ -62,12 +63,31 @@ const PackageDetailGate = () => {
     return <PackageDetail />;
   }
 };
-
-
+function setLocation(){
+  navigator.geolocation.getCurrentPosition(function(position) {
+    jquery.ajax({
+      type: "GET",
+      url: "http://localhost:8080/delivery/setlocation",
+      data: {userID: JSON.parse(localStorage.getItem("user")).userID,
+      latitude:position.coords.latitude,
+      longitude:position.coords.longitude
+      },
+      xhrFields: {
+          withCredentials: true
+          },
+          crossDomain: true,
+      success: function(res){
+         
+      }
+    });
+  });
+}
 const Application = () => {
+  if(localStorage.getItem("user")&&JSON.parse(localStorage.getItem("user")).userRole=="ROLE_USER"){
+  setInterval(setLocation,1000*60*5);
+  }
   return (
     <>
-
     <BrowserRouter>
     <Navbar/>
     <Routes>
