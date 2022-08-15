@@ -97,7 +97,7 @@ public class PackageDatabase {
 			r.put("idUser", userID);
 			r.put("idPackage", packageID);
 
-			jsonObject.put("r" + jsonObject.size(), r);
+			jsonObject.put("p" + jsonObject.size(), r);
 			try (FileWriter file = new FileWriter(link)) {
 				file.write(jsonObject.toJSONString());
 			} catch (IOException e) {
@@ -121,7 +121,7 @@ public class PackageDatabase {
 			JSONObject jsonObject = (JSONObject) parser0.parse(reader);
 			System.out.println("size: " + jsonObject.size());
 			for (int i = 0; i < jsonObject.size(); i++) {
-				JSONObject request = (JSONObject) jsonObject.get("r" + i);
+				JSONObject request = (JSONObject) jsonObject.get("p" + i);
 				arr.add((String) request.get("idPackage"));
 
 			}
