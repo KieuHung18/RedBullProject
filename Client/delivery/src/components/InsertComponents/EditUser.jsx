@@ -64,6 +64,34 @@ function EditUser(){
             }
           });
     }
+    function convert(coordinate){
+        let degrees = Math.floor(coordinate)
+        let minutes = Math.floor((coordinate-degrees)*60)
+        let seconds = ((coordinate-degrees)*60 - minutes)*60000
+         return degrees+"°"+minutes+"'"+Math.round(seconds)/1000
+    }
+    function getUrl(latitude,longitude){
+        return "https://www.google.com/maps/place/"+convert(latitude)+"+"+convert(longitude)
+    }
+    function CheckAddress(){
+        jquery.ajax({
+            type: "GET",
+            url: "http://localhost:8080/delivery/getlocation",
+            data: {userID:param.id},
+            xhrFields: {
+                withCredentials: true
+                },
+                crossDomain: true,
+            success: function(res){
+                if(res.result=="SUCCESS"){
+                    window.open(getUrl(res.response.latitude,res.response.longitude))
+                }
+                else{
+                    alert("No location found")
+                }
+            }
+        });
+    }
     function getUser(){
         jquery.ajax({
           type: "GET",
@@ -92,7 +120,7 @@ function EditUser(){
           }
       });
       }
-    useEffect(()=>{console.log("a")
+    useEffect(()=>{
         getUser()
     },[]);
     const param=useParams();
@@ -108,8 +136,11 @@ function EditUser(){
     };
     return(
         <Section>
-            
+            <div style={{display:"flex"}}>
             <h1 className="packagelist-welcome">Edit User</h1>
+            <button style={{width: "fit-content",height: "fit-content",alignSelf: "flex-end"}}
+                 className="add-package-btn btn btn-dark" onClick={(event)=>{event.preventDefault();CheckAddress()}}>Check Address</button>
+            </div>
             <div className="insertCustomer">
                 <div className="Content_Insert">
                         <form onSubmit={saveUser} className="mainForm" action="">

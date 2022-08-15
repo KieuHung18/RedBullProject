@@ -16,10 +16,8 @@ public class AddPackageController {
 							@RequestParam(value = "address") String address,
 							@RequestParam(value = "price") int price) {
 		JsonResponse response=new JsonResponse();
-		String userName=new PackageDatabase().addPackage(address, price, customerID);
-		response.setResult("SUCCESS");response.setResponse(userName);
+		response.setResult("SUCCESS");
 		return response;
-		
 	}
 	@RequestMapping(path="/editpackage",method = RequestMethod.POST)
 	public void editpackage(@RequestParam(value = "customerID") String customerID,

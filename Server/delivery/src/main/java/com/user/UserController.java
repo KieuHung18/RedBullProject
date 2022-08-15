@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.connection.JsonResponse;
+import com.database.LocationDatabase;
 import com.database.Package;
 import com.database.PackageDatabase;
 import com.database.UserDatabase;
@@ -82,6 +83,32 @@ public class UserController {
 
 		}
 		return result;
+	}
+	
+	
+	@RequestMapping(path = "/getlocation", method = RequestMethod.GET)
+	@ResponseBody
+	public JsonResponse getlocation(@RequestParam(value = "userID") String id) {
+		JsonResponse result = new JsonResponse();
+		try {
+			result.setResponse(new LocationDatabase().getLocation(id));
+			result.setResult("SUCCESS");
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			result.setResult("FAIL");
+		}
+		return result;
+		
+	}
+	@RequestMapping(path = "/setlocation", method = RequestMethod.GET)
+	@ResponseBody
+	public JsonResponse getlocation(@RequestParam(value = "userID") String id, @RequestParam(value = "latitude") double latitude,@RequestParam(value = "longitude") double longitude  ) {
+		JsonResponse result = new JsonResponse();
+		new LocationDatabase().setLocation(id, latitude, longitude);
+		result.setResult("SUCCESS");
+		return result;
+		
 	}
 	public User getUser(String userID) {
 		User result = new User();

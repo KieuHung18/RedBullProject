@@ -13,7 +13,25 @@ function Login() {
   // const [password,setPassword]=useState("")
   return <Component navigate={useNavigate()} />;
 }
- 
+function setLocation(){
+  navigator.geolocation.getCurrentPosition(function(position) {
+    jquery.ajax({
+      type: "GET",
+      url: "http://localhost:8080/delivery/setlocation",
+      data: {userID: JSON.parse(localStorage.getItem("user")).userID,
+      latitude:position.coords.latitude,
+      longitude:position.coords.longitude
+      },
+      xhrFields: {
+          withCredentials: true
+          },
+          crossDomain: true,
+      success: function(res){
+      
+      }
+    });
+  });
+}
 class Component extends React.Component {
   constructor(props) {
     super(props);
@@ -38,6 +56,9 @@ class Component extends React.Component {
           let user={userID:response.response.userID,userRole:response.response.userRole};
           localStorage.setItem("user", JSON.stringify(user));
           display.props.navigate("/profile");
+          if(response.response.userRole=="ROLE_USER"){
+            setLocation()
+          }
           window.location.reload(false);
         } else {
           const getNotice = document.getElementById('redNotice');

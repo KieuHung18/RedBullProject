@@ -115,7 +115,6 @@ class Component extends React.Component {
           },
           crossDomain: true,
         success:function(res){
-          alert("Package Added To "+res.response)
           display.props.navigate(-1)
         }
       });
