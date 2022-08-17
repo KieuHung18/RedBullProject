@@ -22,7 +22,12 @@ public class PackageController {
 	public JsonResponse connectpath(@RequestParam(value = "packageID") String packageID) {
 		JsonResponse res = new JsonResponse();
 		if (getPackage(packageID) != null) {
-			res.setResult("SUCCESS");
+			if(new PackageDatabase().inRequest(packageID)) {
+				res.setResult("REQUEST");
+			}
+			else{
+				res.setResult("SUCCESS");
+			}
 			res.setResponse(getPackage(packageID));
 		} else {
 			res.setResult("FAIL");

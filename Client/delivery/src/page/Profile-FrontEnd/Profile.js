@@ -3,7 +3,8 @@ import { } from 'react-bootstrap';//{Card,ListGroupItem,ListGroup}
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Profile.css';
 import jquery  from 'jquery';
-import {useNavigate } from 'react-router-dom'; 
+import {useNavigate } from 'react-router-dom';
+
 var user;
 user={
     FirstName:"",LastName:"",PhoneNumber:"",Address:"",

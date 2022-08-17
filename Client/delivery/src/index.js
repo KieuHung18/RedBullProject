@@ -26,6 +26,7 @@ import InsertUser from './page/InsertPage/InsertUser.jsx';
 import EditUser from './page/InsertPage/EditUser.jsx';
 import EditCustomer from './page/InsertPage/EditCustomer.jsx';
 import AsignPackage from "./page/AsignPackage/AsignPackage";
+import RecivePackage from "./page/PackageList/RecivePackage";
 import jquery from "jquery";
 
 const ProtectedRoute = ({ redirectPath = "/login", children }) => {
@@ -108,6 +109,7 @@ const Application = () => {
         <Route path="packagelist" element={<PackageListGate />} />
         <Route path="package/:id" element={<PackageDetailGate />} />
         <Route path="profile" element={<Profile />} />
+        <Route path="recivepackage" element={<RecivePackage />} />
 
        <Route element={<AdminProtectedRoute/>}>
         {/* ADMIN PROTECTED ROUTES IN HERE */}

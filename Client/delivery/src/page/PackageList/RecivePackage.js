@@ -50,7 +50,7 @@ function count(){
     if(packageTable[i].status=="exception"){numException++;}
   }
 }
-export default function PackageList(){
+export default function RecivePackage(){
   
   return (
     <Component navigate={useNavigate()}/>
@@ -67,7 +67,7 @@ export class Component extends React.Component {
     if(display.state.loadData){
     jquery.ajax({
       type: "GET",
-      url: "http://localhost:8080/delivery/packagelist",
+      url: "http://localhost:8080/delivery/unassignpackages",
       data: {userID: JSON.parse(localStorage.getItem("user")).userID},
       xhrFields: {
         withCredentials: true
@@ -170,7 +170,6 @@ export class Component extends React.Component {
       pagination={pagination}
       filter={ filterFactory() }
        />
-      <Button onClick={()=>{this.props.navigate("/recivepackage")}} style={{marginLeft: "60px"}} variant="dark">Recive Package <FontAwesomeIcon style={{paddingLeft: "5px"}} icon={faAdd}/></Button>
     </div>
     );
   }

@@ -1,5 +1,6 @@
 package com.database;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -23,8 +24,6 @@ public class PackageDatabase {
 
 //	public static final String LINK = "E:\\RedBull\\RedBullProject\\Server\\delivery";
 //	private static 
-	public static final int MAX_PACKAGES = 5;
-
 	/** Phương thức lấy gói hàng(JSONObject) bao gồm tất cả hông tin theo ID **/
 	public JSONObject getPackage(String id_package) {
 		JSONParser parser = new JSONParser();
@@ -44,7 +43,7 @@ public class PackageDatabase {
 		}
 		return obj0;
 	}
-
+	
 	public void transferPackage(String userID) {
 		JSONArray jsonPackage = getListPackages(userID);
 		for (int i = 0; i < jsonPackage.size(); i++) {
@@ -56,48 +55,13 @@ public class PackageDatabase {
 			}
 		}
 	}
-
-	// check đơn hàng có vượt quá số lượng hay không?
-	public String asignPackage(String userID, String packageID) {
-
-		JSONParser parser = new JSONParser();
-		String link = relativePath() + "\\packages.json";
-		try (Reader reader = new FileReader(link)) {
-			JSONObject jsonObject = (JSONObject) parser.parse(reader);
-			System.out.println("size: " + jsonObject.size());
-			int count = 0;
-			for (int i = 0; i < jsonObject.size(); i++) {
-				JSONObject packages = (JSONObject) jsonObject.get("p" + i);
-
-				if (packages.get("idUser").equals(userID) && packages.get("id").equals(packageID)) {
-					count++;
-				}
-			}
-			if (count <= MAX_PACKAGES) {
-				// phương thức addToUser ?
-				return "SUCCESS";
-			}
-
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("File Not Found");
-		}
-		return "FAIL";
-	}
-
-	// thêm yêu cầu từ chối đơn hàng vào json
-	public void requestRemove(String userID, String packageID) {
-
+	public void undoRequest(String packageID) {
 		JSONParser parser = new JSONParser();
 		String link = relativePath() + "\\request.json";
 //			String userID = findUser();
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
-			JSONObject r = new JSONObject();
-			r.put("idUser", userID);
-			r.put("idPackage", packageID);
-
-			jsonObject.put("p" + jsonObject.size(), r);
+			jsonObject.remove(packageID);
 			try (FileWriter file = new FileWriter(link)) {
 				file.write(jsonObject.toJSONString());
 			} catch (IOException e) {
@@ -109,22 +73,78 @@ public class PackageDatabase {
 			System.out.println("File Not Found");
 		}
 	}
+	// check đơn hàng có vượt quá số lượng hay không?
+	public boolean asignPackage(String userID, String packageID) {
+		int max=20;
+		int count = 0;
+		JSONParser parser = new JSONParser();
+		String link = relativePath() + "\\packages.json";
+		try (Reader reader = new FileReader(link)) {
+			JSONObject jsonObject = (JSONObject) parser.parse(reader);
+			for (int i = 0; i < jsonObject.size(); i++) {
+				JSONObject packages = (JSONObject) jsonObject.get("p" + i);
+				if (packages.get("idUser").equals(userID) && packages.get("status").equals("pending")) {
+					count++;
+				}
+			}System.out.println(count);
+			if (count <= max) {
+				JSONObject packages = (JSONObject) jsonObject.get(packageID);
+				packages.put("idUser", userID);
+				try (FileWriter file = new FileWriter(link)) {
+					file.write(jsonObject.toJSONString());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				return true;
+			}
 
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("File Not Found");
+		}
+		return false;
+	}
+
+	// thêm yêu cầu từ chối đơn hàng vào json
+	public void requestRemove(String packageID) {
+		JSONParser parser = new JSONParser();
+		String link = relativePath() + "\\request.json";
+//			String userID = findUser();
+		try (Reader reader = new FileReader(link)) {
+			JSONObject jsonObject = (JSONObject) parser.parse(reader);
+			jsonObject.put(packageID, packageID);
+			try (FileWriter file = new FileWriter(link)) {
+				file.write(jsonObject.toJSONString());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("File Not Found");
+		}
+	}
+	public boolean inRequest(String pid) {
+		JSONParser parser0 = new JSONParser();
+		String link0 = relativePath() + "\\request.json";
+		JSONObject listRequest = null;
+		try (Reader reader = new FileReader(link0)) {
+			listRequest= (JSONObject) parser0.parse(reader);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("File request.json Not Found");
+		}
+		return listRequest.containsKey(pid);
+	}
 	// DS sách đơn hàng yêu cầu từ chối bởi user
-	public JSONArray requesRemoveList() {
+	public JSONArray requestRemoveList() {
 		JSONParser parser = new JSONParser();
 		JSONParser parser0 = new JSONParser();
 		JSONArray arrobj0 = new JSONArray();
 		String link0 = relativePath() + "\\request.json";
-		List<String> arr = new ArrayList<String>();
+		JSONObject listRequest = null;
 		try (Reader reader = new FileReader(link0)) {
-			JSONObject jsonObject = (JSONObject) parser0.parse(reader);
-			System.out.println("size: " + jsonObject.size());
-			for (int i = 0; i < jsonObject.size(); i++) {
-				JSONObject request = (JSONObject) jsonObject.get("p" + i);
-				arr.add((String) request.get("idPackage"));
-
-			}
+			listRequest= (JSONObject) parser0.parse(reader);
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("File request.json Not Found");
@@ -132,94 +152,10 @@ public class PackageDatabase {
 		String link = relativePath() + "\\packages.json";
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
-			for (String idPackage : arr) {
-
-				for (int i = 0; i < jsonObject.size(); i++) {
-					JSONObject packages = (JSONObject) jsonObject.get("p" + i);
-					String compare = (String) packages.get("id");
-					if (compare.equals(idPackage)) {
-						String id = (String) packages.get("id");
-						String idCustomer = (String) packages.get("idCustomer");
-						String idUser = (String) packages.get("idUser");
-						JSONObject dayReceive = (JSONObject) packages.get("dayReceive");
-						long dr0 = (long) dayReceive.get("day");
-						long mr0 = (long) dayReceive.get("month");
-						long yr0 = (long) dayReceive.get("year");
-						JSONObject dayDelivery = (JSONObject) packages.get("dayDelivery");
-						long dd0 = (long) dayDelivery.get("day");
-						long md0 = (long) dayDelivery.get("month");
-						long yd0 = (long) dayDelivery.get("year");
-						String addressDelivery = (String) packages.get("addressDelivery");
-						long cost = (long) packages.get("cost");
-						String status = (String) packages.get("status");
-
-						Package package0 = new Package();
-						Date dater0 = new Date();
-						dater0.setDay((int) dr0);
-						dater0.setMonth((int) mr0);
-						dater0.setYear((int) yr0);
-						Date dated0 = new Date();
-						dated0.setDay((int) dd0);
-						dated0.setMonth((int) md0);
-						dated0.setYear((int) yd0);
-						package0.setId(id);
-						package0.setIdCustomer(idCustomer);
-						package0.setIdUser(idUser);
-						package0.setDayReceive(dater0);
-						package0.setDayDelivery(dated0);
-						package0.setAddressDelivery(addressDelivery);
-						package0.setCost((int) cost);
-						package0.setStatus(status);
-
-						arrobj0.add(package0);
-					}
-				}
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return arrobj0;
-	}
-
-	// bỏ gán idPackage khỏi User
-	public void deasignPackage(String userID, String packageID) {
-
-		JSONParser parser = new JSONParser();
-		String link = relativePath() + "\\request.json";
-		try (Reader reader = new FileReader(link)) {
-			JSONObject jsonObject = (JSONObject) parser.parse(reader);
-			JSONObject r = new JSONObject();
-			JSONObject packages = (JSONObject) jsonObject.get(packageID);
-			String compare = (String) packages.get("idUser");
-			if (compare.equals(userID)) {
-
-				r.put("idUser", null);
-
-				r.put("idPackage", packageID);
-
-				jsonObject.put(packageID, r);
-				try (FileWriter file = new FileWriter(link)) {
-					file.write(jsonObject.toJSONString());
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-
-		String link3 = relativePath() + "\\packages.json";
-		Package package0 = new Package();
-		try (Reader reader = new FileReader(link3)) {
-			JSONObject jsonObject = (JSONObject) parser.parse(reader);
-
 			for (int i = 0; i < jsonObject.size(); i++) {
 				JSONObject packages = (JSONObject) jsonObject.get("p" + i);
 				String compare = (String) packages.get("id");
-				String compareIdUser = (String) packages.get("idUser");
-				if (compare.equals(packageID) && compareIdUser.equals(userID)) {
+				if (listRequest.containsKey(compare)) {
 					String id = (String) packages.get("id");
 					String idCustomer = (String) packages.get("idCustomer");
 					String idUser = (String) packages.get("idUser");
@@ -235,6 +171,7 @@ public class PackageDatabase {
 					long cost = (long) packages.get("cost");
 					String status = (String) packages.get("status");
 
+					Package package0 = new Package();
 					Date dater0 = new Date();
 					dater0.setDay((int) dr0);
 					dater0.setMonth((int) mr0);
@@ -252,6 +189,7 @@ public class PackageDatabase {
 					package0.setCost((int) cost);
 					package0.setStatus(status);
 
+					arrobj0.add(package0);
 				}
 			}
 		} catch (IOException e) {
@@ -259,56 +197,161 @@ public class PackageDatabase {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-
-		JSONParser parser0 = new JSONParser();
-		String link0 = relativePath() + "\\packages.json";
-		try (Reader reader = new FileReader(link0)) {
-			JSONObject jsonObject = (JSONObject) parser0.parse(reader);
-			JSONObject r = new JSONObject();
-			JSONObject packages = (JSONObject) jsonObject.get(packageID);
-			String compare = (String) packages.get("idUser");
-			if (compare.equals(userID)) {
-
-				r.put("idUser", null);
-
-				r.put("id", packageID);
-
-				int day = package0.getDayReceive().getDay();
-				int month = package0.getDayReceive().getMonth();
-				int year = package0.getDayReceive().getYear();
-				JSONObject date = new JSONObject();
-				date.put("day", day);
-				date.put("month", month);
-				date.put("year", year);
-				r.put("dayReceive", date);
-
-				int day1 = package0.getDayDelivery().getDay();
-				int month1 = package0.getDayDelivery().getMonth();
-				int year1 = package0.getDayDelivery().getYear();
-				JSONObject date1 = new JSONObject();
-
-				date1.put("day", day1);
-				date1.put("month", month1);
-				date1.put("year", year1);
-				r.put("dayDelivery", date1);
-
-				r.put("cost", package0.getCost());
-				r.put("addressDelivery", package0.getAddressDelivery());
-//				
-				r.put("idCustomer", package0.getIdCustomer());
-				r.put("status", package0.getStatus());
-
-				jsonObject.put(packageID, r);
-				try (FileWriter file = new FileWriter(link0)) {
-					file.write(jsonObject.toJSONString());
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
+		return arrobj0;
+	}
+	
+	public void deassignPackage(String packageID) {
+		try {
+		String link = relativePath() + "\\request.json";
+		Reader reader = new FileReader(link);
+		JSONParser parser = new JSONParser();
+		JSONObject jsonObject = (JSONObject) parser.parse(reader);
+		FileWriter file = new FileWriter(link);
+		
+		jsonObject.remove(packageID);
+		file.write(jsonObject.toJSONString());
+		file.close();
+		
+		link=relativePath() + "\\packages.json";
+		reader = new FileReader(link);
+		parser = new JSONParser();
+		jsonObject = (JSONObject) parser.parse(reader);
+		((JSONObject)(jsonObject.get(packageID))).put("idUser","");
+		file = new FileWriter(link);
+		file.write(jsonObject.toJSONString());
+		
+		file.close();
+		reader.close();
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
+	
+	// bỏ gán idPackage khỏi User
+//	public void deasignPackage(String packageID) {
+//
+//		JSONParser parser = new JSONParser();
+//		String link = relativePath() + "\\request.json";
+//		try (Reader reader = new FileReader(link)) {
+//			JSONObject jsonObject = (JSONObject) parser.parse(reader);
+//			JSONObject r = new JSONObject();
+//			JSONObject packages = (JSONObject) jsonObject.get(packageID);
+////			if (compare.equals(userID)) {
+////				
+////				r.put("idUser", null);
+////
+////				r.put("idPackage", packageID);
+////
+////				jsonObject.put(packageID, r);
+////				try (FileWriter file = new FileWriter(link)) {
+////					file.write(jsonObject.toJSONString());
+////				} catch (IOException e) {
+////					e.printStackTrace();
+////				}
+////			}
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+//
+//		String link3 = relativePath() + "\\packages.json";
+//		Package package0 = new Package();
+//		try (Reader reader = new FileReader(link3)) {
+//			JSONObject jsonObject = (JSONObject) parser.parse(reader);
+//
+//			for (int i = 0; i < jsonObject.size(); i++) {
+//				JSONObject packages = (JSONObject) jsonObject.get("p" + i);
+//				String compare = (String) packages.get("id");
+//				String compareIdUser = (String) packages.get("idUser");
+//				if (compare.equals(packageID) && compareIdUser.equals(userID)) {
+//					String id = (String) packages.get("id");
+//					String idCustomer = (String) packages.get("idCustomer");
+//					String idUser = (String) packages.get("idUser");
+//					JSONObject dayReceive = (JSONObject) packages.get("dayReceive");
+//					long dr0 = (long) dayReceive.get("day");
+//					long mr0 = (long) dayReceive.get("month");
+//					long yr0 = (long) dayReceive.get("year");
+//					JSONObject dayDelivery = (JSONObject) packages.get("dayDelivery");
+//					long dd0 = (long) dayDelivery.get("day");
+//					long md0 = (long) dayDelivery.get("month");
+//					long yd0 = (long) dayDelivery.get("year");
+//					String addressDelivery = (String) packages.get("addressDelivery");
+//					long cost = (long) packages.get("cost");
+//					String status = (String) packages.get("status");
+//
+//					Date dater0 = new Date();
+//					dater0.setDay((int) dr0);
+//					dater0.setMonth((int) mr0);
+//					dater0.setYear((int) yr0);
+//					Date dated0 = new Date();
+//					dated0.setDay((int) dd0);
+//					dated0.setMonth((int) md0);
+//					dated0.setYear((int) yd0);
+//					package0.setId(id);
+//					package0.setIdCustomer(idCustomer);
+//					package0.setIdUser(idUser);
+//					package0.setDayReceive(dater0);
+//					package0.setDayDelivery(dated0);
+//					package0.setAddressDelivery(addressDelivery);
+//					package0.setCost((int) cost);
+//					package0.setStatus(status);
+//
+//				}
+//			}
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+//
+//		JSONParser parser0 = new JSONParser();
+//		String link0 = relativePath() + "\\packages.json";
+//		try (Reader reader = new FileReader(link0)) {
+//			JSONObject jsonObject = (JSONObject) parser0.parse(reader);
+//			JSONObject r = new JSONObject();
+//			JSONObject packages = (JSONObject) jsonObject.get(packageID);
+//			String compare = (String) packages.get("idUser");
+//			if (compare.equals(userID)) {
+//
+//				r.put("idUser", null);
+//
+//				r.put("id", packageID);
+//
+//				int day = package0.getDayReceive().getDay();
+//				int month = package0.getDayReceive().getMonth();
+//				int year = package0.getDayReceive().getYear();
+//				JSONObject date = new JSONObject();
+//				date.put("day", day);
+//				date.put("month", month);
+//				date.put("year", year);
+//				r.put("dayReceive", date);
+//
+//				int day1 = package0.getDayDelivery().getDay();
+//				int month1 = package0.getDayDelivery().getMonth();
+//				int year1 = package0.getDayDelivery().getYear();
+//				JSONObject date1 = new JSONObject();
+//
+//				date1.put("day", day1);
+//				date1.put("month", month1);
+//				date1.put("year", year1);
+//				r.put("dayDelivery", date1);
+//
+//				r.put("cost", package0.getCost());
+//				r.put("addressDelivery", package0.getAddressDelivery());
+////				
+//				r.put("idCustomer", package0.getIdCustomer());
+//				r.put("status", package0.getStatus());
+//
+//				jsonObject.put(packageID, r);
+//				try (FileWriter file = new FileWriter(link0)) {
+//					file.write(jsonObject.toJSONString());
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+//	}
 
 	public void editPackage(String address, int price, String CustomerID, String userID, String packageID) {
 		JSONParser parser = new JSONParser();
@@ -633,16 +676,72 @@ public class PackageDatabase {
 		return arrobj0;
 	}
 
-	public JSONArray getAsignListPackages(String userID) {
+//	public List<Package> getAsignListPackages(String userID) {
+//		JSONParser parser = new JSONParser();
+//		List<Package> arrobj0 = new ArrayList<Package>();
+//		String link = relativePath() + "\\packages.json";
+//		try (Reader reader = new FileReader(link)) {
+//			JSONObject jsonObject = (JSONObject) parser.parse(reader);
+//			for (int i = 0; i < jsonObject.size(); i++) {
+//				JSONObject packages = (JSONObject) jsonObject.get("p" + i);
+//				String user = (String) packages.get("idUser");
+//				if (user.equals(userID)) {
+//					String id = (String) packages.get("id");
+//					String idCustomer = (String) packages.get("idCustomer");
+//					String idUser = (String) packages.get("idUser");
+//					JSONObject dayReceive = (JSONObject) packages.get("dayReceive");
+//					long dr0 = (long) dayReceive.get("day");
+//					long mr0 = (long) dayReceive.get("month");
+//					long yr0 = (long) dayReceive.get("year");
+//					JSONObject dayDelivery = (JSONObject) packages.get("dayDelivery");
+//					long dd0 = (long) dayDelivery.get("day");
+//					long md0 = (long) dayDelivery.get("month");
+//					long yd0 = (long) dayDelivery.get("year");
+//					String addressDelivery = (String) packages.get("addressDelivery");
+//					long cost = (long) packages.get("cost");
+//					String status = (String) packages.get("status");
+//
+//					Package package0 = new Package();
+//					Date dater0 = new Date();
+//					dater0.setDay((int) dr0);
+//					dater0.setMonth((int) mr0);
+//					dater0.setYear((int) yr0);
+//					Date dated0 = new Date();
+//					dated0.setDay((int) dd0);
+//					dated0.setMonth((int) md0);
+//					dated0.setYear((int) yd0);
+//					package0.setId(id);
+//					package0.setIdCustomer(idCustomer);
+//					package0.setIdUser(idUser);
+//					package0.setDayReceive(dater0);
+//					package0.setDayDelivery(dated0);
+//					package0.setAddressDelivery(addressDelivery);
+//					package0.setCost((int) cost);
+//					package0.setStatus(status);
+//
+//					arrobj0.add(package0);
+//				}
+//			}
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+//		return arrobj0;
+//	}
+	
+	public JSONArray getUnassignPakages() {
 		JSONParser parser = new JSONParser();
 		JSONArray arrobj0 = new JSONArray();
+
 		String link = relativePath() + "\\packages.json";
 		try (Reader reader = new FileReader(link)) {
 			JSONObject jsonObject = (JSONObject) parser.parse(reader);
 			for (int i = 0; i < jsonObject.size(); i++) {
 				JSONObject packages = (JSONObject) jsonObject.get("p" + i);
 				String user = (String) packages.get("idUser");
-				if (user.equals(userID)) {
+				
+				if (user.equals("")) {
 					String id = (String) packages.get("id");
 					String idCustomer = (String) packages.get("idCustomer");
 					String idUser = (String) packages.get("idUser");
@@ -657,7 +756,7 @@ public class PackageDatabase {
 					String addressDelivery = (String) packages.get("addressDelivery");
 					long cost = (long) packages.get("cost");
 					String status = (String) packages.get("status");
-
+					
 					Package package0 = new Package();
 					Date dater0 = new Date();
 					dater0.setDay((int) dr0);
@@ -686,62 +785,62 @@ public class PackageDatabase {
 		}
 		return arrobj0;
 	}
-
-	public JSONArray getListPackages(String userID, String state) {
-		JSONParser parser = new JSONParser();
-		JSONArray arrobj0 = new JSONArray();
-
-		String link = relativePath() + "\\packages.json";
-		try (Reader reader = new FileReader(link)) {
-			JSONObject jsonObject = (JSONObject) parser.parse(reader);
-			for (int i = 0; i < jsonObject.size(); i++) {
-				JSONObject packages = (JSONObject) jsonObject.get("p" + i);
-				String user = (String) packages.get("idUser");
-				String status = (String) packages.get("status");
-
-				if (user.equals(userID) && status.equals(state)) {
-					String id = (String) packages.get("id");
-					String idCustomer = (String) packages.get("idCustomer");
-					String idUser = (String) packages.get("idUser");
-					JSONObject dayReceive = (JSONObject) packages.get("dayReceive");
-					long dr0 = (long) dayReceive.get("day");
-					long mr0 = (long) dayReceive.get("month");
-					long yr0 = (long) dayReceive.get("year");
-					JSONObject dayDelivery = (JSONObject) packages.get("dayDelivery");
-					long dd0 = (long) dayDelivery.get("day");
-					long md0 = (long) dayDelivery.get("month");
-					long yd0 = (long) dayDelivery.get("year");
-					String addressDelivery = (String) packages.get("addressDelivery");
-					long cost = (long) packages.get("cost");
-
-					Package package0 = new Package();
-					Date dater0 = new Date();
-					dater0.setDay((int) dr0);
-					dater0.setMonth((int) mr0);
-					dater0.setYear((int) yr0);
-					Date dated0 = new Date();
-					dated0.setDay((int) dd0);
-					dated0.setMonth((int) md0);
-					dated0.setYear((int) yd0);
-					package0.setId(id);
-					package0.setIdCustomer(idCustomer);
-					package0.setIdUser(idUser);
-					package0.setDayReceive(dater0);
-					package0.setDayDelivery(dated0);
-					package0.setAddressDelivery(addressDelivery);
-					package0.setCost((int) cost);
-					package0.setStatus(status);
-
-					arrobj0.add(package0);
-				}
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return arrobj0;
-	}
+	
+//	public JSONArray getListPackages(String userID, String state) {
+//		JSONParser parser = new JSONParser();
+//		JSONArray arrobj0 = new JSONArray();
+//
+//		String link = relativePath() + "\\packages.json";
+//		try (Reader reader = new FileReader(link)) {
+//			JSONObject jsonObject = (JSONObject) parser.parse(reader);
+//			for (int i = 0; i < jsonObject.size(); i++) {
+//				JSONObject packages = (JSONObject) jsonObject.get("p" + i);
+//				String user = (String) packages.get("idUser");
+//				String status = (String) packages.get("status");
+//
+//				if (user.equals(userID) && status.equals(state)) {
+//					String id = (String) packages.get("id");
+//					String idCustomer = (String) packages.get("idCustomer");
+//					String idUser = (String) packages.get("idUser");
+//					JSONObject dayReceive = (JSONObject) packages.get("dayReceive");
+//					long dr0 = (long) dayReceive.get("day");
+//					long mr0 = (long) dayReceive.get("month");
+//					long yr0 = (long) dayReceive.get("year");
+//					JSONObject dayDelivery = (JSONObject) packages.get("dayDelivery");
+//					long dd0 = (long) dayDelivery.get("day");
+//					long md0 = (long) dayDelivery.get("month");
+//					long yd0 = (long) dayDelivery.get("year");
+//					String addressDelivery = (String) packages.get("addressDelivery");
+//					long cost = (long) packages.get("cost");
+//
+//					Package package0 = new Package();
+//					Date dater0 = new Date();
+//					dater0.setDay((int) dr0);
+//					dater0.setMonth((int) mr0);
+//					dater0.setYear((int) yr0);
+//					Date dated0 = new Date();
+//					dated0.setDay((int) dd0);
+//					dated0.setMonth((int) md0);
+//					dated0.setYear((int) yd0);
+//					package0.setId(id);
+//					package0.setIdCustomer(idCustomer);
+//					package0.setIdUser(idUser);
+//					package0.setDayReceive(dater0);
+//					package0.setDayDelivery(dated0);
+//					package0.setAddressDelivery(addressDelivery);
+//					package0.setCost((int) cost);
+//					package0.setStatus(status);
+//
+//					arrobj0.add(package0);
+//				}
+//			}
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+//		return arrobj0;
+//	}
 
 	public static String relativePath() {
 		String path = "";

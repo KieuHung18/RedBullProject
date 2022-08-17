@@ -5,6 +5,8 @@ import './Profile2.css';
 import jquery  from 'jquery';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen,faCancel,faSave} from '@fortawesome/free-solid-svg-icons'
+import Delivered from "./Delivered";
+
 var user;
 user={
     FirstName:"Loading...",
@@ -386,6 +388,7 @@ class Component extends React.Component {
                 </Row>
                 
                 <Button variant="dark" className="profile-edit-btn" onClick={this.switchUpdate}>UPDATE<FontAwesomeIcon style={{paddingLeft:"5px"}} icon={faPen}/></Button>
+                <Delivered></Delivered>
                 </>
                 }
                 

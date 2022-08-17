@@ -6,6 +6,7 @@ import jquery  from 'jquery';
 import PackageList from "./PackageList";
 import UserList from "./UserList";
 import CustomerList from "./CustomerList";
+import RequestRemove from "./RequestRemove";
 export default function Admin(){
     return <Component/>;
 }
@@ -23,6 +24,9 @@ class Component extends React.Component{
         </Tab>
         <Tab eventKey="customerlist" title="Customer List">
         <CustomerList/>
+        </Tab>
+        <Tab eventKey="requestremove" title="Request Remove">
+        <RequestRemove/>
         </Tab>
         
         

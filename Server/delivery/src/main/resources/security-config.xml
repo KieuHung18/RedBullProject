@@ -30,6 +30,8 @@
 		<sec:intercept-url pattern="/addpackage" access="hasRole('ROLE_ADMIN')" />
 		<sec:intercept-url pattern="/adminpackagelist" access="hasRole('ROLE_ADMIN')" />
 		<sec:intercept-url pattern="/protectedadmin" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/requesremovelist" access="hasRole('ROLE_ADMIN')" />
+		
 		<!-- <sec:intercept-url pattern="/protectedadmin" access="hasRole('ROLE_ADMIN')" /> -->
 		<sec:intercept-url pattern="/denied" access="permitAll" />
 		<sec:intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
