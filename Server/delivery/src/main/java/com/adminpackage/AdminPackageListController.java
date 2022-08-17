@@ -17,7 +17,9 @@ import com.database.Customer;
 import com.database.CustomerDatabase;
 import com.database.Date;
 import com.database.Package;
+import com.database.PackageDatabase;
 import com.database.UserDatabase;
+import com.packagelistcontroller.PackageList;
 
 @Controller
 public class AdminPackageListController {
@@ -45,6 +47,47 @@ public class AdminPackageListController {
 			
 			packageList.setPackageID(packageDB.getId());
 			
+			if(!packageDB.getIdUser().equals("")) {
+				JSONObject jsonUser = new UserDatabase().getUser(packageDB.getIdUser());
+				packageList.setUserName((String) jsonUser.get("fullName"));
+				packageList.setUserID(packageDB.getIdUser());
+			}else {
+				packageList.setUserName("Not Recived");
+				packageList.setUserID("Not Recive");
+			}
+			
+			
+			packageList.setStatus(packageDB.getStatus());
+			JSONObject jsonCustomer = new CustomerDatabase().getCustomer(packageDB.getIdCustomer());
+			packageList.setCustomerName((String) jsonCustomer.get("fullName"));
+			packageList.setCustomerPhone((String) jsonCustomer.get("phoneNumber"));
+
+			result.add(packageList);
+
+		}
+
+		return result;
+	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(path = "/requesremovelist", method = RequestMethod.GET)
+	@ResponseBody
+	public JsonResponse requesRemoveList() {
+		JsonResponse res = new JsonResponse();
+		res.setResponse(getRequestRemove());
+		res.setResult("SUCCESS");
+		return res;
+	}
+	public List<AdminPackageList> getRequestRemove() {
+		List<AdminPackageList> result = new ArrayList<AdminPackageList>();
+		JSONArray jsonPackage = new PackageDatabase().requestRemoveList();
+		
+		for (int i = 0; i < jsonPackage.size(); i++) {
+			AdminPackageList packageList = new AdminPackageList();
+			Package packageDB = (Package) jsonPackage.get(i);
+			
+			packageList.setPackageID(packageDB.getId());
+			
 			
 			JSONObject jsonUser = new UserDatabase().getUser(packageDB.getIdUser());
 			packageList.setUserName((String) jsonUser.get("fullName"));
@@ -61,5 +104,5 @@ public class AdminPackageListController {
 
 		return result;
 	}
-
+	
 }

@@ -10,6 +10,8 @@ import CurrentLocation from '../../Map';
 import { Map, GoogleApiWrapper ,InfoWindow, Marker} from 'google-maps-react';
 
 var packageinfo;
+var requestRemove=false;
+var packageUID="";
 packageinfo = {
   city: "Loading...",
   district: "Loading...",
@@ -38,6 +40,9 @@ class Component extends React.Component {
     this.updatePackage=this.updatePackage.bind(this);
     this.toList=this.toList.bind(this)
     this.toGoogleMap=this.toGoogleMap.bind(this)
+    this.recivePackage=this.recivePackage.bind(this)
+    this.requestRemove=this.requestRemove.bind(this)
+    this.undoRequest=this.undoRequest.bind(this)
   }
   
   updatePackage(){
@@ -61,10 +66,14 @@ class Component extends React.Component {
                   deliveryDate: res.response.deliveryDate,
                   receiveDate: res.response.receiveDate,
                   price:  res.response.price,
-                  status:  res.response.status}
+                  status:  res.response.status
+              }
               customer={phone: res.response.customerPhone,name: res.response.customerName};
+              packageUID=res.response.userID
+              if(res.result=="REQUEST"){requestRemove=true}else(requestRemove=false)
           display.setState({ deliver: res.response.status });
       }
+      
   });
   }
   componentDidMount() {
@@ -90,7 +99,26 @@ class Component extends React.Component {
     url+=addressArr[0]+"/";
     return url;
   }
-
+  recivePackage(){
+    var display=this;
+    jquery.ajax({
+      type: "GET",
+      url: "http://localhost:8080/delivery/asignpackage",
+      data: {packageID:display.props.param.id,userID: JSON.parse(localStorage.getItem("user")).userID},
+      xhrFields: {
+          withCredentials: true
+          },
+          crossDomain: true,
+      success: function(res){
+        if(res.result=="SUCCESS"){
+          alert("package recived")
+          display.props.navigate("/packagelist");
+        }else{
+          alert("maximum package")
+        }
+      }
+  });
+  }
   toGoogleMap(){
     var display=this;
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -114,6 +142,38 @@ class Component extends React.Component {
       display.updatePackage();
     }
   });
+  }
+  requestRemove(){
+    var display=this;
+    jquery.ajax({
+      type: "GET",
+      url: "http://localhost:8080/delivery/requestremove",
+      data: {packageID:display.props.param.id
+      },
+      xhrFields: {
+          withCredentials: true
+          },
+          crossDomain: true,
+      success: function(){
+        display.updatePackage();
+      }
+    });
+  }
+  undoRequest(){
+    var display=this;
+    jquery.ajax({
+      type: "GET",
+      url: "http://localhost:8080/delivery/undorequest",
+      data: {packageID:display.props.param.id
+      },
+      xhrFields: {
+          withCredentials: true
+          },
+          crossDomain: true,
+      success: function(){
+        display.updatePackage();
+      }
+    });
   }
   exception(){
     var display=this;
@@ -147,8 +207,6 @@ class Component extends React.Component {
   }
   toList(){
     this.props.navigate("/packagelist")
-
-    
   }
   
   render() {
@@ -230,31 +288,53 @@ class Component extends React.Component {
                 variant="dark" >
                 Package List
                 </Button>
+                {packageUID==JSON.parse(localStorage.getItem("user")).userID&&
+                <Button className="packagelist-btn"
+                variant="danger"
+                style={{marginTop:"10px"}}
+                onClick={requestRemove?this.undoRequest:this.requestRemove}
+                disabled={this.state.deliver=="pending"?false:true}
+                >
+                {requestRemove?"Undo Request":"Request Remove"}
+                </Button>}
               </Col>
-              <Col md={4}>
+              {packageUID!=JSON.parse(localStorage.getItem("user")).userID?
+              <Button class="btn"
+              onClick={this.recivePackage}
+              style={{width:"fit-content",marginLeft:"10px"}}
+              variant="success"
+              disabled={packageUID!=""?true:false}
+              >
+              Recive Package
+              </Button>
+              :
+              (<Col md={4}>
                 {this.state.deliver=="pending"?
                 <div id="group-btn">
-                <Button class="btn" onClick={this.delivered} 
+                <Button class="btn"
+                onClick={this.delivered}
+                disabled={requestRemove}
                 variant="success" >
                 Delivery Success
                 </Button>
 
                 <Button class="btn" onClick={this.exception} 
-                variant="warning">
+                variant="warning"
+                disabled={requestRemove}>
                 Delivery Failure
                 </Button>
                 </div>:
-
                 <div id="group-btn">
                 <Button class="btn" onClick={this.pending} 
-                variant="primary" >
+                variant="primary"
+                >
                 Undo
                 </Button>
                 <input class="btn"  type="hidden"/>
                 </div>
                 }
-                
-              </Col>
+              </Col>)
+              }
             </Row>
 
             <Row class="map">

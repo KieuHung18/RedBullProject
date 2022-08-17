@@ -7,7 +7,7 @@ public class PackageList {
 	private String status;
 	private String customerName;
 	private String customerPhone;
-
+	
 	public PackageList() {
 		// TODO Auto-generated constructor stub
 	}
@@ -22,7 +22,7 @@ public class PackageList {
 		this.customerName = customerName;
 		this.customerPhone = customerPhone;
 	}
-
+	
 	public String getPackageID() {
 		return packageID;
 	}
