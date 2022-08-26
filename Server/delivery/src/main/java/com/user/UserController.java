@@ -84,7 +84,10 @@ public class UserController {
 		}
 		return result;
 	}
-	
+	public static void main(String[] args) {
+		System.out.println(new UserController().getFullUser("u1").getLastName());
+		;
+	}
 	
 	@RequestMapping(path = "/getlocation", method = RequestMethod.GET)
 	@ResponseBody
@@ -360,13 +363,6 @@ public class UserController {
 		}
 		new PackageDatabase().transferPackage(id);
 		return res;
-	}
-
-	public static void main(String[] args) {
-		UserController uc = new UserController();
-//		System.out.println(uc.addUser("acc", "pass", "Nguyen Van Quyet", "0971619485", "thu duc","ROLE_USER"));
-//		System.out.println(uc.editUser("u3", "ngvanquyet2000", "5655", "Nguyen Van Quyet", "0971619480", "BD"));
-		System.out.println(uc.deleteUser("u0"));
 	}
 
 }

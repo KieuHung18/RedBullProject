@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {useNavigate,useParams} from 'react-router-dom';
 import {useEffect,useState} from "react";
 import jquery from "jquery"
+import { textValiDate } from "../../Validate";
+
 var fullAddress;
 var userInfo={
     id:"Loading...",
@@ -19,10 +21,14 @@ var userInfo={
     password:"Loading..."
 }
 
-
+function validate(){
+    if(textValiDate(jquery("#uidCity").val()+jquery("#uidDistrict").val()+jquery("#uidWard").val()+jquery("#uidStreet").val()+jquery("#uidAccount").val()+jquery("#uidPassword").val()+jquery("#uidFName").val()+" "+jquery("#uidLName").val())){
+      return true
+    }
+    return false    
+}
 function EditUser(){
-    function saveUser(event){
-        event.preventDefault();
+    function saveUser(){
         fullAddress=jquery("#uidCity").val()+","+jquery("#uidDistrict").val()+","+jquery("#uidWard").val()+","+jquery("#uidStreet").val();
         let userRole;
         if(jquery('input[name="gender"]:checked').val()=="User"){
@@ -143,7 +149,10 @@ function EditUser(){
             </div>
             <div className="insertCustomer">
                 <div className="Content_Insert">
-                        <form onSubmit={saveUser} className="mainForm" action="">
+                        <form onSubmit={
+                        (event)=>{event.preventDefault()
+                        if(validate()){saveUser()}else{alert("invalid data")}}
+                        } className="mainForm" action="">
                         {!!user?<>
                             <Row>
                             <Col>

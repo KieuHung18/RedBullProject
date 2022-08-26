@@ -16,6 +16,7 @@ public class AddPackageController {
 							@RequestParam(value = "address") String address,
 							@RequestParam(value = "price") int price) {
 		JsonResponse response=new JsonResponse();
+		new PackageDatabase().addPackage(address, price, customerID);
 		response.setResult("SUCCESS");
 		return response;
 	}

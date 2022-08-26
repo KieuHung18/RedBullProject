@@ -12,8 +12,7 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faAdd} from '@fortawesome/free-solid-svg-icons'
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
-import CurrentLocation from '../../Map';
-import { Map, GoogleApiWrapper ,InfoWindow, Marker} from 'google-maps-react';
+import { textValiDate } from "../../Validate";
 // asdasdasd
 var fullAddress;
 var customer={id:"Loading...", phone: "Loading...", name: "Loading..." };
@@ -141,7 +140,6 @@ class Component extends React.Component {
   savePackage(event){
   fullAddress=jquery("#CityID").val()+","+jquery("#DistrictID").val()+","+jquery("#WardID").val()+","+jquery("#StreetID").val();
   var display=this;
-  event.preventDefault();
   if(!this.checkPrice(jquery("#PriceID").val())){
     this.setState({price:true})
   }else{this.setState({price:false});
@@ -195,8 +193,11 @@ class Component extends React.Component {
     });
     
   }
-  getForm(){
-      
+  validate(){
+    if(textValiDate(jquery("#CityID").val()+jquery("#DistrictID").val()+jquery("#WardID").val()+jquery("#StreetID").val())){
+      return true
+    }
+    return false    
   }
   render() {
     
@@ -260,7 +261,10 @@ class Component extends React.Component {
         
         <Col>
         {this.state.loadData?"Loading...":
-        <Form className="add-package-form" onSubmit={this.savePackage}>
+        <Form className="add-package-form" onSubmit={
+          (event)=>{event.preventDefault()
+            if(this.validate()){this.savePackage()}else{alert("invalid data")}}
+        }>
             <Form.Group className="add-package-group" controlId="CityID">
               <Form.Control disabled={packageinfo.status=="pending"?false:true} required defaultValue={packageinfo.city} placeholder="Province/City" />
             </Form.Group>
