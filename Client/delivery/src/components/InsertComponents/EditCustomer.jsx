@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {useNavigate,useParams} from 'react-router-dom';
 import {useEffect,useState} from "react";
 import jquery from "jquery"
+import { textValiDate } from "../../Validate";
+
 var fullAddress
 var customerInfo={
     id:"Loading...",
@@ -16,7 +18,12 @@ var customerInfo={
     street: "Loading...",
     phone: "Loading...",
 }
-
+function validate(){
+    if(textValiDate(jquery("#cidCity").val()+jquery("#cidDistrict").val()+jquery("#cidWard").val()+jquery("#cidStreet").val()+jquery("#cidFName").val()+" "+jquery("#cidLName").val())){
+      return true
+    }
+    return false    
+}
 function EditCustomer(){
     const [customer, setCustomer] = useState();
     function getCustomer(){
@@ -89,7 +96,10 @@ function EditCustomer(){
              <h1 className="packagelist-welcome">Edit Customer</h1>
              <div className="insertCustomer">
                 <div className="Content_Insert">
-                        <form onSubmit={saveCustomer} className="mainForm" action="">
+                        <form onSubmit={
+                                (event)=>{event.preventDefault()
+                                if(validate()){saveCustomer()}else{alert("invalid data")}}
+                            } className="mainForm" action="">
                         {!!customer?<>
                         <Row>
                             <Col>

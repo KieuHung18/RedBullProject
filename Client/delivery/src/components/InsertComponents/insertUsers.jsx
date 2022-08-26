@@ -4,11 +4,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {useNavigate} from 'react-router-dom';
 import {useState} from "react";
 import jquery from "jquery"
+import { textValiDate } from "../../Validate";
 var fullAddress;
-
+    function validate(){
+    if(textValiDate(jquery("#uidCity").val()+jquery("#uidDistrict").val()+jquery("#uidWard").val()+jquery("#uidStreet").val()+jquery("#uidAccount").val()+jquery("#uidPassword").val()+jquery("#uidFName").val()+" "+jquery("#uidLName").val())){
+      return true
+    }
+    return false    
+    }
     function InsertUsers(){
-        function saveUser(event){
-            event.preventDefault();
+        function saveUser(){
             fullAddress=jquery("#uidCity").val()+","+jquery("#uidDistrict").val()+","+jquery("#uidWard").val()+","+jquery("#uidStreet").val();
             let userRole;
             if(jquery('input[name="gender"]:checked').val()=="User"){
@@ -69,7 +74,10 @@ var fullAddress;
             <h1 className="packagelist-welcome">Add User</h1>
             <div className="insertCustomer">
                 <div className="Content_Insert">
-                        <form onSubmit={saveUser} className="mainForm" action="" >
+                        <form onSubmit={
+                        (event)=>{event.preventDefault()
+                        if(validate()){saveUser()}else{alert("invalid data")}}
+                        } className="mainForm" action="" >
                             <Row>
                             <Col>
                            <div className="YourName form_items">
@@ -118,7 +126,7 @@ var fullAddress;
 
                             <div className="Role form_items">
                                 <div className="user_role ">
-                                    <input name="gender"   type="radio" value="User" />
+                                    <input name="gender"   type="radio" value="User" checked/>
                                     <span>User</span>
                                 </div>
                                 <div className="admin_role">

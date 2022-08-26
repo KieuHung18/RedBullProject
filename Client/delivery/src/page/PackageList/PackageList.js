@@ -9,7 +9,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import jquery from 'jquery';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckCircle,faExclamationCircle, faCircleArrowRight,faAdd} from '@fortawesome/free-solid-svg-icons'
+import { faCheckCircle,faExclamationCircle, faCircleArrowRight,faAdd,faBoxesPacking} from '@fortawesome/free-solid-svg-icons'
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import {useNavigate } from 'react-router-dom'; 
 function productsGenerator(quantity){
@@ -36,6 +36,7 @@ function productsGenerator(quantity){
 const delivered=(<FontAwesomeIcon style={{color:"hsl(123deg 58% 31%)",transform: "scale(1.75)"}} icon={faCheckCircle} />);
 const pending=(<FontAwesomeIcon style={{color:"hsl(268deg 83% 24%)",transform: "scale(1.75)"}} icon={faCircleArrowRight} />);
 const exception=(<FontAwesomeIcon style={{color:"hsl(345deg 67% 41%)",transform: "scale(1.75)"}} icon={faExclamationCircle} />);
+const totalicon=(<FontAwesomeIcon style={{color:"hsl(268deg 83% 24%)",transform: "scale(1.75)"}} icon={faBoxesPacking} />);
 
 var packageTable=[];
 var userName;
@@ -125,10 +126,9 @@ export class Component extends React.Component {
     ];
 
     var status=[
-
-      ["EXCEPTION",numException,exception],
-      ["PENDING",numPending,pending],
-      ["DELIVERED",numDelivered,delivered],
+      // ["EXCEPTION",numException,exception],
+      ["TOTAL",numPending,totalicon]
+      // ["DELIVERED",numDelivered,delivered],
 
     ]
     

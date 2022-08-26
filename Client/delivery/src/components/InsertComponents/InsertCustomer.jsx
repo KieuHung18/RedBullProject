@@ -5,18 +5,23 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {useNavigate} from 'react-router-dom';
 import {useState} from "react";
 import jquery from "jquery";
-
+import { textValiDate } from "../../Validate";
 
 var fullAddress
+function validate(){
+    if(textValiDate(jquery("#cidCity").val()+jquery("#cidDistrict").val()+jquery("#cidWard").val()+jquery("#cidStreet").val()+jquery("#cidFName").val()+" "+jquery("#cidLName").val())){
+      return true
+    }
+    return false    
+}
 function InsertCustomer(){
     
-    function saveCustomer(event){
-        console.log(fullAddress);
-        console.log(jquery("#uidFName").val()+" "+jquery("#uidLName").val());
-        console.log(jquery("#uidPhone").val());
-    }
-    function saveCustomer(event){
-        event.preventDefault();
+    // function saveCustomer(event){
+    //     console.log(fullAddress);
+    //     console.log(jquery("#uidFName").val()+" "+jquery("#uidLName").val());
+    //     console.log(jquery("#uidPhone").val());
+    // }
+    function saveCustomer(){
         fullAddress=jquery("#cidCity").val()+","+jquery("#cidDistrict").val()+","+jquery("#cidWard").val()+","+jquery("#cidStreet").val();
           jquery.ajax({
             type: "POST",
@@ -63,7 +68,11 @@ function InsertCustomer(){
              <h1 className="packagelist-welcome">Add Customer</h1>
             <div className="insertCustomer">
                 <div className="Content_Insert">
-                        <form onSubmit={saveCustomer} className="mainForm" action="">
+                        <form onSubmit={
+                                (event)=>{event.preventDefault()
+                                if(validate()){saveCustomer()}else{alert("invalid data")}}
+                            }
+                            className="mainForm" action="">
                         <Row>
                             <Col>
                            <div className="YourName form_items">

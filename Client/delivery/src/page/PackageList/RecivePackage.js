@@ -146,8 +146,8 @@ export class Component extends React.Component {
     
     return (
       <div className="package-list-container">
-      <h1 className="packagelist-welcome">Welcome back, {userName}</h1>
-      <Row className='status-container'>
+      <h1 className="packagelist-welcome">Recive Package</h1>
+      {/* <Row className='status-container'>
       {status.map((s) => (
         <Col className='status-items-container'>
           <Row className='status-main-container'>
@@ -159,7 +159,7 @@ export class Component extends React.Component {
           </Row>
         </Col>
       ))}
-      </Row>
+      </Row> */}
       
       <BootstrapTable 
       rowEvents={ tableRowEvents } 

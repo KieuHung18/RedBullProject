@@ -12,9 +12,7 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faAdd} from '@fortawesome/free-solid-svg-icons'
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
-import CurrentLocation from '../../Map';
-import { Map, GoogleApiWrapper ,InfoWindow, Marker} from 'google-maps-react';
-import { parse } from "@fortawesome/fontawesome-svg-core";
+import { textValiDate } from "../../Validate";
 // asdasdasd
 var fullAddress;
 var customerID;
@@ -45,6 +43,7 @@ class Component extends React.Component {
     this.savePackage=this.savePackage.bind(this)
     this.toAddCustomer=this.toAddCustomer.bind(this)
     this.toGoogleMap=this.toGoogleMap.bind(this)
+    this.validate=this.validate.bind(this)
   }
   componentDidMount() {
     var display=this;
@@ -95,10 +94,9 @@ class Component extends React.Component {
       
     }
   }
-  savePackage(event){
+  savePackage(){
     var display=this;
     fullAddress=jquery("#CityID").val()+","+jquery("#DistrictID").val()+","+jquery("#WardID").val()+","+jquery("#StreetID").val();
-    event.preventDefault();
     if(!this.checkPrice(jquery("#PriceID").val())){
       this.setState({price:true})
     }else{this.setState({price:false});
@@ -115,7 +113,7 @@ class Component extends React.Component {
           },
           crossDomain: true,
         success:function(res){
-          display.props.navigate(-1)
+          display.props.navigate("/PackageList")
         }
       });
     }
@@ -153,7 +151,12 @@ class Component extends React.Component {
   toAddCustomer(){
     this.props.navigate("/insertcustomer")
   }
-
+  validate(){
+    if(textValiDate(jquery("#CityID").val()+jquery("#DistrictID").val()+jquery("#WardID").val()+jquery("#StreetID").val())){
+      return true
+    }
+    return false    
+  }
   render() {
 
     const tableRowEvents = {
@@ -203,7 +206,10 @@ class Component extends React.Component {
         </Col>
         
         <Col>
-        <Form className="add-package-form" onSubmit={this.savePackage}>
+        <Form className="add-package-form" onSubmit={
+          (event)=>{event.preventDefault()
+            if(this.validate()){this.savePackage()}else{alert("invalid data")}}
+        }>
             <Form.Group className="add-package-group" controlId="CityID">
               <Form.Control required disabled={this.state.customer==""?true:false} placeholder="Province/City" />
             </Form.Group>
