@@ -11,7 +11,7 @@ export class HomePage extends React.Component {
         {/* HIGHLIGHT  */}
         <Row class="row">
         <div className="col-md-6 content_banner ">
-          <h1>Delivering happiness since 2017</h1>
+          {/* <h1>Delivering happiness since 2017</h1> */}
           {/* <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
           when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
           <div className="search_order">
@@ -44,7 +44,7 @@ export class HomePage extends React.Component {
         <hr></hr>
         <Row>
           <Row class="row">
-            <h3 class="text-bold">A new Perspective of Business Delivery</h3>
+            <h3 class="text-bold">“When it absolutely, positively has to get there, overnight”</h3>
           </Row>
         </Row>
         <hr></hr>
